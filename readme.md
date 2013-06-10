@@ -1,3 +1,7 @@
+Server for Mensa Hamburg App
+============================
+
+
 TODO:
 --
 - Document
