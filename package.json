@@ -8,5 +8,9 @@
 		"request": "2.x",
 		"cheerio": "0.10.x",
 		"mongojs": ""
+	},
+	"devDependencies": {
+		"jshint": ""
 	}
+
 }
