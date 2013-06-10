@@ -1,0 +1,108 @@
+Server running at http://localhost:8080/
+    <section class="suite">
+      <h1>server</h1>
+      <dl>
+        <dt>should return well formed data</dt>
+        <dd><pre><code>request(url + &quot;Geomatikum&quot;, function(err, res, body){
+			var data = JSON.parse(body);
+			var correctMensa = function(item){ return item.mensa === &quot;Geomatikum&quot;; };
+			expect( data.menu.every(correctMensa) ).to.be(true);
+			checkJSON(data.menu);
+			done();
+		});</code></pre></dd>
+        <dt>should not request data multiple time</dt>
+        <dd><pre><code>//		expect(true).to.be(false, &quot;not implemented&quot;);</code></pre></dd>
+        <dt>should handle this, next, both; default is this</dt>
+        <dd><pre><code>request(url + &quot;Geomatikum/&quot;, function(err, res, body){
+			var withSlash = body;
+			request(url + &quot;Geomatikum&quot;, function(err, res, body){
+				var withoutSlash = body;
+				request(url + &quot;Geomatikum/this&quot;, function(err, res, body){
+					var thisw = body;
+					request(url + &quot;Geomatikum/next&quot;, function(err, res, body){
+						var next= body;
+						request(url + &quot;Geomatikum/this,next&quot;, function(err, res, body){
+							var thisnext = body;
+							request(url + &quot;Geomatikum/next,this&quot;, function(err, res, body){
+								var nextthis = body;
+								request(url + &quot;Geomatikum/both&quot;, function(err, res, body){
+									var both = body;
+									expect(both).to.eql(thisnext);
+									expect(both).to.eql(nextthis);
+									expect(both).to.not.be.empty();
+									expect(thisw).to.not.be.empty();
+									expect(next).to.not.be.empty();
+									expect(thisw).to.eql(withoutSlash);
+									expect(thisw).to.eql(withSlash);
+									
+									var sort_by_id = function(a,b){
+										return a._id&gt;b._id ? 1 : -1;
+									}
+									var jsonthis = (JSON.parse(thisw)).menu;
+									var jsonnext = (JSON.parse(next)).menu;
+									var jsonboth = (JSON.parse(both)).menu;
+									var combined = jsonthis.concat(jsonnext);
+
+									expect( jsonboth.sort(sort_by_id) ).to.eql( combined.sort(sort_by_id) );
+
+									done();
+								});
+							});
+						});
+					});
+				});
+			});
+		});</code></pre></dd>
+        <dt>should handle week numbers</dt>
+        <dd><pre><code>//		expect(true).to.be(false, &quot;not implemented&quot;);</code></pre></dd>
+        <dt>should be case insensitive</dt>
+        <dd><pre><code>request(url + &quot;geomAtikum,philosophenturm,STUDIERENDENHAUS&quot;, function(err, res, body){
+			var data = JSON.parse(body);
+			var hasMensa = function(mensa, menu){
+				return menu.some(function(item){ return item.mensa === mensa });
+			}
+			checkJSON(data.menu);
+			expect( hasMensa(&quot;Geomatikum&quot;,       data.menu) ).to.be(true);
+			expect( hasMensa(&quot;Philosophenturm&quot;,  data.menu) ).to.be(true);
+			expect( hasMensa(&quot;Studierendenhaus&quot;, data.menu) ).to.be(true);
+			done();
+		});</code></pre></dd>
+        <dt>should fail gracefully</dt>
+        <dd><pre><code>//		expect(true).to.be(false, &quot;not implemented&quot;);</code></pre></dd>
+        <dt>should log errors</dt>
+        <dd><pre><code>//		expect(true).to.be(false, &quot;not implemented&quot;);</code></pre></dd>
+        <dt>should log accessed</dt>
+        <dd><pre><code>//		expect(true).to.be(false, &quot;not implemented&quot;);</code></pre></dd>
+        <dt>should honour changedSince</dt>
+        <dd><pre><code>//		expect(true).to.be(false, &quot;not implemented&quot;);</code></pre></dd>
+        <dt>should compress data</dt>
+        <dd><pre><code>//		expect(true).to.be(false, &quot;not implemented&quot;);</code></pre></dd>
+        <dt>should allow for mensen to be combined</dt>
+        <dd><pre><code>var geo, campus, geocampus, combined;
+		request(url + &quot;Geomatikum/&quot;, function(err, res, body){
+			geo = JSON.parse(body).menu;
+			request(url + &quot;Campus/&quot;, function(err, res, body){
+				campus = JSON.parse(body).menu;
+				request(url + &quot;Campus,Geomatikum/&quot;, function(err, res, body){
+					
+					var sort_by_id = function(a,b){
+						return a._id&gt;b._id ? 1 : -1;
+					}
+					combined = campus.concat(geo).sort(sort_by_id);
+					geocampus = JSON.parse(body).menu.sort(sort_by_id);
+					checkJSON(geocampus);
+					expect( geocampus ).to.eql( combined );
+					done();
+				});
+			});
+		});</code></pre></dd>
+      </dl>
+    </section>
+    <section class="suite">
+      <h1>legacy server</h1>
+      <dl>
+        <dt>should return well formed data</dt>
+        <dd><pre><code>//		expect(true).to.be(false, &quot;not implemented&quot;);
+		done();</code></pre></dd>
+      </dl>
+    </section>
