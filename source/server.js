@@ -1,8 +1,8 @@
 /**
- * 
  * @TODO Write tests
- * @TODO add changedSince header 
- * &lt; 100 lines
+ * @TODO add changedSince header
+ * @TODO use standard modifiedSince header and stuff
+ * @TODO cleanup
  * 
  *  server.js
  *    |
@@ -12,10 +12,9 @@
  * from db    \\ 
  *             parser.js
  */
-/*jshint node:true*/
 "use strict";
 var url = require("url"),
-	urls = require("./urls.js").urls,
+	mensa = require("./urls.js"),
 	express = require('express'),
 	fs = require("fs"),
 	get = require("./get.js").get,
@@ -33,65 +32,74 @@ var url = require("url"),
 		}
 	},
 	logFile = fs.createWriteStream('./access.log', {flags: 'a'});
+
 var reply = function(req, res){
-	var changedSince = req.query["changedSince"];
+	var changedSince = req.query.changedSince;
 	get(req, req.mensen, req.weeks, changedSince, function(error){
 		if(error){
 			console.error(new Date(), req.mensen, req.weeks, "get error");
-			res.send(500, '{menu:[]}');
+			res.send(500, JSON.stringify({menu:[]}));
 		} else {
 			res.send({menu: req.result});
 		}
 //		console.log(+new Date() - req.time);
 	});
-}
+};
+
 var legacyReply = function(req, res){
 	get(req, req.mensen, req.weeks, null, function(error){
 		if(error){
 			console.error(new Date(), req.mensen, req.weeks, "get error");
-			res.send(500, '[]');
+			res.send(500, JSON.stringify([]));
 		} else {
 			res.send(req.result);
 		}
 	});
-}
-var app = express()
- .use(function(req, res, next){
- 	req.time = +new Date();
-	next();
- })
- .use(allowCrossDomain)                  // allow other domains via CORS header
- .use(express.logger({stream: logFile})) // log to access.log
- .use(express.compress())                // use compression
- .use(function(err, req, res, next){    // catch errors
-	console.error(new Date(), err.stack);
-	res.send(500, '[]');
- })
- // process parameters from request
- .use(function(req, res, next){
-	var s = url.parse(req.url).pathname.split("/");
-	req.mensen = s[1].toLowerCase().split(",").map(function(item){ return urls[item].name });
-	
-	if(s[2] === "both"){
-		s[2] = "this,next";
-	}
-	req.weeks  = s[2] ? s[2].split(",") : ["this"];
-	req.weeks = req.weeks.map(function(w){
-		if(w === "this"){
-			w = (new Date()).getWeek();
-		} else if(w === "next"){
-			w = (new Date( +new Date() + 1000*3600*24*7 )).getWeek();
-		} 
-		return w;
-	});
-	next();
- })
- .use(express.vhost('menu.mensaapp.org', legacyReply))
- .use(express.vhost('data.mensaapp.org', reply))
- .use(express.vhost('localhost', reply))
- .listen(port);
+};
 
-console.log("Server running at http://localhost:"+port+"/"); 
+var app = express()
+	.use(function(req, res, next){
+		req.time = +new Date();
+		next();
+	})
+	.use(allowCrossDomain)                  // allow other domains via CORS header
+	.use(express.logger({stream: logFile})) // log to access.log
+	.use(express.compress())                // use compression
+	.use(function(err, req, res, next){    // catch errors
+		console.error(new Date(), err.stack);
+		res.send(500, '[]');
+	})
+	// process parameters from request
+	.use(function(req, res, next){
+		var s = url.parse(req.url).pathname.split("/");
+		req.mensen = s[1].toLowerCase().split(",").map(function(mensaId){
+			console.log(mensaId, mensa.byId[mensaId])
+			if(mensa.byId[mensaId]){
+				return mensa.byId[mensaId].id;
+			}
+		}).filter(function(item){ if(item){ return item; }  });
+		console.log("req.mensen", req.mensen)
+
+		if(s[2] === "both"){
+			s[2] = "this,next";
+		}
+		req.weeks  = s[2] ? s[2].split(",") : ["this"];
+		req.weeks = req.weeks.map(function(w){
+			if(w === "this"){
+				w = (new Date()).getWeek();
+			} else if(w === "next"){
+				w = (new Date( +new Date() + 1000*3600*24*7 )).getWeek();
+			}
+			return w;
+		});
+		next();
+	})
+	.use(express.vhost('menu.mensaapp.org', legacyReply))
+	.use(express.vhost('data.mensaapp.org', reply))
+	.use(express.vhost('localhost', reply))
+	.listen(port);
+
+console.log("Server running at http://localhost:"+port+"/");
 
 
 // http://syn.ac/tech/19/get-the-weeknumber-with-javascript/
@@ -125,6 +133,6 @@ Date.prototype.getWeek = function() {
 
 // log exceptions
 //process.on('uncaughtException', function (err) {
-//	console.log(new Date(), 'Caught exception: ' + err);
+//	console.error(new Date(), 'uncaught exception: ' + err);
 //});
 

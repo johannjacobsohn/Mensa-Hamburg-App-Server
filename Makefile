@@ -54,3 +54,4 @@ clean:
 log: 
 	git log --format="%ad %s" --date=short
 
+.PHONY: test

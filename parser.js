@@ -1,17 +1,17 @@
 /**
  * 
  * @TODO document
+ * @TODO cleanup
  * @TODO add parser for wedel
  * 
  */
 /*jshint node:true*/
 "use strict";
-;(function(){
 var cheerio = require("cheerio");
 var parser = {};
-parser.studhh = function(body, mensa, week){
+parser.studhh = function(body, mensaId, week){
 	var weekMenu = [];
-	var $ = cheerio.load(body);	
+	var $ = cheerio.load(body);
 	// extract and parse date field
 	var datefield = $("tr").first().find("th").first().html().split("<br>")[1];
 	var germanStartdate = datefield.split("-")[0].trim();
@@ -25,11 +25,10 @@ parser.studhh = function(body, mensa, week){
 			var $td = $(this);
 			$td.find("p").each(function(){
 				var $pi = $(this), l = 0, properties = [], additives = [],
-				    tempObj = {}, dish = "", imgs = [], spans = [], title = "",
-				    price = "", studPrice = "", normalPrice = "",
-				    date = new Date(startdate.valueOf() + (i) * 24 * 60 * 60 * 1000),
-				    dateString = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
-				
+					tempObj = {}, dish = "", imgs = [], spans = [], title = "",
+					price = "", studPrice = 0, normalPrice = 0,
+					date = new Date(startdate.valueOf() + (i) * 24 * 60 * 60 * 1000),
+					dateString = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
 				// parse price
 				var priceEl = $pi.find(".price");
 				if(priceEl.length){
@@ -41,8 +40,8 @@ parser.studhh = function(body, mensa, week){
 					price = price.length === 2 ? price : ["0", "0"];
 					$pi.html($pi.html().replace(/[0-9]+,[0-9][0-9]/g,"")); // remove Price from String
 				}
-				studPrice = price[0].replace(/[^0-9,]/g,"");
-				normalPrice = price[1].replace(/[^0-9,]/g,"");
+				studPrice = parseFloat( price[0].replace(/[^0-9,]/g,"").replace(",", "."), 10 );
+				normalPrice = parseFloat( price[1].replace(/[^0-9,]/g,"").replace(",", "."), 10 );
 
 				// Parse Properties
 				imgs = $pi.find("img");
@@ -80,7 +79,7 @@ parser.studhh = function(body, mensa, week){
 				dish = dish.replace(/[\s]+/g, " ").trim(); // remove exessive whitespaces
 
 				weekMenu.push({
-					mensa       : mensa,
+					mensaId     : mensaId,
 					week        : week,
 					name        : dishName,
 					dish        : dish,
@@ -97,4 +96,3 @@ parser.studhh = function(body, mensa, week){
 };
 
 exports.parser = parser;
-})();

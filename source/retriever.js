@@ -7,31 +7,28 @@
  * @TODO Document
  * @TODO protect against failure in parser
  */
-/*jshint node:true*/
 "use strict";
-function retrieve(mensa, week, callback){
+function retrieve(mensaId, week, callback){
 	var request = require("request"),
-	    urls = require("./urls.js").urls,
-	    parser = require("./parser.js").parser;
-	
-	var id = urls.ids[mensa];
-	var url = urls.mensenWeek[id];
-	 
-	if( url && !isNaN(parseInt(week,10)) ){ // this, next week
-		console.log(new Date(), "retrieve", url.replace(/{{week}}/, week));
-		request({ 
+	    parser = require("./parser.js").parser,
+	    mensa = require("./urls.js").byId[mensaId],
+	    url = mensa.url;
+	console.log("retriever called")
+	if( url && !isNaN(parseInt(week, 10)) ){
+		console.log(new Date(), ": Retrieve ", url.replace(/{{week}}/, week));
+		request({
 			uri: url.replace(/{{week}}/, week)
 		}, function(err, response, body) {
 			if(!err){
-				callback( null, parser[urls[id].parser](body, mensa, week) );
+				callback( null, parser[mensa.parser](body, mensaId, week) );
 			} else {
-				console.log(new Date(), err);
-				callback( {} );
+				console.error("%s: Cannot Retrieve: %s in week %d which maps to %s", new Date(), mensaId, week, url);
+				callback("request failed");
 			}
 		});
 	} else {
-		console.error( new Date(), "Cannot Retrieve:", mensa, "with id", id, "in week", week, "which maps to", url );
-		callback( {} );
+		console.error("%s: Cannot find or parse: mensaId '%s' in week %d", new Date(), mensaId, week);
+		callback("arguments malformed");
 	}
 }
 

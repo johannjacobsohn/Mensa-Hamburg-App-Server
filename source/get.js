@@ -4,90 +4,110 @@
  * 
  * re-requests old data as well
  * 
- * @TODO check and rewrite mensen and weeks -&gt; be case insensitive
- * @TODO find out if all mensen are loaded and which are not; retrieved these
- * &lt; 100 lines
+ * @TODO check and rewrite mensen and weeks -> be case insensitive
  * 
  * @module get.js
  * @exports get
- * 
  */
-/*jshint node:true*/
 "use strict";
+
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/mensaDB');
 var retrieve = require("./retriever.js").retrieve;
-var databaseUrl = "menudb";
-var collections = ["menu", "mensen"];
-var db = require("mongojs").connect(databaseUrl, collections);
-var maxAgeOfData = 1000*60*60*24; //Data should be reloaded at least once a day
+var maxAgeOfData = 1000*60*60*24; // Data should be reloaded at least once a day
 var callbackqueue = [];
 var locks = {};
-var processQueue = function(lock){
+var processQueue = function(err, lock){
 	delete locks[lock];
-	
+
 	if(!Object.keys(locks).length){
 		while (callbackqueue.length){
-			(callbackqueue.pop())();
+			(callbackqueue.pop())(err);
 		}
 	}
 };
 
-var get = function(req, mensen, weeks, since, success){
+var dishSchema = mongoose.Schema({
+	mensaId     : String,
+	week        : Number,
+	name        : String,
+	type        : String,
+	studPrice   : Number,
+	normalPrice : Number,
+	date        : Date,
+	properties  : [String],
+	additives   : [String]
+});
 
-	//@TODO: handle changedSince
-	since = since; // date
+var Dish = mongoose.model('Dish', dishSchema);
+
+var get = function(req, mensen, weeks, since, callback){
+	// @TODO: handle changedSince
+
+	// @TODO: wont work for mensa+week combination
 
 	// todo: check and rewrite mensen and weeks
 	var requested = [];
-
-	db.menu.find({mensa: { $in: mensen }, week: {$in: weeks }}, function(err, found){
+	console.log("find", mensen, weeks)
+	Dish.find({mensaId: { $in: mensen }, week: {$in: weeks }}, function(err, found){
 		// find out if all mensen are loaded and which are not; retrieved those
 		// check for every requested mensa if it exist in result; if not, request loading
 		if(err) {
-			console.log(err)
-			return
+			console.log(err);
+			return;
 		}
+		
+		console.log("found", found)
 		req.result = found;
 		var missingmensen = {};
 		mensen.forEach(function(item){
 			missingmensen[item] = true;
 		});
 		found.forEach(function(item){
-			delete missingmensen[item.mensa];
+			delete missingmensen[item.mensaId];
 		});
 		// missingmensen now contains only unsaved mensen
 		missingmensen = Object.keys(missingmensen);
 
 		if(missingmensen.length){
 			// there are mensen which need to be aquired
-			callbackqueue.push(success)
+			callbackqueue.push(callback);
 			missingmensen.forEach(function(mensa){
 				weeks.forEach(function(week){
 					// lock execution of callback queue
 					if( !locks[mensa+week] ){
 						locks[mensa+week] = true;
-						retrieve(mensa, week, function(error, items){
-							if(!error){
+						retrieve(mensa, week, function(err, items){
+							console.log("retrieved", arguments)
+							if(err){
+								processQueue(err, mensa+week);
+							} else {
+								var counter = items.length;
 								items.forEach(function(item){
-									db.menu.save(item, function(err){
-										if(err) console.error(err)
+									new Dish(item).save(function(err, dish){
+										if(err){
+											console.error(err);
+										} else {
+											req.result.push(dish);
+										}
+										if(!--counter){
+											processQueue(null, mensa+week);
+										}
 									});
 								});
-								req.result.push(items);
 							}
-							processQueue(mensa+week);
 						});
 					}
 				});
 			});
 		} else {
 			// everything is present, load and call callback
-			success(null);
+			callback();
 		}
-		
+
+		// @TODO:
 		// check for outdated data; trigger reload (this request will get 
 		// the old data, but the next one doesn't have to)
-		
-		
 
 	});
 };
