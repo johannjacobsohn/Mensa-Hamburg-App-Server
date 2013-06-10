@@ -13,7 +13,7 @@ function retrieve(mensaId, week, callback){
 	    parser = require("./parser.js").parser,
 	    mensa = require("./urls.js").byId[mensaId],
 	    url = mensa.url;
-	console.log("retriever called")
+
 	if( url && !isNaN(parseInt(week, 10)) ){
 		console.log(new Date(), ": Retrieve ", url.replace(/{{week}}/, week));
 		request({

@@ -48,7 +48,6 @@ var get = function(req, mensen, weeks, since, callback){
 
 	// todo: check and rewrite mensen and weeks
 	var requested = [];
-	console.log("find", mensen, weeks)
 	Dish.find({mensaId: { $in: mensen }, week: {$in: weeks }}, function(err, found){
 		// find out if all mensen are loaded and which are not; retrieved those
 		// check for every requested mensa if it exist in result; if not, request loading
@@ -56,8 +55,7 @@ var get = function(req, mensen, weeks, since, callback){
 			console.log(err);
 			return;
 		}
-		
-		console.log("found", found)
+
 		req.result = found;
 		var missingmensen = {};
 		mensen.forEach(function(item){
@@ -78,7 +76,6 @@ var get = function(req, mensen, weeks, since, callback){
 					if( !locks[mensa+week] ){
 						locks[mensa+week] = true;
 						retrieve(mensa, week, function(err, items){
-							console.log("retrieved", arguments)
 							if(err){
 								processQueue(err, mensa+week);
 							} else {

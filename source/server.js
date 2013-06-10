@@ -73,12 +73,10 @@ var app = express()
 	.use(function(req, res, next){
 		var s = url.parse(req.url).pathname.split("/");
 		req.mensen = s[1].toLowerCase().split(",").map(function(mensaId){
-			console.log(mensaId, mensa.byId[mensaId])
 			if(mensa.byId[mensaId]){
 				return mensa.byId[mensaId].id;
 			}
 		}).filter(function(item){ if(item){ return item; }  });
-		console.log("req.mensen", req.mensen)
 
 		if(s[2] === "both"){
 			s[2] = "this,next";

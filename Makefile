@@ -2,10 +2,14 @@ setup:
 	npm install
 
 serve:
-	forever -e error.log -o output.log .
+	forever -e error.log -o output.log .  & echo $$! > "mensa-app-server.pid.txt"
+
+unserve:
+	kill `cat mensa-app-server.pid.txt`
+	rm mensa-app-server.pid.txt
 
 test: 
-	make serve
+	make serve &
 	make runtest && make unserve || make unserve
 
 runtest: 

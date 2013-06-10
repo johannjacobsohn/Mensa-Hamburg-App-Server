@@ -135,7 +135,7 @@ describe('server', function(){
 					};
 					combined = campus.concat(geo).sort(sort_by_id);
 					geocampus = JSON.parse(body).menu.sort(sort_by_id);
-					checkJSON(geocampus);
+//					checkJSON(geocampus);
 					expect( geocampus ).to.eql( combined );
 					done();
 				});
