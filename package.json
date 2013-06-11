@@ -7,10 +7,12 @@
 		"forever": "0.9.x",
 		"request": "2.x",
 		"cheerio": "0.10.x",
-		"mongojs": ""
+		"mongoose": ""
 	},
 	"devDependencies": {
-		"jshint": ""
+		"jshint": "",
+		"mocha": "",
+		"expect.js": ""
 	}
 
 }
