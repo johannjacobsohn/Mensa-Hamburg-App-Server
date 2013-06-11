@@ -9,11 +9,7 @@ unserve:
 	rm mensa-app-server.pid.txt
 
 test: 
-	make serve &
-	make runtest && make unserve || make unserve
-
-runtest: 
-	node_modules/.bin/mocha
+	node_modules/.bin/mocha -R spec
 	
 # extrem naiver Test ob die Tests stabil sind - also ob die Tests immer das gleiche Ergebnis liefern
 test-stable:
