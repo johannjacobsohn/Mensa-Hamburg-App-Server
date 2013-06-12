@@ -144,7 +144,7 @@ var mensen = [
 	{
 		name: "Cafe CFEL",
 		id: "cafecfel",
-		url: baselink + "/680/2013/{{week}}/",
+		url: baselink + "680/2013/{{week}}/",
 		address: "Notkestrasse 85, 22607 Hamburg",
 		open: "Montag - Freitag: 08:00 - 15:00 Uhr",
 		parser: "studhh"

@@ -3,16 +3,17 @@ var
   serv = require('..'),
   url = "http://localhost:8080/",
   expect = require('expect.js'),
-  request = require('request');
+  request = require('request'),
+  fakeweb = require('node-fakeweb');
 
-//var databaseUrl = "menudb";
-//var collections = ["menu", "mensen"];
-//var db = require("mongojs").connect(databaseUrl, collections);
-//db.menu.remove();
-//db.mensen.remove();
+fakeweb.allowNetConnect = false;
+require("../source/urls.js").list.forEach(function(item){
+	var id = item.url.match(/\/de\/(.*)\/201/)[1];
+	fakeweb.registerUri({uri: item.url.replace("{{week}}", 24).replace(".de", ".de:80"), file: 'test/fixtures/'+id});
+	fakeweb.registerUri({uri: item.url.replace("{{week}}", 25).replace(".de", ".de:80"), file: 'test/fixtures/'+id});
+});
 
 describe('server', function(){
-//	this.timeout(1E5);
 
 	var checkJSON = function(menu){
 		var hasProperties = function(item){ return item.properties; };
@@ -127,15 +128,16 @@ describe('server', function(){
 		var geo, campus, geocampus, combined;
 		request(url + "Geomatikum/", function(err, res, body){
 			geo = JSON.parse(body).menu;
-			request(url + "Citynord/", function(err, res, body){
+			request(url + "Campus/", function(err, res, body){
 				campus = JSON.parse(body).menu;
-				request(url + "Geomatikum,Citynord/", function(err, res, body){
+				checkJSON(campus);
+				request(url + "Geomatikum,Campus/", function(err, res, body){
 					var sort_by_id = function(a,b){
 						return a._id>b._id ? 1 : -1;
 					};
 					combined = campus.concat(geo).sort(sort_by_id);
 					geocampus = JSON.parse(body).menu.sort(sort_by_id);
-//					checkJSON(geocampus);
+					checkJSON(geocampus);
 					expect( geocampus ).to.eql( combined );
 					done();
 				});

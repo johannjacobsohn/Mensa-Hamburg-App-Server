@@ -10,10 +10,6 @@ unserve:
 
 test: 
 	node_modules/.bin/mocha -R spec
-	
-# extrem naiver Test ob die Tests stabil sind - also ob die Tests immer das gleiche Ergebnis liefern
-test-stable:
-	make runtest > test-stable-log && make runtest > test-stable-log && make runtest > test-stable-log && make runtest > test-stable-log && make runtest > test-stable-log && make runtest > test-stable-log && make runtest > test-stable-log && make runtest > test-stable-log && make runtest > test-stable-log && make runtest > test-stable-log && make runtest > test-stable-log && make runtest > test-stable-log && make runtest > test-stable-log && make runtest > test-stable-log && make runtest > test-stable-log && make runtest > test-stable-log && make runtest > test-stable-log && make runtest > test-stable-log && make runtest > test-stable-log && make runtest > test-stable-log && rm test-stable-log && echo stable || cat test-stable-log
 
 lint: 
 	node_modules/.bin/jshint .

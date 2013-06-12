@@ -12,7 +12,7 @@
 	"devDependencies": {
 		"jshint": "",
 		"mocha": "",
-		"expect.js": ""
+		"expect.js": "",
+		"node-fakeweb": ""
 	}
-
 }
