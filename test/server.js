@@ -39,9 +39,9 @@ describe('server', function(){
 		});
 	});
 
-	it( "should not request data multiple time", function(){
-//		expect(true).to.be(false, "not implemented");
-	});
+	//~ it( "should not request data multiple time", function(){
+		//~ expect(true).to.be(false, "not implemented");
+	//~ });
 
 	it( "should handle this, next, both; default is this", function(done){
 		// @FIXME: someone need to learn about promises
@@ -86,9 +86,9 @@ describe('server', function(){
 		});
 	});
 
-	it( "should handle week numbers", function(){
-//		expect(true).to.be(false, "not implemented");
-	});
+	//~ it( "should handle week numbers", function(){
+		//~ expect(true).to.be(false, "not implemented");
+	//~ });
 
 	it( "should be case insensitive", function(done){
 		request(url + "geomAtikum,philosophenturm,STUDIERENDENHAUS", function(err, res, body){
@@ -104,25 +104,25 @@ describe('server', function(){
 		});
 	});
 
-	it( "should fail gracefully", function(){
-//		expect(true).to.be(false, "not implemented");
-	});
+	//~ it( "should fail gracefully", function(){
+		//~ expect(true).to.be(false, "not implemented");
+	//~ });
 
-	it( "should log errors", function(){
-//		expect(true).to.be(false, "not implemented");
-	});
+	//~ it( "should log errors", function(){
+		//~ expect(true).to.be(false, "not implemented");
+	//~ });
 
-	it( "should log accessed", function(){
-//		expect(true).to.be(false, "not implemented");
-	});
+	//~ it( "should log accessed", function(){
+		//~ expect(true).to.be(false, "not implemented");
+	//~ });
 
-	it( "should honour changedSince", function(){
-//		expect(true).to.be(false, "not implemented");
-	});
+	//~ it( "should honour changedSince", function(){
+		//~ expect(true).to.be(false, "not implemented");
+	//~ });
 
-	it( "should compress data", function(){
-//		expect(true).to.be(false, "not implemented");
-	});
+	//~ it( "should compress data", function(){
+		//~ expect(true).to.be(false, "not implemented");
+	//~ });
 
 	it( "should allow for mensen to be combined", function(done){
 		var geo, campus, geocampus, combined;
@@ -147,10 +147,10 @@ describe('server', function(){
 });
 
 
-describe('legacy server', function(){
-	it("should return well formed data", function(done){
-//		expect(true).to.be(false, "not implemented");
-		done();
-	});
-});
+//~ describe('legacy server', function(){
+	//~ it("should return well formed data", function(done){
+		//~ expect(true).to.be(false, "not implemented");
+		//~ done();
+	//~ });
+//~ });
 
