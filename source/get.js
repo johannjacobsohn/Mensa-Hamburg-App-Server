@@ -4,7 +4,6 @@
  * 
  * re-requests old data as well
  * 
- * @TODO check and rewrite mensen and weeks -> be case insensitive
  * 
  * @module get.js
  * @exports get
@@ -45,8 +44,6 @@ var get = function(req, mensen, weeks, since, callback){
 	// @TODO: handle changedSince
 
 	// @TODO: wont work for mensa+week combination
-
-	// todo: check and rewrite mensen and weeks
 	var requested = [];
 	Dish.find({mensaId: { $in: mensen }, week: {$in: weeks }}, function(err, found){
 		// find out if all mensen are loaded and which are not; retrieved those
@@ -75,6 +72,7 @@ var get = function(req, mensen, weeks, since, callback){
 					// lock execution of callback queue
 					if( !locks[mensa+week] ){
 						locks[mensa+week] = true;
+
 						retrieve(mensa, week, function(err, items){
 							if(err){
 								processQueue(err, mensa+week);
@@ -107,6 +105,10 @@ var get = function(req, mensen, weeks, since, callback){
 		// the old data, but the next one doesn't have to)
 
 	});
+};
+
+exports.clean = function(){
+	Dish.collection.remove(function(){});
 };
 
 exports.get = get;

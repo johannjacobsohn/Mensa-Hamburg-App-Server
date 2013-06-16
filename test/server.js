@@ -1,11 +1,13 @@
 "use strict";
+
 var
-  serv = require('..'),
   url = "http://localhost:8080/",
   expect = require('expect.js'),
   request = require('request'),
-  fakeweb = require('node-fakeweb');
+  fakeweb = require('node-fakeweb'),
+  mockery = require("mockery");
 
+  var serv = require('..')
 fakeweb.allowNetConnect = false;
 require("../source/urls.js").list.forEach(function(item){
 	var id = item.url.match(/\/de\/(.*)\/201/)[1];
@@ -14,6 +16,8 @@ require("../source/urls.js").list.forEach(function(item){
 });
 
 describe('server', function(){
+
+	var geomatikum;
 
 	var checkJSON = function(menu){
 		var hasProperties = function(item){ return item.properties; };
@@ -31,20 +35,23 @@ describe('server', function(){
 
 	it("should return well formed data", function(done){
 		request(url + "Geomatikum", function(err, res, body){
-			var data = JSON.parse(body);
+			geomatikum = JSON.parse(body);
 			var correctMensa = function(item){ return item.mensaId === "geomatikum"; };
-			expect( data.menu.every(correctMensa) ).to.be(true);
-			checkJSON(data.menu);
+			expect( geomatikum.menu.every(correctMensa) ).to.be(true);
+			checkJSON(geomatikum.menu);
 			done();
 		});
 	});
 
-	//~ it( "should not request data multiple time", function(){
-		//~ expect(true).to.be(false, "not implemented");
-	//~ });
+	it("clears out unparsable mensen", function(done){
+		request(url + "Geomatikum,DOESNOTEXIST", function(err, res, body){
+			expect( JSON.parse(body) ).to.eql( geomatikum );
+			done();
+		});
+	});
 
 	it( "should handle this, next, both; default is this", function(done){
-		// @FIXME: someone need to learn about promises
+		// @FIXME: someone needs to learn about promises
 		request(url + "Geomatikum/", function(err, res, body){
 			var withSlash = body;
 			request(url + "Geomatikum", function(err, res, body){
@@ -143,6 +150,35 @@ describe('server', function(){
 				});
 			});
 		});
+	});
+
+
+	it( "should not request data multiple time", function(done){
+		// mock retriever
+		var numberOfCalls = 0;
+		mockery.enable({ useCleanCache: true });
+		mockery.warnOnUnregistered(false);
+		mockery.registerMock('./retriever.js', {
+			retrieve: function(mensa, week, callback){
+				numberOfCalls++;
+				setTimeout(function(){
+					callback([{name:"testdish"}]);
+				}, 10);
+			}
+		});
+
+		// request data twice
+		var get = require("../source/get.js");
+		get.clean(); // drop database
+		get.get({}, ["geomatikum"], [24], "", function(){});
+		get.get({}, ["geomatikum"], [24], "", function(){});
+
+		// make sure retriever has been called just once
+		setTimeout(function(){
+			expect(numberOfCalls).to.be(1);
+			done();
+			mockery.deregisterAll();
+		}, 30)
 	});
 });
 
