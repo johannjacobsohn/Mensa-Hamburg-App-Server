@@ -16,7 +16,12 @@ function retrieve(mensaId, week, callback){
 			uri: url.replace(/{{week}}/, week)
 		}, function(err, response, body) {
 			if(!err){
-				callback( null, parser[mensa.parser](body, mensaId, week) );
+				try{
+					callback( null, parser[mensa.parser](body, mensaId, week) );
+				} catch(e) {
+					console.error("%s: Error while parsing: %s in week %d which maps to %s", new Date(), mensaId, week, url, body, e);
+					callback("request failed");
+				}
 			} else {
 				console.error("%s: Cannot Retrieve: %s in week %d which maps to %s", new Date(), mensaId, week, url);
 				callback("request failed");

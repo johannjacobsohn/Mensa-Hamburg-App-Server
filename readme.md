@@ -22,7 +22,6 @@ Overview:
 TODO:
 --
 - Document
-- protect against failure in parser
 - clean up
 - high level Documentation
 - change storage to retrieve all mensen in one single request
