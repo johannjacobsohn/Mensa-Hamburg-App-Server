@@ -5,7 +5,6 @@ var
   expect  = require('expect.js'),
   request = require('request'),
   fakeweb = require('node-fakeweb'),
-  mockery = require("mockery"),
   serv    = require('..');
 
 // http://syn.ac/tech/19/get-the-weeknumber-with-javascript/
