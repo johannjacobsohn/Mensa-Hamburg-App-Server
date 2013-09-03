@@ -1,5 +1,7 @@
 language: node_js
 node_js:
   - "0.8"
+before_install:
+  - echo "127.0.0.1 localhost-legacy" | sudo tee -a /etc/hosts
 script: make setup && make lint && make test
 services: mongodb

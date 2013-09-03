@@ -1,22 +1,35 @@
 "use strict";
 
 var
-  url = "http://localhost:8080/",
-  expect = require('expect.js'),
+  url     = "http://localhost:8080/",
+  expect  = require('expect.js'),
   request = require('request'),
   fakeweb = require('node-fakeweb'),
-  mockery = require("mockery");
+  mockery = require("mockery"),
+  serv    = require('..');
 
-  var serv = require('..')
 fakeweb.allowNetConnect = false;
 require("../source/urls.js").list.forEach(function(item){
 	var id = item.url.match(/\/de\/(.*)\/201/)[1];
-	fakeweb.registerUri({uri: item.url.replace("{{week}}", 24).replace(".de", ".de:80"), file: 'test/fixtures/'+id});
-	fakeweb.registerUri({uri: item.url.replace("{{week}}", 25).replace(".de", ".de:80"), file: 'test/fixtures/'+id});
+
+	// http://syn.ac/tech/19/get-the-weeknumber-with-javascript/
+	Date.prototype.getWeek = function() {
+		var determinedate = new Date();
+		determinedate.setFullYear(this.getFullYear(), this.getMonth(), this.getDate());
+		var D = determinedate.getDay();
+		if(D === 0){ D = 7; }
+		determinedate.setDate(determinedate.getDate() + (4 - D));
+		var YN = determinedate.getFullYear();
+		var ZBDoCY = Math.floor((determinedate.getTime() - new Date(YN, 0, 1, -6)) / 86400000);
+		var WN = 1 + Math.floor(ZBDoCY / 7);
+		return WN;
+	};
+
+	fakeweb.registerUri({uri: item.url.replace("{{week}}", new Date().getWeek()).replace(".de", ".de:80"), file: 'test/fixtures/'+id});
+	fakeweb.registerUri({uri: item.url.replace("{{week}}", new Date().getWeek()+1).replace(".de", ".de:80"), file: 'test/fixtures/'+id});
 });
 
 describe('server', function(){
-
 	var geomatikum;
 
 	var checkJSON = function(menu){
@@ -45,7 +58,8 @@ describe('server', function(){
 
 	it("clears out unparsable mensen", function(done){
 		request(url + "Geomatikum,DOESNOTEXIST", function(err, res, body){
-			expect( JSON.parse(body) ).to.eql( geomatikum );
+			var sort = function(a,b){ return a._id === b._id ? 0 : a._id > b._id ? 1 : -1; };
+			expect( JSON.parse(body).menu.sort(sort) ).to.eql( geomatikum.menu.sort(sort) );
 			done();
 		});
 	});
@@ -178,15 +192,6 @@ describe('server', function(){
 			expect(numberOfCalls).to.be(1);
 			done();
 			mockery.deregisterAll();
-		}, 30)
+		}, 30);
 	});
 });
-
-
-//~ describe('legacy server', function(){
-	//~ it("should return well formed data", function(done){
-		//~ expect(true).to.be(false, "not implemented");
-		//~ done();
-	//~ });
-//~ });
-

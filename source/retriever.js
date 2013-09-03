@@ -2,10 +2,6 @@
  * retrieverJS
  * 
  * Retrieves data and calls parser to process that data into JSON
- * 
- * @TODO write tests
- * @TODO Document
- * @TODO protect against failure in parser
  */
 "use strict";
 function retrieve(mensaId, week, callback){
