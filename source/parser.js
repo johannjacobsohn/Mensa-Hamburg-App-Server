@@ -9,7 +9,9 @@
 "use strict";
 var cheerio = require("cheerio");
 var parser = {};
-parser.studhh = function(body, mensaId, week){
+parser.uke = require("./parser/uke/index.js").parser;
+
+parser.studhh = function(body, mensaId, week, callback){
 	var weekMenu = [];
 	var $ = cheerio.load(body);
 	// extract and parse date field
@@ -81,8 +83,8 @@ parser.studhh = function(body, mensaId, week){
 				weekMenu.push({
 					mensaId     : mensaId,
 					week        : week,
-					name        : dishName,
-					dish        : dish,
+					type        : dishName,
+					name        : dish,
 					studPrice   : studPrice,
 					normalPrice : normalPrice,
 					date        : dateString,
@@ -92,7 +94,7 @@ parser.studhh = function(body, mensaId, week){
 			});
 		});
 	});
-	return weekMenu;
+	callback(null, weekMenu);
 };
 
 exports.parser = parser;

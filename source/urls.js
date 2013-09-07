@@ -105,7 +105,14 @@ var mensen = [
 		id: "cafecfel",
 		url: baselink + "680/2013/{{week}}/",
 		parser: "studhh"
+	},
+	{
+		name: "UKE",
+		id: "uke",
+		url: "http://www.uke.de/zentrale-dienste/kge/downloads/kge-klinik-gastronomie-eppendorf/ma_kw{{week}}.pdf",
+		parser: "uke"
 	}
+	
 ];
 
 /*
