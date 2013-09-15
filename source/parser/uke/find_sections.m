@@ -14,20 +14,28 @@ Ia = imread(a);
 green = Ia(:,:,2);
 
 meanVert = mean(green, 2);
+meanVert(meanVert > 120) = 255;
 [maxVert, minVert] = peakdet(meanVert, 0.5);
-minVert = sortrows(minVert, 2);
-minVert = minVert(1:17,:);
+%~ plot(meanVert)
+%~ pause
+%~ minVert = sortrows(minVert, 2);
+%~ minVert = minVert(1:13,:);
 minVert = sortrows(minVert, 1);
 minVert = minVert(:,1);
-minVert = minVert(1:14);
+%~ minVert = minVert(1:14);
+%~ minVert
 
 meanHori = mean(green, 1);
+meanHori(meanHori > 120) = 255;
 [maxHori, minHori] = peakdet(meanHori, 0.5);
-minHori = sortrows(minHori, 2);
-minHori = minHori(1:10,:);
+%~ minHori = sortrows(minHori, 2);
+%~ minHori = minHori(1:10,:);
 minHori = sortrows(minHori, 1);
 minHori = minHori(:,1);
-minHori = minHori(1:7);
+%~ minHori = minHori(1:7);
+
+%~ plot(meanHori)
+%~ pause
 
 h = "";
 v = "";
