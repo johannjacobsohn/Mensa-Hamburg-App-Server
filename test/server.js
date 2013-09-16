@@ -224,10 +224,6 @@ describe('server', function(){
 		});
 	});
 
-	//~ it( "should honour changedSince", function(){
-		//~ expect(true).to.be(false, "not implemented");
-	//~ });
-
 	it( "should allow for mensen to be combined", function(done){
 		var geo, campus, geocampus, combined;
 		request(url + "Geomatikum/", function(err, res, body){
@@ -266,8 +262,8 @@ describe('server', function(){
 		// request data twice
 		var get = require("../source/get.js");
 		get.clean(); // drop database
-		get.get({}, ["geomatikum"], [24], "", function(){});
-		get.get({}, ["geomatikum"], [24], "", function(){});
+		get.get({}, ["geomatikum"], [24], function(){});
+		get.get({}, ["geomatikum"], [24], function(){});
 
 		// make sure retriever has been called just once
 		setTimeout(function(){

@@ -48,8 +48,7 @@ var parseParameters = function(req, res, next){
  * Construct new reply
  */
 var reply = function(req, res){
-	var changedSince = req.query.changedSince;
-	get(req, req.mensen, req.weeks, changedSince, function(error){
+	get(req, req.mensen, req.weeks, function(error){
 		if(error){
 			console.error(new Date(), req.mensen, req.weeks, "get error");
 			res.send(500, JSON.stringify({menu:[]}));
@@ -63,7 +62,7 @@ var reply = function(req, res){
  * Construct old reply
  */
 var legacyReply = function(req, res){
-	get(req, req.mensen, req.weeks, null, function(error){
+	get(req, req.mensen, req.weeks, function(error){
 		if(error){
 			console.error(new Date(), req.mensen, req.weeks, "get error");
 			res.send(500, JSON.stringify([]));
@@ -86,22 +85,6 @@ Date.prototype.getWeek = function() {
 	var WN = 1 + Math.floor(ZBDoCY / 7);
 	return WN;
 };
-
-
-/*
- .use(function(req, res, next){
-	var changedSince = req.query["changedSince"];
-	var lastChanged = 0;
-	// intercept changedSince-Request 
-	if ( changedSince &amp;&amp; +(new Date(changedSince)) &gt; lastChanged ) {
-		// lastChanged happend before last request from client (changedSince)
-		// don't send any data
-		res.send(200);
-	} else {
-		next();
-	}
- })
-*/
 
 // log exceptions
 //process.on('uncaughtException', function (err) {

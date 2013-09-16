@@ -40,9 +40,7 @@ var dishSchema = mongoose.Schema({
 
 var Dish = mongoose.model('Dish', dishSchema);
 
-var get = function(req, mensen, weeks, since, callback){
-	// @TODO: handle changedSince
-
+var get = function(req, mensen, weeks, callback){
 	// @TODO: wont work for mensa+week combination
 	var requested = [];
 	Dish.find({mensaId: { $in: mensen }, week: {$in: weeks }}, function(err, found){
