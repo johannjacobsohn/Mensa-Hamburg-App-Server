@@ -8,6 +8,7 @@ var
   mockery = require("mockery"),
   serv    = require(".."),
   fs      = require("fs"),
+  async   = require('async'),
   thisWeekNumber = new Date().getWeek(),
   nextWeekNumber = thisWeekNumber + 1;
 
@@ -67,45 +68,70 @@ describe('server', function(){
 	});
 
 	it( "should handle this, next, both; default is this", function(done){
-		// @FIXME: someone needs to learn about promises
-		request(url + "Geomatikum/", function(err, res, body){
-			var withSlash = body;
-			request(url + "Geomatikum", function(err, res, body){
-				var withoutSlash = body;
-				request(url + "Geomatikum/this", function(err, res, body){
-					var thisw = body;
-					request(url + "Geomatikum/next", function(err, res, body){
-						var next= body;
-						request(url + "Geomatikum/this,next", function(err, res, body){
-							var thisnext = body;
-							request(url + "Geomatikum/next,this", function(err, res, body){
-								var nextthis = body;
-								request(url + "Geomatikum/both", function(err, res, body){
-									var both = body;
-									var sort_by_id = function(a,b){
-										return a._id>b._id ? 1 : -1;
-									};
-									expect(both).to.eql(thisnext);
-									expect(both).to.eql(nextthis);
-									expect(both).to.not.be.empty();
-									expect(thisw).to.not.be.empty();
-									expect(next).to.not.be.empty();
-									expect(thisw).to.eql(withoutSlash);
-									expect(thisw).to.eql(withSlash);
-									var jsonthis = (JSON.parse(thisw)).menu;
-									var jsonnext = (JSON.parse(next)).menu;
-									var jsonboth = (JSON.parse(both)).menu;
-									var combined = jsonthis.concat(jsonnext);
-
-									expect( jsonboth.sort(sort_by_id) ).to.eql( combined.sort(sort_by_id) );
-
-									done();
-								});
-							});
-						});
-					});
+		var withSlash, withoutSlash, thisw, next, thisnext, nextthis, both;
+		async.series([
+			function(callback){
+				request(url + "Geomatikum/", function(err, res, body){
+					withSlash = body;
+					callback();
 				});
-			});
+			},
+			function(callback){
+				request(url + "Geomatikum", function(err, res, body){
+					withoutSlash = body;
+					callback();
+				});
+			},
+			function(callback){
+				request(url + "Geomatikum/this", function(err, res, body){
+					thisw = body;
+					callback();
+				});
+			},
+			function(callback){
+				request(url + "Geomatikum/next", function(err, res, body){
+					next = body;
+					callback();
+				});
+			},
+			function(callback){
+				request(url + "Geomatikum/this,next", function(err, res, body){
+					thisnext = body;
+					callback();
+				});
+			},
+			function(callback){
+				request(url + "Geomatikum/next,this", function(err, res, body){
+					nextthis = body;
+					callback();
+				});
+			},
+			function(callback){
+				request(url + "Geomatikum/both", function(err, res, body){
+					both = body;
+					callback();
+				});
+			}
+		], function(){
+
+			var sort_by_id = function(a,b){
+				return a._id>b._id ? 1 : -1;
+			};
+			expect(both).to.eql(thisnext);
+			expect(both).to.eql(nextthis);
+			expect(both).to.not.be.empty();
+			expect(thisw).to.not.be.empty();
+			expect(next).to.not.be.empty();
+			expect(thisw).to.eql(withoutSlash);
+			expect(thisw).to.eql(withSlash);
+			var jsonthis = (JSON.parse(thisw)).menu;
+			var jsonnext = (JSON.parse(next)).menu;
+			var jsonboth = (JSON.parse(both)).menu;
+			var combined = jsonthis.concat(jsonnext);
+
+			expect( jsonboth.sort(sort_by_id) ).to.eql( combined.sort(sort_by_id) );
+
+			done();
 		});
 	});
 
@@ -160,16 +186,31 @@ describe('server', function(){
 	it( "should log accessed", function(done){
 		var file = "access.log";
 
-		fs.writeFile(file, "", function(err){
-			fs.readFile(file, function(err, content){
-				expect(content).to.be.empty();
-				request(url + "geomatikum/", function(err, res, body){
-					fs.readFile(file, function(err, content){
-						expect(content).to.not.be.empty();
-						done();
-					});
+		async.series([
+			// empty log file
+			fs.writeFile.bind(fs, file, ""),
+
+			// confirm log file is empty
+			function(callback){
+				fs.readFile(file, function(err, content){
+					expect(content).to.be.empty();
+					callback();
 				});
-			});
+			},
+
+			// make request to server
+			request.bind(this, url + "geomatikum/"),
+
+			// confirm log file is not empty anymore
+			function(callback){
+				fs.readFile(file, "", function(err, content){
+					expect(content).to.not.be.empty();
+					callback();
+				});
+			}
+		], function(err) {
+			if (err) return next(err);
+			done();
 		});
 	});
 
