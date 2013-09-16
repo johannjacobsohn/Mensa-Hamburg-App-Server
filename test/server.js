@@ -2,11 +2,12 @@
 
 var
   url     = "http://localhost:8080/",
-  expect  = require('expect.js'),
-  request = require('request'),
-  fakeweb = require('node-fakeweb'),
+  expect  = require("expect.js"),
+  request = require("request"),
+  fakeweb = require("node-fakeweb"),
   mockery = require("mockery"),
-  serv    = require('..'),
+  serv    = require(".."),
+  fs      = require("fs"),
   thisWeekNumber = new Date().getWeek(),
   nextWeekNumber = thisWeekNumber + 1;
 
@@ -142,17 +143,35 @@ describe('server', function(){
 		});
 	});
 
-	//~ it( "should fail gracefully", function(){
-		//~ expect(true).to.be(false, "not implemented");
-	//~ });
+	it( "should handle unexpected urls gracefully", function(done){
+		request(url + "test", function(err, res, body){
+			var j = JSON.parse(body);
+			expect( j ).to.be.an("object");
+			expect( j.menu ).to.be.an("array");
+			expect( j.menu ).to.be.empty();
+			done();
+		});
+	});
 
 	//~ it( "should log errors", function(){
 		//~ expect(true).to.be(false, "not implemented");
 	//~ });
 
-	//~ it( "should log accessed", function(){
-		//~ expect(true).to.be(false, "not implemented");
-	//~ });
+	it( "should log accessed", function(done){
+		var file = "access.log";
+
+		fs.writeFile(file, "", function(err){
+			fs.readFile(file, function(err, content){
+				expect(content).to.be.empty();
+				request(url + "geomatikum/", function(err, res, body){
+					fs.readFile(file, function(err, content){
+						expect(content).to.not.be.empty();
+						done();
+					});
+				});
+			});
+		});
+	});
 
 	//~ it( "should honour changedSince", function(){
 		//~ expect(true).to.be(false, "not implemented");
@@ -178,7 +197,6 @@ describe('server', function(){
 			});
 		});
 	});
-
 
 	it( "should not request data multiple time", function(done){
 		// mock retriever
