@@ -173,6 +173,17 @@ describe('server', function(){
 		});
 	});
 
+	it("should compress output", function(done){
+		var headers = {
+			'Accept-Encoding': 'gzip'
+		};
+
+		request({url: url + "Geomatikum/", 'headers': headers}, function(err, res, body){
+			expect( res.headers['content-encoding'] ).to.be('gzip');
+			done();
+		});
+	});
+
 	//~ it( "should honour changedSince", function(){
 		//~ expect(true).to.be(false, "not implemented");
 	//~ });
