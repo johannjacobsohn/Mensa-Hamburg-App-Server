@@ -11,7 +11,7 @@ function retrieve(mensaId, week, callback){
 	    url = mensa.url;
 
 	if( url && !isNaN(parseInt(week, 10)) ){
-		console.log(new Date(), ": Retrieve ", url.replace(/{{week}}/, week));
+		//~ console.log(new Date(), ": Retrieve ", url.replace(/{{week}}/, week));
 		request({
 			uri: url.replace(/{{week}}/, week)
 		}, function(err, response, body) {

@@ -209,7 +209,6 @@ describe('server', function(){
 				});
 			}
 		], function(err) {
-			if (err) return next(err);
 			done();
 		});
 	});
