@@ -6,28 +6,29 @@ var
   request = require('request'),
   fakeweb = require('node-fakeweb'),
   mockery = require("mockery"),
-  serv    = require('..');
+  serv    = require('..'),
+  thisWeekNumber = new Date().getWeek(),
+  nextWeekNumber = thisWeekNumber + 1;
 
 fakeweb.allowNetConnect = false;
 require("../source/urls.js").list.forEach(function(item){
 	var id = item.url.match(/\/de\/(.*)\/201/)[1];
-
-	// http://syn.ac/tech/19/get-the-weeknumber-with-javascript/
-	Date.prototype.getWeek = function() {
-		var determinedate = new Date();
-		determinedate.setFullYear(this.getFullYear(), this.getMonth(), this.getDate());
-		var D = determinedate.getDay();
-		if(D === 0){ D = 7; }
-		determinedate.setDate(determinedate.getDate() + (4 - D));
-		var YN = determinedate.getFullYear();
-		var ZBDoCY = Math.floor((determinedate.getTime() - new Date(YN, 0, 1, -6)) / 86400000);
-		var WN = 1 + Math.floor(ZBDoCY / 7);
-		return WN;
-	};
-
-	fakeweb.registerUri({uri: item.url.replace("{{week}}", new Date().getWeek()).replace(".de", ".de:80"), file: 'test/fixtures/'+id});
-	fakeweb.registerUri({uri: item.url.replace("{{week}}", new Date().getWeek()+1).replace(".de", ".de:80"), file: 'test/fixtures/'+id});
+	fakeweb.registerUri({uri: item.url.replace("{{week}}", thisWeekNumber).replace(".de", ".de:80"), file: 'test/fixtures/'+id});
+	fakeweb.registerUri({uri: item.url.replace("{{week}}", nextWeekNumber).replace(".de", ".de:80"), file: 'test/fixtures/'+id});
 });
+
+// http://syn.ac/tech/19/get-the-weeknumber-with-javascript/
+Date.prototype.getWeek = function() {
+	var determinedate = new Date();
+	determinedate.setFullYear(this.getFullYear(), this.getMonth(), this.getDate());
+	var D = determinedate.getDay();
+	if(D === 0){ D = 7; }
+	determinedate.setDate(determinedate.getDate() + (4 - D));
+	var YN = determinedate.getFullYear();
+	var ZBDoCY = Math.floor((determinedate.getTime() - new Date(YN, 0, 1, -6)) / 86400000);
+	var WN = 1 + Math.floor(ZBDoCY / 7);
+	return WN;
+};
 
 describe('server', function(){
 	var geomatikum;
@@ -107,9 +108,25 @@ describe('server', function(){
 		});
 	});
 
-	//~ it( "should handle week numbers", function(){
-		//~ expect(true).to.be(false, "not implemented");
-	//~ });
+	it( "should handle this weeks number", function(done){
+		request(url + "geomatikum/"+ thisWeekNumber, function(err, res, body){
+			var a = body;
+			request(url + "geomatikum/this", function(err, res, body){
+				expect(a).to.be(body);
+				done();
+			});
+		});
+	});
+
+	it( "should handle the next week number", function(done){
+		request(url + "geomatikum/"+ nextWeekNumber, function(err, res, body){
+			var a = body;
+			request(url + "geomatikum/next", function(err, res, body){
+				expect(a).to.be(body);
+				done();
+			});
+		});
+	});
 
 	it( "should be case insensitive", function(done){
 		request(url + "geomAtikum,philosophenturm,STUDIERENDENHAUS", function(err, res, body){
@@ -138,10 +155,6 @@ describe('server', function(){
 	//~ });
 
 	//~ it( "should honour changedSince", function(){
-		//~ expect(true).to.be(false, "not implemented");
-	//~ });
-
-	//~ it( "should compress data", function(){
 		//~ expect(true).to.be(false, "not implemented");
 	//~ });
 
