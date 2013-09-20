@@ -2,7 +2,7 @@ setup:
 	npm install
 
 serve:
-	forever -e error.log -o output.log .  & echo $$! > "mensa-app-server.pid.txt"
+	forever -e logs/error.log -o logs/output.log .  & echo $$! > "mensa-app-server.pid.txt"
 
 unserve:
 	kill `cat mensa-app-server.pid.txt`

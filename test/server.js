@@ -187,7 +187,7 @@ describe('server', function(){
 	//~ });
 
 	it( "should log accessed", function(done){
-		var file = "access.log";
+		var file = "logs/access.log";
 
 		async.series([
 			// empty log file

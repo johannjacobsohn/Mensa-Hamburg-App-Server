@@ -5,7 +5,7 @@ var url = require("url"),
 	fs = require("fs"),
 	get = require("./get.js").get,
 	port = 8080,
-	logFile = fs.createWriteStream('./access.log', {flags: 'a'});
+	logFile = fs.createWriteStream('./logs/access.log', {flags: 'a'});
 
 // https://gist.github.com/2344435
 var allowCrossDomain = function(req, res, next) {
