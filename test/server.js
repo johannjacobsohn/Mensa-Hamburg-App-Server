@@ -171,6 +171,9 @@ describe('server', function(){
 
 	it( "should handle unexpected urls gracefully", function(done){
 		request(url + "test", function(err, res, body){
+			expect( res.headers['content-type'] ).to.be('application/json; charset=utf-8');
+			expect( res.statusCode ).to.be(200);
+
 			var j = JSON.parse(body);
 			expect( j ).to.be.an("object");
 			expect( j.menu ).to.be.an("array");
@@ -223,6 +226,16 @@ describe('server', function(){
 			done();
 		});
 	});
+
+	it("an empty mensa yields an empty result", function(done){
+		request({url: url + "emptymensa/"}, function(err, res, body){
+			expect( res.headers['content-type'] ).to.be('application/json; charset=utf-8');
+			expect( res.statusCode ).to.be(200);
+			expect( JSON.parse(body).menu ).to.be.empty();
+			done();
+		});
+	});
+
 
 	it( "should allow for mensen to be combined", function(done){
 		var geo, campus, geocampus, combined;

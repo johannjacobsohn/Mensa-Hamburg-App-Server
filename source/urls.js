@@ -105,6 +105,12 @@ var mensen = [
 		id: "cafecfel",
 		url: baselink + "680/2013/{{week}}/",
 		parser: "studhh"
+	},
+	{
+		name: "empty mensa - just for testing",
+		id: "emptymensa",
+		url: baselink + "empty/2013/{{week}}/",
+		parser: "studhh"
 	}
 ];
 

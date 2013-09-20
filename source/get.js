@@ -76,18 +76,22 @@ var get = function(req, mensen, weeks, callback){
 								processQueue(err, mensa+week);
 							} else {
 								var counter = items.length;
-								items.forEach(function(item){
-									new Dish(item).save(function(err, dish){
-										if(err){
-											console.error(err);
-										} else {
-											req.result.push(dish);
-										}
-										if(!--counter){
-											processQueue(null, mensa+week);
-										}
+								if(counter){
+									items.forEach(function(item){
+										new Dish(item).save(function(err, dish){
+											if(err){
+												console.error(err);
+											} else {
+												req.result.push(dish);
+											}
+											if(!--counter){
+												processQueue(null, mensa+week);
+											}
+										});
 									});
-								});
+								} else {
+									processQueue(null, mensa+week);
+								}
 							}
 						});
 					}
