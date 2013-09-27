@@ -7,6 +7,12 @@ var
   url = require("url"),
   mensa = require("./urls.js");
 
+
+//~ http://stackoverflow.com/questions/1960473/unique-values-in-an-array
+function unique(value, index, self) {
+	return self.indexOf(value) === index;
+}
+
 exports.parseRequest = function(req, res, next){
 	var s = url.parse(req.url).pathname.split("/");
 
@@ -42,11 +48,6 @@ exports.parseRequest = function(req, res, next){
 
 	next();
 };
-
-//~ http://stackoverflow.com/questions/1960473/unique-values-in-an-array
-function unique(value, index, self) {
-	return self.indexOf(value) === index;
-}
 
 // http://syn.ac/tech/19/get-the-weeknumber-with-javascript/
 Date.prototype.getWeek = function() {

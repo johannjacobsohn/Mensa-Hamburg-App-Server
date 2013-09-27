@@ -285,4 +285,19 @@ describe('server', function(){
 			mockery.deregisterAll();
 		}, 30);
 	});
+
+	it( "should allow CORS requests", function(done){
+		request(url + "Geomatikum/", function(err, res, body){
+			expect( res.headers['Access-Control-Allow-Origin'.toLowerCase()] ).to.be('*');
+			done();
+		});
+	});
+
+	it( "accept CORS preflight requests", function(done){
+		request({url: url + "Geomatikum/", method: "OPTIONS"}, function(err, res, body){
+			expect( res.headers['Access-Control-Allow-Origin'.toLowerCase()] ).to.be('*');
+			expect(body).to.be("OK");
+			done();
+		});
+	});
 });
