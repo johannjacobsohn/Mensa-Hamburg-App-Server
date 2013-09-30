@@ -12,22 +12,14 @@ function sort(a, b){
 }
 
 describe('uke parser', function(){
-	this.timeout(5 * 60 * 1000);
-
 	//~ [30, 32, 33, 34, 35, 36, 37]
-
 	[37, 38, 39, 40, 41].forEach(function(week){
 		it("works for kw" + week, function(done){
 			fs.readFile("test/fixtures/uke/ma_kw" + week + ".json", 'utf8', function(err, data) {
 				var fixture = JSON.parse(data);
 
 				parser("test/fixtures/uke/ma_kw" + week + ".pdf", "uke", week, function(err, data){
-					data = data
-						//~ .map(function(item){
-							//~ item.type = !item.type ? "" : item.type;
-							//~ return item;
-						//~ })
-						.sort(sort);
+					data = data.sort(sort);
 
 					fixture.sort(sort).forEach(function(item, i){
 						expect(item).to.eql(data[i]);

@@ -20,37 +20,14 @@ test:
 lint: 
 	node_modules/.bin/jshint .
 
-coverage: mk-cov test-cov clean
+check-coverage:
+	node_modules/.bin/istanbul check-coverage --statement -25 --branch -22 --function 90
 
-mk-cov:
-	@jscoverage App/source App/source-cov \
-		--no-instrument=package.js \
-		--no-instrument=Bookmarks/package.js \
-		--no-instrument=Catalog/package.js \
-		--no-instrument=CatalogItem/package.js \
-		--no-instrument=Contact/package.js \
-		--no-instrument=Content/package.js \
-		--no-instrument=custom/package.js \
-		--no-instrument=conf \
-		--no-instrument=Header/package.js \
-		--no-instrument=Index/package.js \
-		--no-instrument=Page/package.js \
-		--no-instrument=Search/package.js \
-		--no-instrument=Shelf/package.js \
-		--no-instrument=Sidebar/package.js \
-		--no-instrument=Slide/package.js \
-		--no-instrument=StaticView/package.js \
-		--no-instrument=hotspots/package.js \
-		--no-instrument=utils
-		
-
-test-cov:
-	node_modules/.bin/mocha-phantomjs http://localhost:8765/App/test/coverage-runner.html -R json-cov | \
-	grep -v enyo.kind | \
-	node_modules/.bin/json2htmlcov > coverage.html
+coverage:
+	node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha
 
 clean:
-	-rm -r App/source-cov
+	-rm -r coverage
 	-rm -r node_modules
 
 deploy: clean setup test
@@ -59,7 +36,13 @@ deploy: clean setup test
 	# restart app
 	ssh root@menu.mensaapp.org "cd mensaapp-server && make setup && make restart"
 
+travis:
+	make setup
+	make lint
+	make test
+	make check-coverage
+
 log: 
 	git log --format="%ad %s" --date=short
 
-.PHONY: test
+.PHONY: test coverage

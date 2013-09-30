@@ -8,40 +8,29 @@ function retrieve(mensaId, week, callback){
 	var request = require("request"),
 	    parser = require("./parser.js").parser,
 	    mensa = require("./urls.js").byId[mensaId],
-	    url = mensa.url;
+	    url = mensa.url.replace(/{{week}}/, week);
 
 	if( url && !isNaN(parseInt(week, 10)) ){
 		//~ console.log(new Date(), ": Retrieve ", url.replace(/{{week}}/, week));
 
 		if(url.indexOf(".pdf") !== -1){
-			var name = mensaId + week + ".pdf";
+			var path = mensaId + week + ".pdf";
 			var fs = require('fs');
 			if(url.indexOf(".pdf") !== -1){
-				var r = request( url.replace(/{{week}}/, week) ).on('end', function () {
-					parser[mensa.parser](name, mensaId, week, callback);
-				}).pipe(fs.createWriteStream(name));
+				var r = request( url ).on('end', function () {
+					parser[mensa.parser](path, mensaId, week, callback);
+				}).pipe(fs.createWriteStream(path));
 			}
 		} else {
 			request({
-				uri: url.replace(/{{week}}/, week)
+				uri: url
 			}, function(err, response, body) {
 				if(!err){
-					if(url.indexOf(".pdf") !== -1){
-						var name = mensaId + week + ".pdf";
-						fs.writeFile(mensaId + week + ".pdf", body, function(err) {
-							if(err) {
-								console.log(err);
-							} else {
-								parser[mensa.parser](name, mensaId, week, callback);
-							}
-						});
-					} else {
-						try{
-							parser[mensa.parser](body, mensaId, week, callback);
-						} catch(e) {
-							console.error("%s: Error while parsing: %s in week %d which maps to %s", new Date(), mensaId, week, url, body, e);
-							callback("request failed");
-						}
+					try{
+						parser[mensa.parser](body, mensaId, week, callback);
+					} catch(e) {
+						console.error("%s: Error while parsing: %s in week %d which maps to %s", new Date(), mensaId, week, url, body, e);
+						callback("request failed");
 					}
 				} else {
 					console.error("%s: Cannot Retrieve: %s in week %d which maps to %s", new Date(), mensaId, week, url);

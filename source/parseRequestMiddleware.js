@@ -5,6 +5,7 @@
 
 var
   url = require("url"),
+  getWeek = require("./getweek.js"),
   mensa = require("./urls.js");
 
 
@@ -29,9 +30,9 @@ module.exports = function(req, res, next){
 			w = w.toLowerCase();
 
 			if(w === "this"){
-				w = (new Date()).getWeek();
+				w = getWeek();
 			} else if(w === "next"){
-				w = (new Date( +new Date() + 1000*3600*24*7 )).getWeek();
+				w = getWeek(new Date( +new Date() + 1000*3600*24*7 ));
 			}
 			return w;
 		}, req.weeks)
@@ -47,17 +48,4 @@ module.exports = function(req, res, next){
 		});
 
 	next();
-};
-
-// http://syn.ac/tech/19/get-the-weeknumber-with-javascript/
-Date.prototype.getWeek = function() {
-	var determinedate = new Date();
-	determinedate.setFullYear(this.getFullYear(), this.getMonth(), this.getDate());
-	var D = determinedate.getDay();
-	if(D === 0){ D = 7; }
-	determinedate.setDate(determinedate.getDate() + (4 - D));
-	var YN = determinedate.getFullYear();
-	var ZBDoCY = Math.floor((determinedate.getTime() - new Date(YN, 0, 1, -6)) / 86400000);
-	var WN = 1 + Math.floor(ZBDoCY / 7);
-	return WN;
 };

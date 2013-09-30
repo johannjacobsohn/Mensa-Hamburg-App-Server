@@ -7,25 +7,13 @@ var
   fakeweb = require("node-fakeweb"),
   serv    = require(".."),
   fs      = require("fs"),
-  async   = require('async'),
+  async   = require("async"),
+  getWeek = require("../source/getweek.js"),
   now     = new Date(2012, 5, 22),
-  thisWeekNumber = now.getWeek(),
-  nextWeekNumber = new Date( +now + 7 * 24 * 3600 * 1000 ).getWeek();
+  thisWeekNumber = getWeek(now),
+  nextWeekNumber = getWeek( new Date( +now + 7 * 24 * 3600 * 1000 ));
 
 fakeweb.allowNetConnect = false;
-
-// http://syn.ac/tech/19/get-the-weeknumber-with-javascript/
-Date.prototype.getWeek = function() {
-	var determinedate = new Date();
-	determinedate.setFullYear(this.getFullYear(), this.getMonth(), this.getDate());
-	var D = determinedate.getDay();
-	if(D === 0){ D = 7; }
-	determinedate.setDate(determinedate.getDate() + (4 - D));
-	var YN = determinedate.getFullYear();
-	var ZBDoCY = Math.floor((determinedate.getTime() - new Date(YN, 0, 1, -6)) / 86400000);
-	var WN = 1 + Math.floor(ZBDoCY / 7);
-	return WN;
-};
 
 require("../source/urls.js").list.forEach(function(item){
 	var id = item.url.match(/\/de\/(.*)\/201/);
@@ -140,7 +128,7 @@ describe('server', function(){
 	});
 
 	it( "should handle this weeks number", function(done){
-		request(url + "geomatikum/"+ (new Date()).getWeek(), function(err, res, body){
+		request(url + "geomatikum/"+ getWeek(), function(err, res, body){
 			var a = body;
 			request(url + "geomatikum/this", function(err, res, body){
 				expect(a).to.be(body);
@@ -150,7 +138,7 @@ describe('server', function(){
 	});
 
 	it( "should handle the next week number", function(done){
-		request(url + "geomatikum/"+ (new Date(+new Date() + 7 * 24 * 3600 * 1000)).getWeek(), function(err, res, body){
+		request(url + "geomatikum/"+ getWeek(new Date(+new Date() + 7 * 24 * 3600 * 1000)), function(err, res, body){
 			var a = body;
 			request(url + "geomatikum/next", function(err, res, body){
 				expect(a).to.be(body);
