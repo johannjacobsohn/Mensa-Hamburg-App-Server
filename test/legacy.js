@@ -30,9 +30,12 @@ fakeweb.ignoreUri({uri: url + "Geomatikum/" + thisWeek});
 fakeweb.ignoreUri({uri: url + "Geomatikum/" + nextWeek});
 
 require("../source/urls.js").list.forEach(function(item){
-	var id = item.url.match(/\/de\/(.*)\/201/)[1];
-	fakeweb.registerUri({uri: item.url.replace("{{week}}", 24).replace(".de", ".de:80"), file: 'test/fixtures/'+id});
-	fakeweb.registerUri({uri: item.url.replace("{{week}}", 25).replace(".de", ".de:80"), file: 'test/fixtures/'+id});
+	var id = item.url.match(/\/de\/(.*)\/201/);
+	if(id){
+		id = id[1];
+		fakeweb.registerUri({uri: item.url.replace("{{week}}", 24).replace(".de", ".de:80"), file: 'test/fixtures/'+id});
+		fakeweb.registerUri({uri: item.url.replace("{{week}}", 25).replace(".de", ".de:80"), file: 'test/fixtures/'+id});
+	}
 });
 
 var checkJSON = function(menu){

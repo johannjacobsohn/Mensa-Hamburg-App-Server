@@ -9,24 +9,28 @@ var
   serv    = require('..');
 
 fakeweb.allowNetConnect = false;
+
+
+// http://syn.ac/tech/19/get-the-weeknumber-with-javascript/
+Date.prototype.getWeek = function() {
+	var determinedate = new Date();
+	determinedate.setFullYear(this.getFullYear(), this.getMonth(), this.getDate());
+	var D = determinedate.getDay();
+	if(D === 0){ D = 7; }
+	determinedate.setDate(determinedate.getDate() + (4 - D));
+	var YN = determinedate.getFullYear();
+	var ZBDoCY = Math.floor((determinedate.getTime() - new Date(YN, 0, 1, -6)) / 86400000);
+	var WN = 1 + Math.floor(ZBDoCY / 7);
+	return WN;
+};
+
 require("../source/urls.js").list.forEach(function(item){
-	var id = item.url.match(/\/de\/(.*)\/201/)[1];
-
-	// http://syn.ac/tech/19/get-the-weeknumber-with-javascript/
-	Date.prototype.getWeek = function() {
-		var determinedate = new Date();
-		determinedate.setFullYear(this.getFullYear(), this.getMonth(), this.getDate());
-		var D = determinedate.getDay();
-		if(D === 0){ D = 7; }
-		determinedate.setDate(determinedate.getDate() + (4 - D));
-		var YN = determinedate.getFullYear();
-		var ZBDoCY = Math.floor((determinedate.getTime() - new Date(YN, 0, 1, -6)) / 86400000);
-		var WN = 1 + Math.floor(ZBDoCY / 7);
-		return WN;
-	};
-
-	fakeweb.registerUri({uri: item.url.replace("{{week}}", new Date().getWeek()).replace(".de", ".de:80"), file: 'test/fixtures/'+id});
-	fakeweb.registerUri({uri: item.url.replace("{{week}}", new Date().getWeek()+1).replace(".de", ".de:80"), file: 'test/fixtures/'+id});
+	var id = item.url.match(/\/de\/(.*)\/201/);
+	if(id){
+		id = id[1];
+		fakeweb.registerUri({uri: item.url.replace("{{week}}", new Date().getWeek()).replace(".de", ".de:80"), file: 'test/fixtures/'+id});
+		fakeweb.registerUri({uri: item.url.replace("{{week}}", new Date().getWeek()+1).replace(".de", ".de:80"), file: 'test/fixtures/'+id});
+	}
 });
 
 describe('server', function(){

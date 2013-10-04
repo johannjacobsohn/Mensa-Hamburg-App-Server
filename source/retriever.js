@@ -34,7 +34,7 @@ function retrieve(mensaId, week, callback){
 							} else {
 								parser[mensa.parser](name, mensaId, week, callback);
 							}
-						}); 
+						});
 					} else {
 						try{
 							parser[mensa.parser](body, mensaId, week, callback);

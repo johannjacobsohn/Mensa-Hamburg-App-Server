@@ -1,86 +1,182 @@
-/**
- *
- *
- *
- *
- *
- *
- */
+//~
+//~
+//~ Target: 150 Lines
+//~ 
 "use strict";
 var exec = require('child_process').exec;
 
+function trim(item){
+	return item.replace(/[\s]+/g, " ").trim();
+}
+
 function parser(file, mensaId, week, callback){
-	var callbacks = 0;
-	var result = [];
 	var names = [];
+	exec('pdftotext -q -layout ' + file + " - ", function (error, stdout, stderr){
+		var s = stdout.split("\n"), menu = [], rows = [];
 
-//~ console.log("try to parse", file)
-
-	exec('convert -density 200 -depth 8 -quality 1 ' + file + ' temp.png', function(e){
-		//~ console.log("converted...")
-		exec('./source/parser/uke/find_sections.m temp.png', function (error, stdout, stderr){
-			console.log("found sections?", error, stdout, stderr)
-			var xy = JSON.parse(stdout.replace("\n", ""));
-			var xs = xy.x;
-			var ys = xy.y;
-
-			for(var i = 0; i<xs.length-2; i++){
-				for(var j = 2; j<ys.length-2; j++){
-					callbacks++;
-					(function(){
-						var x = i;
-						var y = j;
-						//~ console.log(xs[x+1], xs[x],xs[x+1] - xs[x])
-						//~ console.log('convert temp.png -crop ' + (xs[x+1] - xs[x]) + 'x' + (ys[y+1] - ys[y]) + '+' + xs[x] + '+' + ys[y] + ' +repage '+ x +''+ y +'.png')
-//~ return
-						exec('convert temp.png -crop ' + (xs[x+1] - xs[x]) + 'x' + (ys[y+1] - ys[y]) + '+' + xs[x] + '+' + ys[y] + ' +repage '+ x +''+ y +'.png', function (error, stdout, stderr){
-							exec('tesseract '+ x +''+ y +'.png '+ x +''+ y +' -l deu > /dev/null && cat '+ x +''+ y +'.txt', function (error, stdout, stderr){
-								//~ console.log("tesseract says:", stdout)
-								if(x === 0){
-									names[y-1] = scrub(stdout);
-								} else {
-									result.push(parse(stdout, x-1, y, week));
-								}
-								callbacks--;
-								if(!callbacks){
-									result = clean_result(result, names);
-									callback(null, result);
-									//~ console.log(result)
-								}
-
-								// cleanup
-								//~ exec('rm *.png *.txt');
-							});
-						});
-					})();
-				}
+		// remove header
+		for(var i = 0; i<s.length; i++){
+			if( s[i].search(/Montag.*Dienstag/) !== -1 ){
+				s[i] = null;
+				break;
 			}
-		});
+			s[i] = null;
+		}
+		s = s.filter(function(item){
+			return item != null;
+		})
+
+		// remove footer
+		var footer = s.splice(-3,2).join("");
+		var additivesList = extractAdditives(footer);
+
+		// split columns
+		var s = getColums(s);
+
+		// first column == names; tread separately
+		var names = s.shift().map(trim).join("\n").split(/[\n]{3,}/g).map(trim);
+		var veggi = names.indexOf("Vegetarisch");
+		if(veggi == -1) veggi = names.indexOf("vegetarisch");
+		names.splice(veggi, 1);
+		names[ veggi - 1 ] += " - Vegetarisch"
+		//~ console.log(names)
+
+		// last column == additional information; ignore.
+		s.pop();
+
+		// split rows
+		for(var x = 0; x < s.length; x++){
+			rows = splitRows(s[x], names);
+			for(var y = 0; y < rows.length; y++){
+				menu.push( parse(rows[y], x, names[y], week, additivesList) );
+			}
+		}
+
+		callback(null, menu);
 	});
 }
 
-// scrub string
-function scrub(string){
-	string = string.replace(/II/g, "ll ");
-	string = string.replace(/[\s]+/g, " ").trim();
-	string = string.charAt(0).toUpperCase() + string.slice(1);
-	string = string.replace(/ ß/g, "ß");
-	string = string.replace(/ e[\s]*-/g, "€ -");
-	return string;
+function extractAdditives(str){
+	var v = [],
+		re = /[0-9]+ ([^,]*),/g,
+		match;
+	while (match = re.exec(str)) {
+		v.push(match[1]);
+	}
+	return v;
+}
+
+
+function findAdditives(str){
+	var v = [],
+		re = /\(([0-9]+)\),/g,
+		match;
+	while (match = re.exec(str)) {
+		v.push(parseInt(match[1]));
+	}
+	return v;
+}
+
+//~ There are three markers which mark vertical boundaries:
+//~ above "Pasta Bar"
+//~ below "Kcal"
+//~ below "€", except when followed by "Kcal"
+function splitRows(column, types){
+	var found = [];
+
+	column = column.filter(function(item){ return item.match(/[\w]/) });
+	column.forEach(function(line, lineNo, array){
+			if(line.match(/Pasta Bar/i)){
+				found.push(lineNo);
+			} else if( line.match(/Kcal/i) ){
+				found.push(lineNo+1);
+			} else if( line.match(/€/) && array[lineNo+1] && !array[lineNo+1].match(/Kcal/i) ){
+				found.push(lineNo+1);
+			}
+		})
+	;
+
+	var bug = types.indexOf("Beilagen & Gemüse")
+	//~ console.log(found, types.indexOf("Beilagen & Gemüse"), found[bug] + 3 )
+
+	// Beilagen & Gemüse ist genau drei Zeilen lang
+	found.push(found[bug-1] + 3);
+
+	found.push(column.length);
+
+	found = found.sort(function(a,b){return a-b});
+	//~ console.log(found)
+
+	found = found
+		.map(function(item, i, arr){
+			return column.slice(arr[i-1] || 0, item).join("\n");
+		})
+		.map(trim)
+	;
+
+	return found;
+}
+
+//~ TODO: document; cleanup
+function getColums(s){
+	var str = s.map(function(line){
+		var a = line.split("").map(function(char){
+			return +(char !== " " && !!char);
+		})
+		return a
+	})
+	.reduce(function(prev, line){
+		var a = (prev.length > line.length ? prev : line);
+
+		a = a.map(function(char, i){
+			return !!line[i] + Math.min(prev[i] || 0, 8);
+		});
+		return a;
+	})
+	.join("");
+
+	var v = [],
+		re = /0{3,}/g,
+		match;
+	while (match = re.exec(str)) {
+		v.push(match.index);
+	}
+
+	var c = [[], [], [], [], [], []];
+	s.forEach(function(line){
+		for(var i = 0; i<5; i++){
+			c[i].push( line.substring(v[i-1] || 0, v[i]) );
+		}
+	});
+
+	return c;
 }
 
 //~ parse entry
-function parse(entry, x, y, week){
-	var a = entry.match(/(€(.+))/i);
-	var price = a && a.length ? a[2] : "0,00";
-	price = parseFloat( price.replace(/-./, "0.").replace(",", ".") );
-	//~ console.log("scrub entry:", entry)
-	var dish = scrub( entry );
-	dish = dish.replace(/€.*/, "").trim();
-	//~ console.log("scrubed:", dish)
+function parse(entry, x, y, week, additivesList){
+	var a = entry.match(/€(.{3,6})/i) || entry.match(/(-,.{2})/i);
+	var price = a && a.length ? a[1] : "0,00";
 
-	var date = new Date(new Date().getFullYear(), 0, (week-1)*7 + x - 1);
+	price = parseFloat( price.replace(/-./, "0.").replace(",", ".") );
+	var kcal = parseInt( entry.match(/([0-9]+) Kcal/i) );
+
+	var date = new Date(new Date().getFullYear(), 0, (week-1)*7 + x);
 	var dateString = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
+
+	var dish = entry;
+
+	var additives = findAdditives(dish).map(function(idx){
+		return additivesList[idx];
+	});
+
+	dish = dish
+		.replace(/€.*/, "")
+		.replace(/-,.{2}/, "")
+		.replace(/\([0-9]+\)/g, " ")
+		.replace(/[\s]+/g, " ")
+		.replace(/ ,/g, ",")
+		.trim()
+	;
 
 	return {
 		studPrice   : price,
@@ -90,25 +186,10 @@ function parse(entry, x, y, week){
 		week        : week,
 		type        : y,
 		date        : dateString,
+		kcal        : kcal || null,
 		properties  : [],
-		additives   : []
+		additives   : additives
 	};
-}
-
-//~ to be run once the pdf has been parsed
-function clean_result(result, names){
-	names[6] = names[8] = names[7];
-	names = names.map(function(item){
-		if(item){
-			return item.replace(/^L /, "").replace(/ l$/, "");
-		}
-	});
-	names[names.length-1] = names[names.length-2] =  names[names.length-2] + " " + names[names.length-1];
-	result = result.map(function(item){
-		item.type = names[item.type];
-		return item;
-	});
-	return result;
 }
 
 exports.parser = parser;
