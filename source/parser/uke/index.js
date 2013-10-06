@@ -1,6 +1,7 @@
 //~
 //~
 //~ Target: 150 Lines
+//~ @TODO: split and rejoin "süßer Abschluss" and "Beilagen & Gemüse" by ,
 //~ 
 "use strict";
 var exec = require('child_process').exec;
@@ -14,9 +15,12 @@ function parser(file, mensaId, week, callback){
 	exec('pdftotext -q -layout ' + file + " - ", function (error, stdout, stderr){
 		var s = stdout.split("\n"), menu = [], rows = [];
 
+		var header;
+
 		// remove header
 		for(var i = 0; i<s.length; i++){
 			if( s[i].search(/Montag.*Dienstag/) !== -1 ){
+				header = s[i];
 				s[i] = null;
 				break;
 			}
@@ -31,7 +35,9 @@ function parser(file, mensaId, week, callback){
 		var additivesList = extractAdditives(footer);
 
 		// split columns
-		var s = getColums(s);
+		var horBounds = getBoundaries(header);
+		//~ console.log(header)
+		var s = getColums(s, horBounds);
 
 		// first column == names; tread separately
 		var names = s.shift().map(trim).join("\n").split(/[\n]{3,}/g).map(trim);
@@ -42,13 +48,13 @@ function parser(file, mensaId, week, callback){
 		//~ console.log(names)
 
 		// last column == additional information; ignore.
-		s.pop();
-
+		//~ s.pop();
+//~ console.log(s[4])
 		// split rows
 		for(var x = 0; x < s.length; x++){
 			rows = splitRows(s[x], names);
 			for(var y = 0; y < rows.length; y++){
-				menu.push( parse(rows[y], x, names[y], week, additivesList) );
+				menu.push( parse(rows[y], x, names[y] || "", week, additivesList) );
 			}
 		}
 
@@ -117,34 +123,104 @@ function splitRows(column, types){
 	return found;
 }
 
+//~ function getBoundaries(s){
+	//~ var str = s.map(function(line){
+		//~ var a = line.split("").map(function(char){
+			//~ return +(char !== " " && !!char);
+		//~ })
+		//~ return a
+	//~ })
+	//~ .reduce(function(prev, line){
+		//~ var a = (prev.length > line.length ? prev : line);
+//~ 
+		//~ a = a.map(function(char, i){
+			//~ return !!line[i] + Math.min(prev[i] || 0, 8);
+		//~ });
+		//~ return a;
+	//~ })
+	//~ // einmal ist keinmal
+	//~ .map(function(i){
+		//~ return i < 3 ? 0 : i;
+	//~ })
+	//~ .join("");
+//~ 
+	//~ var v = [],
+		//~ re = /0{2,}/g,
+		//~ match;
+	//~ while (match = re.exec(str)) {
+		//~ console.log(match.index, Math.floor(match[0].length/2))
+		//~ v.push(match.index + Math.floor(match[0].length/2));
+	//~ }
+	//~ return v;
+//~ }
+
+// -------------#####--------#####--------#####-------#####--------######-------------------
+//      [^]             ^             ^           ^            ^              [^]
+function getBoundaries(line){
+	var markers = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag"];
+	markers.pop();
+
+	markers = markers.map(function(mark){
+		var re = new RegExp(mark + "([\\s]+)");
+		//~ console.log(re, line)
+		var match = re.exec(line);
+		return match.index + Math.floor( mark.length + match[1].length/2 );
+		//~ return Math.floor( mark.length + match[1].length/2 );
+	});
+
+	//~ var average = markers.reduce(function(a, b){ return a + b; })/markers.length;
+
+	var meanDistance = (markers[markers.length-1] - markers[0])/(markers.length-1);
+//~ console.log(meanDistance)
+	markers.push(Math.floor(markers[markers.length-1] + meanDistance));
+	markers.unshift(Math.floor(markers[0] - meanDistance));
+//~ console.log(markers)
+	return markers;
+}
+
 //~ TODO: document; cleanup
-function getColums(s){
-	var str = s.map(function(line){
-		var a = line.split("").map(function(char){
-			return +(char !== " " && !!char);
-		})
-		return a
-	})
-	.reduce(function(prev, line){
-		var a = (prev.length > line.length ? prev : line);
-
-		a = a.map(function(char, i){
-			return !!line[i] + Math.min(prev[i] || 0, 8);
-		});
-		return a;
-	})
-	.join("");
-
-	var v = [],
-		re = /0{3,}/g,
-		match;
-	while (match = re.exec(str)) {
-		v.push(match.index);
-	}
-
+function getColums(s, v){
 	var c = [[], [], [], [], [], []];
+	var orig_v = JSON.stringify(v);
 	s.forEach(function(line){
-		for(var i = 0; i<5; i++){
+		var x, left, right;
+
+		// reset v
+		v = JSON.parse(orig_v);
+
+		for(var i = 0; i<c.length; i++){
+			//~ console.log(line[v[i]])
+			if(line && line[v[i]] && line[v[i]] !== " "){
+
+
+				// first, look for unusual long whitespace within current string
+				var whitemarker = line.substring(v[i-1] || 0, v[i]).match(/[^\s][\s]{2,}/);
+				//~ console.log(whitemarker)
+
+				if(whitemarker){
+					x = v[i];
+					v[i] = v[i-1] + whitemarker.index + 1;
+					//~ console.log("set to", x, v[i-1], whitemarker.index, v[i], line.substring(v[i-1] || 0, v[i]), line.substring(v[i-1] || 0, x) )
+				} else {
+					//~ v[i] = v[i]-1;
+					x = left = right = v[i];
+					//~ console.log(line[v[i]])
+					while(true){
+						left--;
+						right++;
+						if(!left || !line[left] || line[left] === " "){
+							v[i] = left;
+							//~ console.log("left resolved at: ...", ""+line[left]+line[left+1]+line[left+2]+line[left+3], line.substring(v[i-1] || 0, v[i]).trim(), line[x] )
+							break;
+						} else if(!line[right] || line[right] === " "){
+							v[i] = right;
+							//~ console.log("right resolved at: ...", ""+line[right-3]+line[right-2]+line[right-1]+line[right], line.substring(v[i-1] || 0, v[i]).trim(), line[x])
+							break;
+						}
+						//~ console.log("line not complete:", line[left], line[right], left, right)
+					}
+				}
+			}
 			c[i].push( line.substring(v[i-1] || 0, v[i]) );
 		}
 	});

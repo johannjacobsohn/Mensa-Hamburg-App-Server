@@ -16,12 +16,12 @@ describe.only('uke parser', function(){
 
 	//~ [30, 32, 33, 34, 35, 36, 37]
 
-	[37, 39].forEach(function(week){
+	[37, 38, 39, 40, 41].forEach(function(week){
 		it("works for kw" + week, function(done){
-			fs.readFile("test/fixtures/uke/" + week + ".json", 'utf8', function(err, data) {
+			fs.readFile("test/fixtures/uke/ma_kw" + week + ".json", 'utf8', function(err, data) {
 				var fixture = JSON.parse(data);
 
-				parser("test/fixtures/uke/" + week + ".pdf", "uke", week, function(err, data){
+				parser("test/fixtures/uke/ma_kw" + week + ".pdf", "uke", week, function(err, data){
 					data = data
 						//~ .map(function(item){
 							//~ item.type = !item.type ? "" : item.type;
