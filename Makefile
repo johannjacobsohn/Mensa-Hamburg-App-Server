@@ -1,12 +1,14 @@
 setup:
+	apt-get update && apt-get install poppler-utils
 	npm install
 
-serve:
-	forever -e error.log -o output.log .  & echo $$! > "mensa-app-server.pid.txt"
+start:
+	forever -e error.log -o output.log -l forever.log -a start .
 
-unserve:
-	kill `cat mensa-app-server.pid.txt`
-	rm mensa-app-server.pid.txt
+stop:
+	forever stop `pwd`
+
+restart: stop start
 
 test: 
 	node_modules/.bin/mocha -R spec
@@ -44,8 +46,14 @@ test-cov:
 	node_modules/.bin/json2htmlcov > coverage.html
 
 clean:
-	-rm -r release/*
 	-rm -r App/source-cov
+	-rm -r node_modules
+
+deploy: clean setup test
+	# deploy files
+	rsync -rb index.js source package.json Makefile root@menu.mensaapp.org:mensaapp-server
+	# restart app
+	ssh root@menu.mensaapp.org "cd mensaapp-server && make setup && make restart"
 
 log: 
 	git log --format="%ad %s" --date=short
