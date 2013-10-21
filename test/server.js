@@ -5,7 +5,6 @@ var
   expect  = require("expect.js"),
   request = require("request"),
   fakeweb = require("node-fakeweb"),
-  mockery = require("mockery"),
   serv    = require(".."),
   fs      = require("fs"),
   async   = require('async'),
@@ -256,34 +255,6 @@ describe('server', function(){
 				});
 			});
 		});
-	});
-
-	it( "should not request data multiple time", function(done){
-		// mock retriever
-		var numberOfCalls = 0;
-		mockery.enable({ useCleanCache: true });
-		mockery.warnOnUnregistered(false);
-		mockery.registerMock('./retriever.js', {
-			retrieve: function(mensa, week, callback){
-				numberOfCalls++;
-				setTimeout(function(){
-					callback([{name:"testdish"}]);
-				}, 10);
-			}
-		});
-
-		// request data twice
-		var get = require("../source/get.js");
-		get.clean(); // drop database
-		get.get({}, ["geomatikum"], [24], function(){});
-		get.get({}, ["geomatikum"], [24], function(){});
-
-		// make sure retriever has been called just once
-		setTimeout(function(){
-			expect(numberOfCalls).to.be(1);
-			done();
-			mockery.deregisterAll();
-		}, 30);
 	});
 
 	it( "should allow CORS requests", function(done){

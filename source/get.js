@@ -10,8 +10,8 @@
  */
 "use strict";
 
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/mensaDB');
+var mongoose = require("mongoose");
+mongoose.connect("mongodb://localhost/mensaDB");
 var retrieve = require("./retriever.js").retrieve;
 var maxAgeOfData = 1000*60*60*24; // Data should be reloaded at least once a day
 var callbackqueue = [];
@@ -41,7 +41,6 @@ var dishSchema = mongoose.Schema({
 var Dish = mongoose.model('Dish', dishSchema);
 
 var get = function(req, mensen, weeks, callback){
-	// @TODO: wont work for mensa+week combination
 	var requested = [];
 	Dish.find({mensaId: { $in: mensen }, week: {$in: weeks }}, function(err, found){
 		// find out if all mensen are loaded and which are not; retrieved those
@@ -52,21 +51,28 @@ var get = function(req, mensen, weeks, callback){
 		}
 
 		req.result = found;
-		var missingmensen = {};
-		mensen.forEach(function(item){
-			missingmensen[item] = true;
+		var missing = {};
+		mensen.forEach(function(mensa){
+			missing[mensa] = {};
+			weeks.forEach(function(week){
+				missing[mensa][week] = true;
+			});
 		});
 		found.forEach(function(item){
-			delete missingmensen[item.mensaId];
+			if( missing[item.mensaId] && missing[item.mensaId][item.week]){
+				delete missing[item.mensaId][item.week];
+				if( !Object.keys(missing[item.mensaId]).length ){
+					delete missing[item.mensaId];
+				}
+			}
 		});
 		// missingmensen now contains only unsaved mensen
-		missingmensen = Object.keys(missingmensen);
-
+		var missingmensen = Object.keys(missing);
 		if(missingmensen.length){
 			// there are mensen which need to be aquired
 			callbackqueue.push(callback);
 			missingmensen.forEach(function(mensa){
-				weeks.forEach(function(week){
+				Object.keys(missing[mensa]).forEach(function(week){
 					// lock execution of callback queue
 					if( !locks[mensa+week] ){
 						locks[mensa+week] = true;
@@ -90,7 +96,7 @@ var get = function(req, mensen, weeks, callback){
 										});
 									});
 								} else {
-									processQueue(null, mensa+week);
+									process.nextTick( processQueue.bind(this, null, mensa+week) );
 								}
 							}
 						});
@@ -99,7 +105,7 @@ var get = function(req, mensen, weeks, callback){
 			});
 		} else {
 			// everything is present, load and call callback
-			callback();
+			process.nextTick(callback);
 		}
 
 		// @TODO:
@@ -109,8 +115,8 @@ var get = function(req, mensen, weeks, callback){
 	});
 };
 
-exports.clean = function(){
-	Dish.collection.remove(function(){});
+exports.clean = function(done){
+	Dish.collection.remove(done || function(){});
 };
 
 exports.get = get;
