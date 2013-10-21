@@ -11,7 +11,7 @@ function sort(a, b){
 	return a === b ? 0 : (a > b ? 1 : -1);
 }
 
-describe.only('uke parser', function(){
+describe('uke parser', function(){
 	this.timeout(5 * 60 * 1000);
 
 	//~ [30, 32, 33, 34, 35, 36, 37]

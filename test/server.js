@@ -2,11 +2,14 @@
 
 var
   url     = "http://localhost:8080/",
-  expect  = require('expect.js'),
-  request = require('request'),
-  fakeweb = require('node-fakeweb'),
-  mockery = require("mockery"),
-  serv    = require('..');
+  expect  = require("expect.js"),
+  request = require("request"),
+  fakeweb = require("node-fakeweb"),
+  serv    = require(".."),
+  fs      = require("fs"),
+  async   = require('async'),
+  thisWeekNumber = new Date().getWeek(),
+  nextWeekNumber = thisWeekNumber + 1;
 
 fakeweb.allowNetConnect = false;
 
@@ -69,51 +72,92 @@ describe('server', function(){
 	});
 
 	it( "should handle this, next, both; default is this", function(done){
-		// @FIXME: someone needs to learn about promises
-		request(url + "Geomatikum/", function(err, res, body){
-			var withSlash = body;
-			request(url + "Geomatikum", function(err, res, body){
-				var withoutSlash = body;
-				request(url + "Geomatikum/this", function(err, res, body){
-					var thisw = body;
-					request(url + "Geomatikum/next", function(err, res, body){
-						var next= body;
-						request(url + "Geomatikum/this,next", function(err, res, body){
-							var thisnext = body;
-							request(url + "Geomatikum/next,this", function(err, res, body){
-								var nextthis = body;
-								request(url + "Geomatikum/both", function(err, res, body){
-									var both = body;
-									var sort_by_id = function(a,b){
-										return a._id>b._id ? 1 : -1;
-									};
-									expect(both).to.eql(thisnext);
-									expect(both).to.eql(nextthis);
-									expect(both).to.not.be.empty();
-									expect(thisw).to.not.be.empty();
-									expect(next).to.not.be.empty();
-									expect(thisw).to.eql(withoutSlash);
-									expect(thisw).to.eql(withSlash);
-									var jsonthis = (JSON.parse(thisw)).menu;
-									var jsonnext = (JSON.parse(next)).menu;
-									var jsonboth = (JSON.parse(both)).menu;
-									var combined = jsonthis.concat(jsonnext);
-
-									expect( jsonboth.sort(sort_by_id) ).to.eql( combined.sort(sort_by_id) );
-
-									done();
-								});
-							});
-						});
-					});
+		var withSlash, withoutSlash, thisw, next, thisnext, nextthis, both;
+		async.series([
+			function(callback){
+				request(url + "Geomatikum/", function(err, res, body){
+					withSlash = body;
+					callback();
 				});
+			},
+			function(callback){
+				request(url + "Geomatikum", function(err, res, body){
+					withoutSlash = body;
+					callback();
+				});
+			},
+			function(callback){
+				request(url + "Geomatikum/this", function(err, res, body){
+					thisw = body;
+					callback();
+				});
+			},
+			function(callback){
+				request(url + "Geomatikum/next", function(err, res, body){
+					next = body;
+					callback();
+				});
+			},
+			function(callback){
+				request(url + "Geomatikum/this,next", function(err, res, body){
+					thisnext = body;
+					callback();
+				});
+			},
+			function(callback){
+				request(url + "Geomatikum/next,this", function(err, res, body){
+					nextthis = body;
+					callback();
+				});
+			},
+			function(callback){
+				request(url + "Geomatikum/both", function(err, res, body){
+					both = body;
+					callback();
+				});
+			}
+		], function(){
+
+			var sort_by_id = function(a,b){
+				return a._id>b._id ? 1 : -1;
+			};
+			expect(both).to.eql(thisnext);
+			expect(both).to.eql(nextthis);
+			expect(both).to.not.be.empty();
+			expect(thisw).to.not.be.empty();
+			expect(next).to.not.be.empty();
+			expect(thisw).to.eql(withoutSlash);
+			expect(thisw).to.eql(withSlash);
+			var jsonthis = (JSON.parse(thisw)).menu;
+			var jsonnext = (JSON.parse(next)).menu;
+			var jsonboth = (JSON.parse(both)).menu;
+			var combined = jsonthis.concat(jsonnext);
+
+			expect( jsonboth.sort(sort_by_id) ).to.eql( combined.sort(sort_by_id) );
+
+			done();
+		});
+	});
+
+	it( "should handle this weeks number", function(done){
+		request(url + "geomatikum/"+ thisWeekNumber, function(err, res, body){
+			var a = body;
+			request(url + "geomatikum/this", function(err, res, body){
+				expect(a).to.be(body);
+				done();
 			});
 		});
 	});
 
-	//~ it( "should handle week numbers", function(){
-		//~ expect(true).to.be(false, "not implemented");
-	//~ });
+	it( "should handle the next week number", function(done){
+		request(url + "geomatikum/"+ nextWeekNumber, function(err, res, body){
+			var a = body;
+			request(url + "geomatikum/next", function(err, res, body){
+				expect(a).to.be(body);
+				done();
+			});
+		});
+	});
 
 	it( "should be case insensitive", function(done){
 		request(url + "geomAtikum,philosophenturm,STUDIERENDENHAUS", function(err, res, body){
@@ -129,25 +173,73 @@ describe('server', function(){
 		});
 	});
 
-	//~ it( "should fail gracefully", function(){
-		//~ expect(true).to.be(false, "not implemented");
-	//~ });
+	it( "should handle unexpected urls gracefully", function(done){
+		request(url + "test", function(err, res, body){
+			expect( res.headers['content-type'] ).to.be('application/json; charset=utf-8');
+			expect( res.statusCode ).to.be(200);
+
+			var j = JSON.parse(body);
+			expect( j ).to.be.an("object");
+			expect( j.menu ).to.be.an("array");
+			expect( j.menu ).to.be.empty();
+			done();
+		});
+	});
 
 	//~ it( "should log errors", function(){
 		//~ expect(true).to.be(false, "not implemented");
 	//~ });
 
-	//~ it( "should log accessed", function(){
-		//~ expect(true).to.be(false, "not implemented");
-	//~ });
+	it( "should log accessed", function(done){
+		var file = "logs/access.log";
 
-	//~ it( "should honour changedSince", function(){
-		//~ expect(true).to.be(false, "not implemented");
-	//~ });
+		async.series([
+			// empty log file
+			fs.writeFile.bind(fs, file, ""),
 
-	//~ it( "should compress data", function(){
-		//~ expect(true).to.be(false, "not implemented");
-	//~ });
+			// confirm log file is empty
+			function(callback){
+				fs.readFile(file, function(err, content){
+					expect(content).to.be.empty();
+					callback();
+				});
+			},
+
+			// make request to server
+			request.bind(this, url + "geomatikum/"),
+
+			// confirm log file is not empty anymore
+			function(callback){
+				fs.readFile(file, "", function(err, content){
+					expect(content).to.not.be.empty();
+					callback();
+				});
+			}
+		], function(err) {
+			done();
+		});
+	});
+
+	it("should compress output", function(done){
+		var headers = {
+			'Accept-Encoding': 'gzip'
+		};
+
+		request({url: url + "Geomatikum/", 'headers': headers}, function(err, res, body){
+			expect( res.headers['content-encoding'] ).to.be('gzip');
+			done();
+		});
+	});
+
+	it("an empty mensa yields an empty result", function(done){
+		request({url: url + "emptymensa/"}, function(err, res, body){
+			expect( res.headers['content-type'] ).to.be('application/json; charset=utf-8');
+			expect( res.statusCode ).to.be(200);
+			expect( JSON.parse(body).menu ).to.be.empty();
+			done();
+		});
+	});
+
 
 	it( "should allow for mensen to be combined", function(done){
 		var geo, campus, geocampus, combined;
@@ -170,32 +262,18 @@ describe('server', function(){
 		});
 	});
 
-
-	it( "should not request data multiple time", function(done){
-		// mock retriever
-		var numberOfCalls = 0;
-		mockery.enable({ useCleanCache: true });
-		mockery.warnOnUnregistered(false);
-		mockery.registerMock('./retriever.js', {
-			retrieve: function(mensa, week, callback){
-				numberOfCalls++;
-				setTimeout(function(){
-					callback([{name:"testdish"}]);
-				}, 10);
-			}
-		});
-
-		// request data twice
-		var get = require("../source/get.js");
-		get.clean(); // drop database
-		get.get({}, ["geomatikum"], [24], "", function(){});
-		get.get({}, ["geomatikum"], [24], "", function(){});
-
-		// make sure retriever has been called just once
-		setTimeout(function(){
-			expect(numberOfCalls).to.be(1);
+	it( "should allow CORS requests", function(done){
+		request(url + "Geomatikum/", function(err, res, body){
+			expect( res.headers['Access-Control-Allow-Origin'.toLowerCase()] ).to.be('*');
 			done();
-			mockery.deregisterAll();
-		}, 30);
+		});
+	});
+
+	it( "accept CORS preflight requests", function(done){
+		request({url: url + "Geomatikum/", method: "OPTIONS"}, function(err, res, body){
+			expect( res.headers['Access-Control-Allow-Origin'.toLowerCase()] ).to.be('*');
+			expect(body).to.be("OK");
+			done();
+		});
 	});
 });

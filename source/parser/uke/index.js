@@ -28,7 +28,7 @@ function parser(file, mensaId, week, callback){
 		}
 		s = s.filter(function(item){
 			return item != null;
-		})
+		});
 
 		// remove footer
 		var footer = s.splice(-3,2).join("");
@@ -42,9 +42,11 @@ function parser(file, mensaId, week, callback){
 		// first column == names; tread separately
 		var names = s.shift().map(trim).join("\n").split(/[\n]{3,}/g).map(trim);
 		var veggi = names.indexOf("Vegetarisch");
-		if(veggi == -1) veggi = names.indexOf("vegetarisch");
+		if(veggi == -1){
+			veggi = names.indexOf("vegetarisch");
+		}
 		names.splice(veggi, 1);
-		names[ veggi - 1 ] += " - Vegetarisch"
+		names[ veggi - 1 ] += " - Vegetarisch";
 		//~ console.log(names)
 
 		// last column == additional information; ignore.
@@ -78,7 +80,7 @@ function findAdditives(str){
 		re = /\(([0-9]+)\),/g,
 		match;
 	while (match = re.exec(str)) {
-		v.push(parseInt(match[1]));
+		v.push(parseInt(match[1], 10));
 	}
 	return v;
 }
@@ -90,7 +92,7 @@ function findAdditives(str){
 function splitRows(column, types){
 	var found = [];
 
-	column = column.filter(function(item){ return item.match(/[\w]/) });
+	column = column.filter(function(item){ return item.match(/[\w]/); });
 	column.forEach(function(line, lineNo, array){
 			if(line.match(/Pasta Bar/i)){
 				found.push(lineNo);
@@ -102,7 +104,7 @@ function splitRows(column, types){
 		})
 	;
 
-	var bug = types.indexOf("Beilagen & Gemüse")
+	var bug = types.indexOf("Beilagen & Gemüse");
 	//~ console.log(found, types.indexOf("Beilagen & Gemüse"), found[bug] + 3 )
 
 	// Beilagen & Gemüse ist genau drei Zeilen lang
@@ -110,7 +112,7 @@ function splitRows(column, types){
 
 	found.push(column.length);
 
-	found = found.sort(function(a,b){return a-b});
+	found = found.sort(function(a,b){return a - b; });
 	//~ console.log(found)
 
 	found = found
@@ -234,7 +236,7 @@ function parse(entry, x, y, week, additivesList){
 	var price = a && a.length ? a[1] : "0,00";
 
 	price = parseFloat( price.replace(/-./, "0.").replace(",", ".") );
-	var kcal = parseInt( entry.match(/([0-9]+) Kcal/i) );
+	var kcal = parseInt( entry.match(/([0-9]+) Kcal/i), 10);
 
 	var date = new Date(new Date().getFullYear(), 0, (week-1)*7 + x);
 	var dateString = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();

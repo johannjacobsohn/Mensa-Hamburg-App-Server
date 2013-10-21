@@ -3,7 +3,7 @@ setup:
 	npm install
 
 start:
-	forever -e error.log -o output.log -l forever.log -a start .
+	forever -e logs/error.log -o logs/output.log -l logs/forever.log -a start .
 
 stop:
 	forever stop `pwd`

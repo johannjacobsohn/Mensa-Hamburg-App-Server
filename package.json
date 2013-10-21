@@ -10,10 +10,11 @@
 		"mongoose": ""
 	},
 	"devDependencies": {
-		"jshint": "",
-		"mocha": "",
-		"expect.js": "",
+		"jshint"      : "",
+		"mocha"       : "",
+		"expect.js"   : "",
 		"node-fakeweb": "",
-		"mockery": ""
+		"mockery"     : "",
+		"async"       : ""
 	}
 }
