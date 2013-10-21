@@ -1,9 +1,13 @@
 setup:
-	apt-get update && apt-get install poppler-utils
+	-apt-get update && apt-get install poppler-utils
+	npm install -g forever
 	npm install
 
 start:
-	forever -e logs/error.log -o logs/output.log -l logs/forever.log -a start .
+	NODE_ENV=production forever -e logs/error.log -o logs/output.log -l forever.log -a start .
+
+start-dev:
+	forever -w -e ./logs/error.log -o ./logs/output.log -l forever.log -a start .
 
 stop:
 	forever stop `pwd`
