@@ -1,7 +1,7 @@
 "use strict";
 
 var
-  url     = "http://localhost-legacy:8080/",
+  url     = "http://localhost-legacy:8081/",
   expect  = require('expect.js'),
   request = require('request'),
   fakeweb = require('node-fakeweb'),

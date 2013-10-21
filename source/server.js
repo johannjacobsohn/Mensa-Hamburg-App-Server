@@ -8,7 +8,7 @@ var
   get = require("./get.js").get,
   parseRequest = require("./parseRequestMiddleware.js").parseRequest,
   allowCrossDomain = require("./allowCrossDomainMiddleware.js").allowCrossDomain,
-  port = 8080,
+  port = 8081,
   logFile = require("fs").createWriteStream('./logs/access.log', {flags: 'a'});
 
 /*
