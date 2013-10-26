@@ -6,10 +6,23 @@
 var
   express = require('express'),
   get = require("./get.js").get,
-  parseRequest = require("./parseRequestMiddleware.js").parseRequest,
-  allowCrossDomain = require("./allowCrossDomainMiddleware.js").allowCrossDomain,
+  parseRequest = require("./parseRequestMiddleware.js"),
+  allowCrossDomain = require("./allowCrossDomainMiddleware.js"),
   port = 8081,
   logFile = require("fs").createWriteStream('./logs/access.log', {flags: 'a'});
+
+// use to compress output
+function minimize(menu){
+	return menu.map(function(item){
+		item._id = undefined;  // useless in app
+		item.__v = undefined;  // useless in app
+		item.week = undefined; // week can be infered by date
+		if(!item.kcal){ // remove is empty or null
+			item.kcal = undefined;
+		}
+		return item;
+	});
+}
 
 /*
  * Construct new reply
@@ -20,7 +33,7 @@ var reply = function(req, res){
 			console.error(new Date(), "current error", req, error);
 			res.send(500, JSON.stringify({menu:[]}));
 		} else {
-			res.send({menu: req.result});
+			res.send({menu: minimize(req.result)});
 		}
 	});
 };
@@ -34,7 +47,7 @@ var legacyReply = function(req, res){
 			console.error(new Date(), "legacy error", req, error);
 			res.send(500, JSON.stringify([]));
 		} else {
-			res.send(req.result);
+			res.send( minimize(req.result) );
 		}
 	});
 };

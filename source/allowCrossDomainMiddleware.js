@@ -1,7 +1,7 @@
 "use strict";
 
 // https://gist.github.com/2344435
-exports.allowCrossDomain = function(req, res, next) {
+module.exports = function(req, res, next) {
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
 	res.header('Access-Control-Allow-Headers', 'X-Requested-With, Accept, Origin, Referer, User-Agent, Content-Type, Authorization, X-Mindflash-SessionID');

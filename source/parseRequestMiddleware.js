@@ -13,7 +13,7 @@ function unique(value, index, self) {
 	return self.indexOf(value) === index;
 }
 
-exports.parseRequest = function(req, res, next){
+module.exports = function(req, res, next){
 	var s = url.parse(req.url).pathname.split("/");
 
 	// parse mensen

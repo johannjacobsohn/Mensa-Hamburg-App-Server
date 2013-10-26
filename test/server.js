@@ -8,11 +8,11 @@ var
   serv    = require(".."),
   fs      = require("fs"),
   async   = require('async'),
-  thisWeekNumber = new Date().getWeek(),
-  nextWeekNumber = thisWeekNumber + 1;
+  now     = new Date(2012, 5, 22),
+  thisWeekNumber = now.getWeek(),
+  nextWeekNumber = new Date( +now + 7 * 24 * 3600 * 1000 ).getWeek();
 
 fakeweb.allowNetConnect = false;
-
 
 // http://syn.ac/tech/19/get-the-weeknumber-with-javascript/
 Date.prototype.getWeek = function() {
@@ -31,10 +31,15 @@ require("../source/urls.js").list.forEach(function(item){
 	var id = item.url.match(/\/de\/(.*)\/201/);
 	if(id){
 		id = id[1];
-		fakeweb.registerUri({uri: item.url.replace("{{week}}", new Date().getWeek()).replace(".de", ".de:80"), file: 'test/fixtures/'+id});
-		fakeweb.registerUri({uri: item.url.replace("{{week}}", new Date().getWeek()+1).replace(".de", ".de:80"), file: 'test/fixtures/'+id});
+		fakeweb.registerUri({uri: item.url.replace("{{week}}", thisWeekNumber).replace(".de", ".de:80"), file: 'test/fixtures/'+id});
+		fakeweb.registerUri({uri: item.url.replace("{{week}}", nextWeekNumber).replace(".de", ".de:80"), file: 'test/fixtures/'+id});
 	}
 });
+
+
+var sort = function(a,b){
+	return a.date + a.name > b.date + b.name ? 1 : -1;
+};
 
 describe('server', function(){
 	var geomatikum;
@@ -42,15 +47,15 @@ describe('server', function(){
 	var checkJSON = function(menu){
 		var hasProperties = function(item){ return item.properties; };
 		var hasAdditives  = function(item){ return item.additives; };
-		var hasWeek  = function(item){ return item.week; };
 		var hasName  = function(item){ return item.name; };
+		var isMinified  = function(item){ return !item._id && !item.__v && !item.week; };
 		var hasPrice = function(item){ return item.studPrice && item.normalPrice; };
 		expect( menu ).to.not.be.empty();
 		expect( menu.every(hasProperties) ).to.be(true);
 		expect( menu.every(hasAdditives)  ).to.be(true);
-		expect( menu.every(hasWeek)       ).to.be(true);
 		expect( menu.every(hasName)       ).to.be(true);
 		expect( menu.every(hasPrice)      ).to.be(true);
+		expect( menu.every(isMinified)    ).to.be(true);
 	};
 
 	it("should return well formed data", function(done){
@@ -65,7 +70,6 @@ describe('server', function(){
 
 	it("clears out unparsable mensen", function(done){
 		request(url + "Geomatikum,DOESNOTEXIST", function(err, res, body){
-			var sort = function(a,b){ return a._id === b._id ? 0 : a._id > b._id ? 1 : -1; };
 			expect( JSON.parse(body).menu.sort(sort) ).to.eql( geomatikum.menu.sort(sort) );
 			done();
 		});
@@ -117,10 +121,6 @@ describe('server', function(){
 				});
 			}
 		], function(){
-
-			var sort_by_id = function(a,b){
-				return a._id>b._id ? 1 : -1;
-			};
 			expect(both).to.eql(thisnext);
 			expect(both).to.eql(nextthis);
 			expect(both).to.not.be.empty();
@@ -133,14 +133,14 @@ describe('server', function(){
 			var jsonboth = (JSON.parse(both)).menu;
 			var combined = jsonthis.concat(jsonnext);
 
-			expect( jsonboth.sort(sort_by_id) ).to.eql( combined.sort(sort_by_id) );
+			expect( jsonboth.sort(sort) ).to.eql( combined.sort(sort) );
 
 			done();
 		});
 	});
 
 	it( "should handle this weeks number", function(done){
-		request(url + "geomatikum/"+ thisWeekNumber, function(err, res, body){
+		request(url + "geomatikum/"+ (new Date()).getWeek(), function(err, res, body){
 			var a = body;
 			request(url + "geomatikum/this", function(err, res, body){
 				expect(a).to.be(body);
@@ -150,7 +150,7 @@ describe('server', function(){
 	});
 
 	it( "should handle the next week number", function(done){
-		request(url + "geomatikum/"+ nextWeekNumber, function(err, res, body){
+		request(url + "geomatikum/"+ (new Date(+new Date() + 7 * 24 * 3600 * 1000)).getWeek(), function(err, res, body){
 			var a = body;
 			request(url + "geomatikum/next", function(err, res, body){
 				expect(a).to.be(body);
@@ -240,7 +240,6 @@ describe('server', function(){
 		});
 	});
 
-
 	it( "should allow for mensen to be combined", function(done){
 		var geo, campus, geocampus, combined;
 		request(url + "Geomatikum/", function(err, res, body){
@@ -249,11 +248,8 @@ describe('server', function(){
 				campus = JSON.parse(body).menu;
 				checkJSON(campus);
 				request(url + "Geomatikum,Campus/", function(err, res, body){
-					var sort_by_id = function(a,b){
-						return a._id>b._id ? 1 : -1;
-					};
-					combined = campus.concat(geo).sort(sort_by_id);
-					geocampus = JSON.parse(body).menu.sort(sort_by_id);
+					combined = campus.concat(geo).sort(sort);
+					geocampus = JSON.parse(body).menu.sort(sort);
 					checkJSON(geocampus);
 					expect( geocampus ).to.eql( combined );
 					done();

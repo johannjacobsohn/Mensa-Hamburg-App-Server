@@ -1,7 +1,7 @@
 "use strict";
 
 var
-  parseRequest = require("../source/parseRequestMiddleware.js").parseRequest,
+  parseRequest = require("../source/parseRequestMiddleware.js"),
   expect  = require('expect.js'),
   thisWeekNumber = new Date().getWeek(),
   nextWeekNumber = thisWeekNumber + 1;

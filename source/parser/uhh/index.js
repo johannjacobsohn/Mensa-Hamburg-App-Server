@@ -1,13 +1,22 @@
 "use strict";
 var cheerio = require("cheerio");
+
+// http://stackoverflow.com/questions/4555324/get-friday-from-week-number-and-year-in-javascript
+function monday(week){
+	var year = new Date().getFullYear(),
+	    j10  = new Date( year,0,10,12,0,0),
+	    j4   = new Date( year,0,4,12,0,0),
+	    mon1 = j4.getTime() - j10.getDay() * 86400000;
+	return new Date(mon1 + (week - 1)  * 7 * 86400000);
+}
+
 exports.parser = function(body, mensaId, week, callback){
 	var weekMenu = [];
 	var $ = cheerio.load(body);
-	// extract and parse date field
-	var datefield = $("tr").first().find("th").first().html().split("<br>")[1];
-	var germanStartdate = datefield.split("-")[0].trim();
-	var germanStartdateArr = germanStartdate.split(".");
-	var startdate = new Date(germanStartdateArr[2],(germanStartdateArr[1]-1),germanStartdateArr[0]);
+
+	// assume week to be correct.
+	var startdate = +monday(week);
+
 	$("table").first().find("tr").each(function(){
 		var $tr = $(this);
 		// Parse Dishname
@@ -18,7 +27,7 @@ exports.parser = function(body, mensaId, week, callback){
 				var $pi = $(this), l = 0, properties = [], additives = [],
 					tempObj = {}, dish = "", imgs = [], spans = [], title = "",
 					price = "", studPrice = 0, normalPrice = 0,
-					date = new Date(startdate.valueOf() + (i) * 24 * 60 * 60 * 1000),
+					date = new Date(startdate + (i) * 24 * 60 * 60 * 1000),
 					dateString = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
 				// parse price
 				var priceEl = $pi.find(".price");
@@ -71,7 +80,6 @@ exports.parser = function(body, mensaId, week, callback){
 
 				weekMenu.push({
 					mensaId     : mensaId,
-					week        : week,
 					type        : dishName,
 					name        : dish,
 					studPrice   : studPrice,
