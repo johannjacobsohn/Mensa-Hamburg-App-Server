@@ -24,7 +24,8 @@ TODO:
 - Document
 - clean up
 - high level Documentation
-- change storage to retrieve all mensen in one single request
+✓ change storage to retrieve all mensen in one single request
 - write extensive tests
 - write monitoring tests
-- use standard modifiedSince header and stuff
+x use standard modifiedSince header and stuff
+✓ compress output: no version, no id, no whitespace, no weekno
