@@ -17,7 +17,7 @@ function minimize(menu){
 		item._id = undefined;  // useless in app
 		item.__v = undefined;  // useless in app
 		item.week = undefined; // week can be infered by date
-		if(!item.kcal){ // remove is empty or null
+		if(!item.kcal){ // remove if empty or null
 			item.kcal = undefined;
 		}
 		return item;

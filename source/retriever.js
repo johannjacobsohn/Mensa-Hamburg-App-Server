@@ -1,6 +1,6 @@
 /**
  * retrieverJS
- * 
+ *
  * Retrieves data and calls parser to process that data into JSON
  */
 "use strict";
@@ -44,4 +44,4 @@ function retrieve(mensaId, week, callback){
 	}
 }
 
-exports.retrieve = retrieve;
+module.exports = retrieve;

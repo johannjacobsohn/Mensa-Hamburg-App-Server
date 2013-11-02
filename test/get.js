@@ -16,14 +16,12 @@ describe("get.js", function(){
 		// mock retriever
 		mockery.enable({ useCleanCache: true });
 		mockery.warnOnUnregistered(false);
-		mockery.registerMock('./retriever.js', {
-			retrieve: function(mensa, week, callback){
-				numberOfCalls++;
+		mockery.registerMock('./retriever.js', function(mensa, week, callback){
+			numberOfCalls++;
 
-				setTimeout(function(){
-					callback(null, [{name:"testdish", week: week, mensaId: mensa}]);
-				}, 10);
-			}
+			setTimeout(function(){
+				callback(null, [{name:"testdish", week: week, mensaId: mensa}]);
+			}, 10);
 		});
 
 		get = require("../source/get.js");

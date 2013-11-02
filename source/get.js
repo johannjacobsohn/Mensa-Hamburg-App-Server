@@ -1,10 +1,10 @@
 /**
  * handles database interaction and kicks of retriever if data is not yet
  * present or outdated.
- * 
+ *
  * re-requests old data as well
- * 
- * 
+ *
+ *
  * @module get.js
  * @exports get
  */
@@ -12,7 +12,7 @@
 
 var mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/mensaDB");
-var retrieve = require("./retriever.js").retrieve;
+var retrieve = require("./retriever.js");
 var maxAgeOfData = 1000*60*60*24; // Data should be reloaded at least once a day
 var callbackqueue = [];
 var locks = {};
@@ -109,7 +109,7 @@ var get = function(req, mensen, weeks, callback){
 		}
 
 		// @TODO:
-		// check for outdated data; trigger reload (this request will get 
+		// check for outdated data; trigger reload (this request will get
 		// the old data, but the next one doesn't have to)
 
 	});
