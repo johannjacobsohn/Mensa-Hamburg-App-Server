@@ -8,25 +8,44 @@ var
   getWeek = require("./getweek.js"),
   mensa = require("./urls.js");
 
-
-//~ http://stackoverflow.com/questions/1960473/unique-values-in-an-array
+// http://stackoverflow.com/questions/1960473/unique-values-in-an-array
 function unique(value, index, self) {
 	return self.indexOf(value) === index;
+}
+
+// check that week is this or next week
+function inrange(week){
+	var now = new Date();
+	var next = new Date(+now + 7*24*3600*1000);
+	return week === getWeek(now) || week === getWeek(next);
+}
+
+function isMensa(mensaId){
+	return !!mensa.byId[mensaId];
+}
+
+function toNumber(i){
+	return +i;
+}
+
+function notNaN(i){
+	return !isNaN(i);
+}
+
+function numericSort(a, b){
+	return a - b;
 }
 
 module.exports = function(req, res, next){
 	var s = url.parse(req.url).pathname.split("/");
 
 	// parse mensen
-	req.mensen = s[1].toLowerCase().split(",").filter(function(mensaId){
-		return !!mensa.byId[mensaId];
-	});
-	req.mensen = req.mensen.filter(unique);
+	req.mensen = s[1].toLowerCase().split(",").filter(isMensa).filter(unique);
 
 	//parse weeks
 	req.weeks = s[2] ? s[2].replace("both", "this,next").split(",") : ["this"];
 	req.weeks = req.weeks
-		.map(function(w, i, l){
+		.map(function(w){
 			w = w.toLowerCase();
 
 			if(w === "this"){
@@ -35,17 +54,12 @@ module.exports = function(req, res, next){
 				w = getWeek(new Date( +new Date() + 1000*3600*24*7 ));
 			}
 			return w;
-		}, req.weeks)
-		.map(function(i){
-			return +i;
 		})
-		.filter(function(i){
-			return !isNaN(i);
-		})
+		.map(toNumber)
+		.filter(notNaN)
 		.filter(unique)
-		.sort(function(a, b){
-			return a - b;
-		});
+		.filter(inrange)
+		.sort(numericSort);
 
 	next();
 };

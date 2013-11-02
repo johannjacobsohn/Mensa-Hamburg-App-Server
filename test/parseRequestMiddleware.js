@@ -25,7 +25,7 @@ describe("parseRequestMiddleware", function(){
 		expect(req.mensen).to.eql(["geomatikum"]);
 		expect(req.weeks).to.eql([thisWeekNumber, nextWeekNumber]);
 	});
-	
+
 	it("parses both", function(){
 		req.url = "/geomatikum/both/";
 		parseRequest(req, res, noop);
@@ -34,9 +34,9 @@ describe("parseRequestMiddleware", function(){
 	});
 
 	it("parses weeknumbers", function(){
-		req.url = "//54,55,54,56";
+		req.url = "//" + thisWeekNumber + "," + nextWeekNumber + "," + thisWeekNumber + "," + nextWeekNumber + 1;
 		parseRequest(req, res, noop);
 		expect(req.mensen).to.eql([]);
-		expect(req.weeks).to.eql([54,55,56]);
+		expect(req.weeks).to.eql([thisWeekNumber,nextWeekNumber]);
 	});
 });
