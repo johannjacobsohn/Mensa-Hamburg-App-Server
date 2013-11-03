@@ -27,6 +27,7 @@ var processQueue = function(err, lock){
 };
 
 var dishSchema = mongoose.Schema({
+	createdAt   : { type: Date, expires: 3 * 3600 }, // let menu expire after 3 hours
 	mensaId     : String,
 	week        : Number,
 	name        : String,
@@ -84,6 +85,7 @@ var get = function(req, mensen, weeks, callback){
 								var counter = items.length;
 								if(counter){
 									items.forEach(function(item){
+										item.createdAt = new Date();
 										new Dish(item).save(function(err, dish){
 											if(err){
 												console.error(err);
@@ -107,11 +109,6 @@ var get = function(req, mensen, weeks, callback){
 			// everything is present, load and call callback
 			process.nextTick(callback);
 		}
-
-		// @TODO:
-		// check for outdated data; trigger reload (this request will get
-		// the old data, but the next one doesn't have to)
-
 	});
 };
 
