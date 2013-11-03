@@ -109,8 +109,6 @@ describe('server', function(){
 				});
 			}
 		], function(){
-			expect(both).to.eql(thisnext);
-			expect(both).to.eql(nextthis);
 			expect(both).to.not.be.empty();
 			expect(thisw).to.not.be.empty();
 			expect(next).to.not.be.empty();
@@ -118,10 +116,14 @@ describe('server', function(){
 			expect(thisw).to.eql(withSlash);
 			var jsonthis = (JSON.parse(thisw)).menu;
 			var jsonnext = (JSON.parse(next)).menu;
-			var jsonboth = (JSON.parse(both)).menu;
-			var combined = jsonthis.concat(jsonnext);
+			var jsonthisnext = (JSON.parse(thisnext)).menu.sort(sort);
+			var jsonnextthis = (JSON.parse(nextthis)).menu.sort(sort);
+			var jsonboth = (JSON.parse(both)).menu.sort(sort);
+			var combined = jsonthis.concat(jsonnext).sort(sort);
 
-			expect( jsonboth.sort(sort) ).to.eql( combined.sort(sort) );
+			expect( jsonboth ).to.eql( jsonthisnext );
+			expect( jsonboth ).to.eql( jsonnextthis );
+			expect( jsonboth ).to.eql( combined );
 
 			done();
 		});
