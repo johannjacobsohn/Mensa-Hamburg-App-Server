@@ -107,6 +107,12 @@ var mensen = [
 		parser: "studhh"
 	},
 	{
+		name: "UKE",
+		id: "uke",
+		url: "http://www.uke.de/zentrale-dienste/kge/downloads/kge-klinik-gastronomie-eppendorf/ma_kw{{week}}.pdf",
+		parser: "uke"
+	},
+	{
 		name: "empty mensa - just for testing",
 		id: "emptymensa",
 		url: baselink + "empty/2013/{{week}}/",
