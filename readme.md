@@ -3,8 +3,10 @@ Server for Mensa Hamburg App
 
 This is the backend server for the Mensa Hamburg App Project.
 
+[![Dependency Status](https://gemnasium.com/johannjacobsohn/Mensa-Hamburg-App-Server.png)](https://gemnasium.com/johannjacobsohn/Mensa-Hamburg-App-Server)
+[![Build Status](https://travis-ci.org/johannjacobsohn/Mensa-Hamburg-App.png?branch=master)](https://travis-ci.org/johannjacobsohn/Mensa-Hamburg-App)
 
-Overview: 
+Technical overview:
 ---------
 
 ````
@@ -23,9 +25,4 @@ TODO:
 --
 - Document
 - clean up
-- high level Documentation
-✓ change storage to retrieve all mensen in one single request
-- write extensive tests
 - write monitoring tests
-x use standard modifiedSince header and stuff
-✓ compress output: no version, no id, no whitespace, no weekno
