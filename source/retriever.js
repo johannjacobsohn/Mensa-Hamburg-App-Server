@@ -4,10 +4,16 @@
  * Retrieves data and calls parser to process that data into JSON
  */
 "use strict";
-function retrieve(mensaId, week, callback){
+function toDoubleDigit(number){
+	var n = (""+number);
+	return n.length === 1 ? "0"+n : n;
+}
+
+function retrieve(mensaId, w, callback){
 	var request = require("request"),
 	    parser = require("./parser.js").parser,
 	    mensa = require("./urls.js").byId[mensaId],
+	    week = toDoubleDigit(w),
 	    url = mensa.url.replace(/{{week}}/, week);
 
 	if( url && !isNaN(parseInt(week, 10)) ){

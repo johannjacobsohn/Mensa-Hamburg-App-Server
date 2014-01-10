@@ -9,11 +9,17 @@ var
   fs      = require("fs"),
   async   = require("async"),
   getWeek = require("../source/getweek.js"),
-  now     = new Date(2012, 5, 22),
-  thisWeekNumber = getWeek(now),
-  nextWeekNumber = getWeek( new Date( +now + 7 * 24 * 3600 * 1000 ));
+  now     = new Date(),
+  toDoubleDigit = function(number){
+      var n = "" + number;
+      return n.length === 1 ? "0" + n : n;
+  },
+  thisWeekNumber = toDoubleDigit( getWeek(now) ),
+  nextWeekNumber = toDoubleDigit( getWeek( new Date( +now + 7 * 24 * 3600 * 1000 )) );
 
 fakeweb.allowNetConnect = false;
+
+
 
 require("../source/urls.js").list.forEach(function(item){
 	var id = item.url.match(/\/de\/(.*)\/201/);
