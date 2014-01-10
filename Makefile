@@ -14,14 +14,14 @@ stop:
 
 restart: stop start
 
-test: 
+test:
 	node_modules/.bin/mocha -R spec
 
-lint: 
+lint:
 	node_modules/.bin/jshint .
 
 check-coverage:
-	node_modules/.bin/istanbul check-coverage --statement -25 --branch -22 --function 90
+	node_modules/.bin/istanbul check-coverage --statement -26 --branch -24 --function 90
 
 coverage:
 	node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha
@@ -42,7 +42,7 @@ travis:
 	make test
 	make check-coverage
 
-log: 
+log:
 	git log --format="%ad %s" --date=short
 
 .PHONY: test coverage
