@@ -27,8 +27,7 @@ exports.parser = function(body, mensaId, week, callback){
 				var $pi = $(this), l = 0, properties = [], additives = [],
 					tempObj = {}, dish = "", imgs = [], spans = [], title = "",
 					price = "", studPrice = 0, normalPrice = 0,
-					date = new Date(startdate + (i) * 24 * 60 * 60 * 1000),
-					dateString = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
+					date = new Date(startdate + (i) * 24 * 60 * 60 * 1000);
 				// parse price
 				var priceEl = $pi.find(".price");
 				if(priceEl.length){
@@ -84,7 +83,7 @@ exports.parser = function(body, mensaId, week, callback){
 					name        : dish,
 					studPrice   : studPrice,
 					normalPrice : normalPrice,
-					date        : dateString,
+					date        : date,
 					properties  : properties,
 					additives   : additives
 				});

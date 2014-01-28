@@ -5,7 +5,7 @@
     "name": "Erbsenschoten Creme",
     "mensaId": "uke",
     "type": "Suppe",
-    "date": "2013-9-23",
+    "date": "2014-09-22T22:00:00.000Z",
     "kcal": 136,
     "properties": [],
     "additives": []
@@ -16,7 +16,7 @@
     "name": "VITALIEN Pasta Bolognaiser Art mit Penne",
     "mensaId": "uke",
     "type": "Menü 1",
-    "date": "2013-9-23",
+    "date": "2014-09-22T22:00:00.000Z",
     "kcal": 404,
     "properties": [],
     "additives": []
@@ -27,7 +27,7 @@
     "name": "Berner Rösti mit Rahmgemüse und Käse gratiniert",
     "mensaId": "uke",
     "type": "Menü 2 vegetarisch",
-    "date": "2013-9-23",
+    "date": "2014-09-22T22:00:00.000Z",
     "kcal": 647,
     "properties": [],
     "additives": []
@@ -38,7 +38,7 @@
     "name": "Hähnchen Cordon bleu, Brokkoligemüse mit Mandelbutter, Kartoffeln, Bratensauce",
     "mensaId": "uke",
     "type": "Menü 3",
-    "date": "2013-9-23",
+    "date": "2014-09-22T22:00:00.000Z",
     "kcal": 641,
     "properties": [],
     "additives": []
@@ -49,7 +49,7 @@
     "name": "Schweinegeschnetzeltes Asia mit Erbsen, Basmatireis",
     "mensaId": "uke",
     "type": "Wok & Grill",
-    "date": "2013-9-23",
+    "date": "2014-09-22T22:00:00.000Z",
     "kcal": 661,
     "properties": [],
     "additives": []
@@ -60,7 +60,7 @@
     "name": "geröstetes Baguette mit Bruchetta, Balsamicocreme",
     "mensaId": "uke",
     "type": "Aktion",
-    "date": "2013-9-23",
+    "date": "2014-09-22T22:00:00.000Z",
     "kcal": null,
     "properties": [],
     "additives": []
@@ -70,8 +70,8 @@
     "normalPrice": 0,
     "name": "Kartoffelgemüse Zitronen Paprikareis Kohlrabi in Petersilienrahm",
     "mensaId": "uke",
-    "date": "2013-9-23",
     "type": "Beilagen & Gemüse",
+    "date": "2014-09-22T22:00:00.000Z",
     "kcal": null,
     "properties": [],
     "additives": []
@@ -82,7 +82,7 @@
     "name": "Kirsch Michel mit Vanillesauce",
     "mensaId": "uke",
     "type": "Extra Beilagen Menü",
-    "date": "2013-9-23",
+    "date": "2014-09-22T22:00:00.000Z",
     "kcal": null,
     "properties": [],
     "additives": []
@@ -93,7 +93,7 @@
     "name": "Karamell Pudding Ananas Grütze mit Vanille Quark",
     "mensaId": "uke",
     "type": "süßer Abschluß",
-    "date": "2013-9-23",
+    "date": "2014-09-22T22:00:00.000Z",
     "kcal": null,
     "properties": [],
     "additives": []
@@ -104,7 +104,7 @@
     "name": "Weißkohlsuppe mit Sahne und Speck",
     "mensaId": "uke",
     "type": "Suppe",
-    "date": "2013-9-24",
+    "date": "2014-09-23T22:00:00.000Z",
     "kcal": 226,
     "properties": [],
     "additives": []
@@ -115,7 +115,7 @@
     "name": "Kassler (Schwein), Schnittbohnen mit Speck und Zwiebeln, Kartoffelgratin",
     "mensaId": "uke",
     "type": "Menü 1",
-    "date": "2013-9-24",
+    "date": "2014-09-23T22:00:00.000Z",
     "kcal": 832,
     "properties": [],
     "additives": []
@@ -126,7 +126,7 @@
     "name": "Korsische Kartoffelpfanne mit Hirtenkäse, Oliven, Rosmarin",
     "mensaId": "uke",
     "type": "Menü 2 vegetarisch",
-    "date": "2013-9-24",
+    "date": "2014-09-23T22:00:00.000Z",
     "kcal": 694,
     "properties": [],
     "additives": []
@@ -137,7 +137,7 @@
     "name": "VITALIEN Hühner Eintopf mit Nudeln und bunten Gemüse",
     "mensaId": "uke",
     "type": "Menü 3",
-    "date": "2013-9-24",
+    "date": "2014-09-23T22:00:00.000Z",
     "kcal": 183,
     "properties": [],
     "additives": []
@@ -148,7 +148,7 @@
     "name": "Currywurst mit Peperonizwiebeln und Steak House Pommes",
     "mensaId": "uke",
     "type": "Wok & Grill",
-    "date": "2013-9-24",
+    "date": "2014-09-23T22:00:00.000Z",
     "kcal": 733,
     "properties": [],
     "additives": []
@@ -159,7 +159,7 @@
     "name": "Erdbeeren Vanille Smoothie",
     "mensaId": "uke",
     "type": "Aktion",
-    "date": "2013-9-24",
+    "date": "2014-09-23T22:00:00.000Z",
     "kcal": null,
     "properties": [],
     "additives": []
@@ -170,7 +170,7 @@
     "name": "Röstkartoffeln Curryreis Mischgemüse",
     "mensaId": "uke",
     "type": "Beilagen & Gemüse",
-    "date": "2013-9-24",
+    "date": "2014-09-23T22:00:00.000Z",
     "kcal": null,
     "properties": [],
     "additives": []
@@ -181,7 +181,7 @@
     "name": "Tortellini gelb und rot mit Gemüsefüllung, Kräutersauce",
     "mensaId": "uke",
     "type": "Extra Beilagen Menü",
-    "date": "2013-9-24",
+    "date": "2014-09-23T22:00:00.000Z",
     "kcal": null,
     "properties": [],
     "additives": []
@@ -192,7 +192,7 @@
     "name": "Buttermilch Joghurt mit Erdbeeren Grießpudding mit Kirschen",
     "mensaId": "uke",
     "type": "süßer Abschluß",
-    "date": "2013-9-24",
+    "date": "2014-09-23T22:00:00.000Z",
     "kcal": null,
     "properties": [],
     "additives": []
@@ -203,7 +203,7 @@
     "name": "Suppe nach Bauernart",
     "mensaId": "uke",
     "type": "Suppe",
-    "date": "2013-9-25",
+    "date": "2014-09-24T22:00:00.000Z",
     "kcal": 26,
     "properties": [],
     "additives": []
@@ -214,7 +214,7 @@
     "name": "paniertes Schnitzel vom Schwein mit Jägersauce, Pommes",
     "mensaId": "uke",
     "type": "Menü 1",
-    "date": "2013-9-25",
+    "date": "2014-09-24T22:00:00.000Z",
     "kcal": 946,
     "properties": [],
     "additives": []
@@ -225,7 +225,7 @@
     "name": "VITALIEN Bunte Gemüsepfanne mit Tofu und Basmatireis",
     "mensaId": "uke",
     "type": "Menü 2 vegetarisch",
-    "date": "2013-9-25",
+    "date": "2014-09-24T22:00:00.000Z",
     "kcal": 393,
     "properties": [],
     "additives": []
@@ -236,7 +236,7 @@
     "name": "scharfes Putengeschnetzeltes, Kokosmilch, Gemüse, Koksnussreis",
     "mensaId": "uke",
     "type": "Menü 3",
-    "date": "2013-9-25",
+    "date": "2014-09-24T22:00:00.000Z",
     "kcal": 689,
     "properties": [],
     "additives": []
@@ -247,7 +247,7 @@
     "name": "Schweinefilet mit Schwarzwurzel und Meerrettich Hollandaise, Herzogin Kartoffeln",
     "mensaId": "uke",
     "type": "Wok & Grill",
-    "date": "2013-9-25",
+    "date": "2014-09-24T22:00:00.000Z",
     "kcal": 729,
     "properties": [],
     "additives": []
@@ -258,7 +258,7 @@
     "name": "Salami (Pute) - Käse Toast mit Tomaten",
     "mensaId": "uke",
     "type": "Aktion",
-    "date": "2013-9-25",
+    "date": "2014-09-24T22:00:00.000Z",
     "kcal": null,
     "properties": [],
     "additives": []
@@ -269,7 +269,7 @@
     "name": "Kräuter Kartoffeln Spiralnudeln Bohnenpfann mit Speck",
     "mensaId": "uke",
     "type": "Beilagen & Gemüse",
-    "date": "2013-9-25",
+    "date": "2014-09-24T22:00:00.000Z",
     "kcal": null,
     "properties": [],
     "additives": []
@@ -280,7 +280,7 @@
     "name": "1 Paar Weißwürste mit süßem Senf",
     "mensaId": "uke",
     "type": "Extra Beilagen Menü",
-    "date": "2013-9-25",
+    "date": "2014-09-24T22:00:00.000Z",
     "kcal": null,
     "properties": [],
     "additives": []
@@ -291,7 +291,7 @@
     "name": "Schokoladenpudding mit Passionsfrucht Bananen Bayrisch Creme an Beerebsauce",
     "mensaId": "uke",
     "type": "süßer Abschluß",
-    "date": "2013-9-25",
+    "date": "2014-09-24T22:00:00.000Z",
     "kcal": null,
     "properties": [],
     "additives": []
@@ -302,7 +302,7 @@
     "name": "Vietnamesische Suppe mit Zitronengras",
     "mensaId": "uke",
     "type": "Suppe",
-    "date": "2013-9-26",
+    "date": "2014-09-25T22:00:00.000Z",
     "kcal": 34,
     "properties": [],
     "additives": []
@@ -313,7 +313,7 @@
     "name": "gebackener Hirtenkäse mit Bauernsalat und Ciabatta",
     "mensaId": "uke",
     "type": "Menü 1",
-    "date": "2013-9-26",
+    "date": "2014-09-25T22:00:00.000Z",
     "kcal": 747,
     "properties": [],
     "additives": []
@@ -324,7 +324,7 @@
     "name": "VITALIEN Kartoffel Spinat Auflauf mit Hirtenkäse und weißer Sauce",
     "mensaId": "uke",
     "type": "Menü 2 vegetarisch",
-    "date": "2013-9-26",
+    "date": "2014-09-25T22:00:00.000Z",
     "kcal": 430,
     "properties": [],
     "additives": []
@@ -335,7 +335,7 @@
     "name": "Kartoffelrösti mit Rahmchampignons, Romanesko Gemüse",
     "mensaId": "uke",
     "type": "Menü 3",
-    "date": "2013-9-26",
+    "date": "2014-09-25T22:00:00.000Z",
     "kcal": 539,
     "properties": [],
     "additives": []
@@ -346,7 +346,7 @@
     "name": "Tofuburger mit Blattspinat, Tomate und Asia Dip, Wedges",
     "mensaId": "uke",
     "type": "Wok & Grill",
-    "date": "2013-9-26",
+    "date": "2014-09-25T22:00:00.000Z",
     "kcal": 864,
     "properties": [],
     "additives": []
@@ -357,7 +357,7 @@
     "name": "Mango Joghurt Smoothie",
     "mensaId": "uke",
     "type": "Aktion",
-    "date": "2013-9-26",
+    "date": "2014-09-25T22:00:00.000Z",
     "kcal": null,
     "properties": [],
     "additives": []
@@ -368,7 +368,7 @@
     "name": "Basilikum Kartoffeln Kräuter Schupfnudeln Brokkoli und Blumenkohl",
     "mensaId": "uke",
     "type": "Beilagen & Gemüse",
-    "date": "2013-9-26",
+    "date": "2014-09-25T22:00:00.000Z",
     "kcal": null,
     "properties": [],
     "additives": []
@@ -379,7 +379,7 @@
     "name": "Vegetarische Lasagne mit Tomaten Kräuterkompott",
     "mensaId": "uke",
     "type": "Extra Beilagen Menü",
-    "date": "2013-9-26",
+    "date": "2014-09-25T22:00:00.000Z",
     "kcal": null,
     "properties": [],
     "additives": []
@@ -390,7 +390,7 @@
     "name": "Orangen Milch Pudding Milchreis mit Kirschen",
     "mensaId": "uke",
     "type": "süßer Abschluß",
-    "date": "2013-9-26",
+    "date": "2014-09-25T22:00:00.000Z",
     "kcal": null,
     "properties": [],
     "additives": []
@@ -401,7 +401,7 @@
     "name": "Maiscremesuppe",
     "mensaId": "uke",
     "type": "Suppe",
-    "date": "2013-9-27",
+    "date": "2014-09-26T22:00:00.000Z",
     "kcal": 196,
     "properties": [],
     "additives": []
@@ -412,7 +412,7 @@
     "name": "Rindergulasch ungarischer Art, Paprikagemüse, Salzkartoffeln",
     "mensaId": "uke",
     "type": "Menü 1",
-    "date": "2013-9-27",
+    "date": "2014-09-26T22:00:00.000Z",
     "kcal": 492,
     "properties": [],
     "additives": []
@@ -423,7 +423,7 @@
     "name": "VITALIEN Gemüsekuchen mit Tomatensauce",
     "mensaId": "uke",
     "type": "Menü 2 vegetarisch",
-    "date": "2013-9-27",
+    "date": "2014-09-26T22:00:00.000Z",
     "kcal": 305,
     "properties": [],
     "additives": []
@@ -434,7 +434,7 @@
     "name": "saftiger Putengulasch mit Brokkoligemüse und Makkaroni",
     "mensaId": "uke",
     "type": "Menü 3",
-    "date": "2013-9-27",
+    "date": "2014-09-26T22:00:00.000Z",
     "kcal": 506,
     "properties": [],
     "additives": []
@@ -445,7 +445,7 @@
     "name": "Backfisch mit Rahmspinat und Risoleekartoffeln",
     "mensaId": "uke",
     "type": "Wok & Grill",
-    "date": "2013-9-27",
+    "date": "2014-09-26T22:00:00.000Z",
     "kcal": 888,
     "properties": [],
     "additives": []
@@ -456,7 +456,7 @@
     "name": "mariniertes Gemüse, Baguette, Basilikum",
     "mensaId": "uke",
     "type": "Aktion",
-    "date": "2013-9-27",
+    "date": "2014-09-26T22:00:00.000Z",
     "kcal": null,
     "properties": [],
     "additives": []
@@ -467,7 +467,7 @@
     "name": "Butterkartoffeln Vollkornreis Kartoffelsalat",
     "mensaId": "uke",
     "type": "Beilagen & Gemüse",
-    "date": "2013-9-27",
+    "date": "2014-09-26T22:00:00.000Z",
     "kcal": null,
     "properties": [],
     "additives": []
@@ -478,7 +478,7 @@
     "name": "Wiener Würstchen",
     "mensaId": "uke",
     "type": "Extra Beilagen Menü",
-    "date": "2013-9-27",
+    "date": "2014-09-26T22:00:00.000Z",
     "kcal": null,
     "properties": [],
     "additives": []
@@ -489,7 +489,7 @@
     "name": "Makkamousse mit Haselnuß Krokant Sahne Pudding mit Himmbeeren Püree",
     "mensaId": "uke",
     "type": "süßer Abschluß",
-    "date": "2013-9-27",
+    "date": "2014-09-26T22:00:00.000Z",
     "kcal": null,
     "properties": [],
     "additives": []

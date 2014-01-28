@@ -7,8 +7,8 @@ var
   year = new Date().getFullYear();
 
 function sort(a, b){
-	a = a.date + a.name + a.type;
-	b = b.date + b.name + b.type;
+	a = a.name + a.type;
+	b = b.name + b.type;
 	return a === b ? 0 : (a > b ? 1 : -1);
 }
 
@@ -23,7 +23,7 @@ describe('uke parser', function(){
 					data = data.sort(sort);
 
 					fixture.sort(sort).forEach(function(item, i){
-						item.date = item.date.replace("2013", year);
+						data[i].date = new Date(data[i].date).toISOString();
 						expect(item).to.eql(data[i]);
 					});
 					expect(data.length).to.be(fixture.length);

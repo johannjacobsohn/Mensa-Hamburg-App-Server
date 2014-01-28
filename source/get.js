@@ -27,7 +27,7 @@ var processQueue = function(err, lock){
 };
 
 var dishSchema = mongoose.Schema({
-	createdAt   : { type: Date, expires: 3 * 3600 }, // let menu expire after 3 hours
+	createdAt   : { type: Date, expires: "3h" }, // let menu expire after 3 hours
 	mensaId     : String,
 	week        : Number,
 	name        : String,
@@ -86,6 +86,7 @@ var get = function(req, mensen, weeks, callback){
 								if(counter){
 									items.forEach(function(item){
 										item.createdAt = new Date();
+										item.week = week;
 										new Dish(item).save(function(err, dish){
 											if(err){
 												console.error(err);

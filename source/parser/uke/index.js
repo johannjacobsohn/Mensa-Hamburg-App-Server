@@ -124,7 +124,6 @@ function parse(entry, x, y, week, additivesList){
 	var kcal = parseInt( entry.match(/([0-9]+) Kcal/i), 10);
 
 	var date = new Date(new Date().getFullYear(), 0, (week-1)*7 + x);
-	var dateString = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
 
 	var dish = entry;
 
@@ -147,7 +146,7 @@ function parse(entry, x, y, week, additivesList){
 		name        : dish,
 		mensaId     : "uke",
 		type        : y,
-		date        : dateString,
+		date        : date,
 		kcal        : kcal || null,
 		properties  : [],
 		additives   : additives
