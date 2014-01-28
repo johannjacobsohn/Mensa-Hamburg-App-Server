@@ -63,8 +63,18 @@ process.on('uncaughtException', function (err) {
 /////////////////////////////
 // Finaly start the server: /
 /////////////////////////////
+var formatString = {
+	"remote-addr": ":remote-addr",
+	"X-Forwarded-For": ":req[X-Forwarded-For]",
+	"date": ":date",
+	"url": ":url",
+	"user-agent": ":user-agent",
+	"response-time": ":response-time"
+};
+
+
 var app = express()
-	.use(express.logger({stream: logFile}))               // log to access.log
+	.use(express.logger({stream: logFile, format: JSON.stringify(formatString)}))               // log to access.log
 	.use(allowCrossDomain)                                // allow other domains via CORS header
 	.use(express.compress())                              // use compression
 	.use(parseRequest)                                    // process parameters from request
