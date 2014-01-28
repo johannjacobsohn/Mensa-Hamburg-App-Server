@@ -23,7 +23,9 @@ describe('uke parser', function(){
 					data = data.sort(sort);
 
 					fixture.sort(sort).forEach(function(item, i){
+						// normalize date for comparison
 						data[i].date = new Date(data[i].date).toISOString();
+
 						expect(item).to.eql(data[i]);
 					});
 					expect(data.length).to.be(fixture.length);
