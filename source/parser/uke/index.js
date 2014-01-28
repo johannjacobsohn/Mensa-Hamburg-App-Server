@@ -122,8 +122,9 @@ function parse(entry, x, y, week, additivesList){
 
 	price = parseFloat( price.replace(/-./, "0.").replace(",", ".") );
 	var kcal = parseInt( entry.match(/([0-9]+) Kcal/i), 10);
-
-	var date = new Date(new Date().getFullYear(), 0, (week-1)*7 + x, 0, -(new Date().getTimezoneOffset()));
+	var now = new Date();
+	var approx_date = new Date(now.getFullYear(), 0, (week-1)*7 + x);
+	var date = new Date(now.getFullYear(), 0, (week-1)*7 + x, 0, -(approx_date.getTimezoneOffset()));
 
 	var dish = entry;
 
