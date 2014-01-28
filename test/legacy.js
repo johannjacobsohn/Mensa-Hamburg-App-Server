@@ -58,7 +58,11 @@ describe('legacy server', function(){
 			var menu = JSON.parse(body);
 			expect( menu.every(function(i){ return getWeek( new Date(i.date) ) === thisWeek; }) ).to.be(true);
 
-			var sort = function(a,b){ return a._id === b._id ? 0 : a._id > b._id ? 1 : -1; };
+			var sort = function(a,b){
+				var left = a.date + a.name + a.mensaId,
+					right = b.date + b.name + b.mensaId;
+				return left === right ? 0 : left > right ? 1 : -1;
+			};
 			expect( thisWeekGeomatikum.sort(sort) ).to.eql( menu.sort(sort) );
 			done();
 		});
