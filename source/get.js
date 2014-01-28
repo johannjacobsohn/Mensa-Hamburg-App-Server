@@ -110,7 +110,7 @@ var get = function(req, mensen, weeks, callback){
 			// everything is present, load and call callback
 			process.nextTick(callback);
 		}
-	});
+	}).lean();
 };
 
 exports.clean = function(done){

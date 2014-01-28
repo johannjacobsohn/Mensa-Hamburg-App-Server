@@ -42,7 +42,7 @@ describe('server', function(){
 		var hasProperties = function(item){ return item.properties; };
 		var hasAdditives  = function(item){ return item.additives; };
 		var hasName  = function(item){ return item.name; };
-		var isMinified  = function(item){ return !item._id && !item.__v && !item.week; };
+		var isMinified  = function(item){ return !item._id && !item.__v; };
 		var hasPrice = function(item){ return item.studPrice && item.normalPrice; };
 		expect( menu ).to.not.be.empty();
 		expect( menu.every(hasProperties) ).to.be(true);

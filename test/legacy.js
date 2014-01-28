@@ -6,7 +6,9 @@ var
   request = require('request'),
   fakeweb = require('node-fakeweb'),
   getWeek = require("../source/getweek.js"),
-  serv    = require('..');
+  serv    = require('..'),
+  fs = require('fs');
+
 
 var now = new Date();
 var thisWeek = getWeek(now);
@@ -26,6 +28,12 @@ require("../source/urls.js").list.forEach(function(item){
 	}
 });
 
+var sort = function(a,b){
+	var left = a.date + a.dish + a.mensa,
+		right = b.date + b.dish + b.mensa;
+	return left === right ? 0 : left > right ? 1 : -1;
+};
+
 var checkJSON = function(menu){
 	var hasProperties = function(item){ return item.properties; };
 	var hasAdditives  = function(item){ return item.additives; };
@@ -43,9 +51,8 @@ describe('legacy server', function(){
 	it("should return well formed data", function(done){
 		request(url + "Geomatikum", function(err, res, body){
 			var menu = JSON.parse(body);
-			thisWeekGeomatikum = menu;
 			expect(menu).to.be.an("array");
-			expect(menu).to.have.length(14);
+			expect(menu).to.have.length(27);
 			checkJSON(menu);
 
 
@@ -53,17 +60,27 @@ describe('legacy server', function(){
 			done();
 		});
 	});
+	it("has not changed", function(done){
+		request(url + "Geomatikum/" + thisWeek, function(err, res, body){
+			var menu = JSON.parse(body).sort(sort);
+			fs.readFile("test/fixtures/540.json", 'utf8', function(err, data) {
+				var fixture = JSON.parse(data);
+				fixture.sort(sort).forEach(function(item, i){
+					expect(item).to.eql(menu[i]);
+				});
+				expect(menu.length).to.be(fixture.length);
+
+
+				expect( menu.every(function(i){ return getWeek( new Date(i.date) ) === thisWeek; }) ).to.be(true);
+				done();
+			});
+		});
+	});
+
 	it("should accept week numbers: this week", function(done){
 		request(url + "Geomatikum/" + thisWeek, function(err, res, body){
 			var menu = JSON.parse(body);
 			expect( menu.every(function(i){ return getWeek( new Date(i.date) ) === thisWeek; }) ).to.be(true);
-
-			var sort = function(a,b){
-				var left = a.date + a.name + a.mensaId,
-					right = b.date + b.name + b.mensaId;
-				return left === right ? 0 : left > right ? 1 : -1;
-			};
-			expect( thisWeekGeomatikum.sort(sort) ).to.eql( menu.sort(sort) );
 			done();
 		});
 	});

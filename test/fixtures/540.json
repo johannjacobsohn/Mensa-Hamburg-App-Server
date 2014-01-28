@@ -1,0 +1,500 @@
+[
+  {
+    "mensa": "Geomatikum",
+    "week": 5,
+    "name": "Aus dem Suppentopf und Süßes",
+    "dish": "Gulaschsuppe",
+    "studPrice": "1,30",
+    "normalPrice": "2,30",
+    "date": "2014-1-27",
+    "properties": [
+      "mit Rind"
+    ],
+    "additives": [
+      "Antioxidationsmittel",
+      "Geschmacksverstärker",
+      "Geschwefelt",
+      "Glutenhaltiges",
+      "Milch/-erzeugnisse",
+      "Sellerie/-erzeugnisse",
+      "Senf/-erzeugnisse"
+    ]
+  },
+  {
+    "mensa": "Geomatikum",
+    "week": 5,
+    "name": "Aus dem Suppentopf und Süßes",
+    "dish": "Erbsencremesuppe",
+    "studPrice": "1,30",
+    "normalPrice": "2,30",
+    "date": "2014-1-27",
+    "properties": [
+      "vegetarisch"
+    ],
+    "additives": [
+      "Milch/-erzeugnisse",
+      "Sellerie/-erzeugnisse"
+    ]
+  },
+  {
+    "mensa": "Geomatikum",
+    "week": 5,
+    "name": "Aus dem Suppentopf und Süßes",
+    "dish": "Warmer Apfelstrudel mit Vanillesoße",
+    "studPrice": "1,30",
+    "normalPrice": "2,30",
+    "date": "2014-1-27",
+    "properties": [
+      "vegetarisch"
+    ],
+    "additives": [
+      "Glutenhaltiges",
+      "Milch/-erzeugnisse"
+    ]
+  },
+  {
+    "mensa": "Geomatikum",
+    "week": 5,
+    "name": "Aus dem Suppentopf und Süßes",
+    "dish": "Lauchcreme Suppe",
+    "studPrice": "1,30",
+    "normalPrice": "2,30",
+    "date": "2014-1-28",
+    "properties": [
+      "mit Schwein"
+    ],
+    "additives": [
+      "Konservierungsstoffe",
+      "Antioxidationsmittel",
+      "Milch/-erzeugnisse",
+      "Sellerie/-erzeugnisse"
+    ]
+  },
+  {
+    "mensa": "Geomatikum",
+    "week": 5,
+    "name": "Aus dem Suppentopf und Süßes",
+    "dish": "Vegane Linsensuppe",
+    "studPrice": "1,30",
+    "normalPrice": "2,30",
+    "date": "2014-1-28",
+    "properties": [
+      "Vegan",
+      "laktosefrei",
+      "vegetarisch"
+    ],
+    "additives": [
+      "Antioxidationsmittel",
+      "Geschwefelt",
+      "Sellerie/-erzeugnisse"
+    ]
+  },
+  {
+    "mensa": "Geomatikum",
+    "week": 5,
+    "name": "Aus dem Suppentopf und Süßes",
+    "dish": "Milchreis mit Rhabarberkompott",
+    "studPrice": "1,30",
+    "normalPrice": "2,30",
+    "date": "2014-1-29",
+    "properties": [
+      "Klima Teller",
+      "vegetarisch"
+    ],
+    "additives": [
+      "Farbstoffe",
+      "Ei/-erzeugnisse",
+      "Milch/-erzeugnisse"
+    ]
+  },
+  {
+    "mensa": "Geomatikum",
+    "week": 5,
+    "name": "Aus dem Suppentopf und Süßes",
+    "dish": "Kürbis Koriander Suppe",
+    "studPrice": "1,30",
+    "normalPrice": "2,30",
+    "date": "2014-1-29",
+    "properties": [
+      "Klima Teller",
+      "vegetarisch"
+    ],
+    "additives": [
+      "Milch/-erzeugnisse",
+      "Sellerie/-erzeugnisse"
+    ]
+  },
+  {
+    "mensa": "Geomatikum",
+    "week": 5,
+    "name": "Aus dem Suppentopf und Süßes",
+    "dish": "Tomatencremesuppe",
+    "studPrice": "1,30",
+    "normalPrice": "2,30",
+    "date": "2014-1-29",
+    "properties": [
+      "Klima Teller",
+      "vegetarisch"
+    ],
+    "additives": [
+      "Glutenhaltiges",
+      "Sellerie/-erzeugnisse"
+    ]
+  },
+  {
+    "mensa": "Geomatikum",
+    "week": 5,
+    "name": "Aus dem Suppentopf und Süßes",
+    "dish": "Möhreneintopf mit Ingwer",
+    "studPrice": "1,30",
+    "normalPrice": "2,30",
+    "date": "2014-1-30",
+    "properties": [
+      "laktosefrei",
+      "vegetarisch"
+    ],
+    "additives": [
+      "Antioxidationsmittel",
+      "Geschwefelt",
+      "Sellerie/-erzeugnisse"
+    ]
+  },
+  {
+    "mensa": "Geomatikum",
+    "week": 5,
+    "name": "Aus dem Suppentopf und Süßes",
+    "dish": "Germknödel mit Mohnzucker und warmer Vanillesoße",
+    "studPrice": "1,30",
+    "normalPrice": "2,30",
+    "date": "2014-1-30",
+    "properties": [
+      "vegetarisch"
+    ],
+    "additives": [
+      "Glutenhaltiges",
+      "Ei/-erzeugnisse",
+      "Soja/-erzeugnisse",
+      "Milch/-erzeugnisse",
+      "Farbstoffe"
+    ]
+  },
+  {
+    "mensa": "Geomatikum",
+    "week": 5,
+    "name": "Aus dem Suppentopf und Süßes",
+    "dish": "Kartoffelsuppe mit Speckwürfel und Schweinefleisch",
+    "studPrice": "1,30",
+    "normalPrice": "2,30",
+    "date": "2014-1-30",
+    "properties": [
+      "laktosefrei",
+      "mit Schwein"
+    ],
+    "additives": [
+      "Konservierungsstoffe",
+      "Antioxidationsmittel",
+      "Geschwefelt",
+      "Sellerie/-erzeugnisse"
+    ]
+  },
+  {
+    "mensa": "Geomatikum",
+    "week": 5,
+    "name": "Aus dem Suppentopf und Süßes",
+    "dish": "Dampfnudeln mit Vanillesoße",
+    "studPrice": "1,30",
+    "normalPrice": "2,30",
+    "date": "2014-1-31",
+    "properties": [
+      "Klima Teller",
+      "vegetarisch"
+    ],
+    "additives": [
+      "Farbstoffe",
+      "Glutenhaltiges",
+      "Ei/-erzeugnisse",
+      "Soja/-erzeugnisse",
+      "Milch/-erzeugnisse"
+    ]
+  },
+  {
+    "mensa": "Geomatikum",
+    "week": 5,
+    "name": "Aus dem Suppentopf und Süßes",
+    "dish": "Spargelsuppe",
+    "studPrice": "1,30",
+    "normalPrice": "2,30",
+    "date": "2014-1-31",
+    "properties": [
+      "vegetarisch"
+    ],
+    "additives": [
+      "Glutenhaltiges",
+      "Milch/-erzeugnisse"
+    ]
+  },
+  {
+    "mensa": "Geomatikum",
+    "week": 5,
+    "name": "Gut und günstig",
+    "dish": "Texashacksteak mit Pfefferrahmsoße und Kartoffelspalten",
+    "studPrice": "1,95",
+    "normalPrice": "3,05",
+    "date": "2014-1-28",
+    "properties": [
+      "mit Rind"
+    ],
+    "additives": [
+      "Glutenhaltiges",
+      "Ei/-erzeugnisse",
+      "Milch/-erzeugnisse"
+    ]
+  },
+  {
+    "mensa": "Geomatikum",
+    "week": 5,
+    "name": "Gut und günstig",
+    "dish": "Blechkartoffeln mit Sourcreme und einem mexikanischer Bohnensalat",
+    "studPrice": "1,95",
+    "normalPrice": "3,05",
+    "date": "2014-1-30",
+    "properties": [
+      "vegetarisch"
+    ],
+    "additives": [
+      "Geschmacksverstärker",
+      "Ei/-erzeugnisse",
+      "Milch/-erzeugnisse",
+      "Senf/-erzeugnisse",
+      "Sellerie/-erzeugnisse"
+    ]
+  },
+  {
+    "mensa": "Geomatikum",
+    "week": 5,
+    "name": "Gut und günstig",
+    "dish": "Überbackene Hackfleisch- Gemüsepfanne mit Rindfleisch und Nudeln",
+    "studPrice": "1,95",
+    "normalPrice": "3,05",
+    "date": "2014-1-31",
+    "properties": [
+      "mit Rind"
+    ],
+    "additives": [
+      "Glutenhaltiges",
+      "Milch/-erzeugnisse"
+    ]
+  },
+  {
+    "mensa": "Geomatikum",
+    "week": 5,
+    "name": "Beliebt und gerne gegessen",
+    "dish": "Hähnchenbrust in Parmesanpanade mit tomatisierter Kräutersoße und Strozapretti",
+    "studPrice": "2,40",
+    "normalPrice": "3,50",
+    "date": "2014-1-27",
+    "properties": [
+      "mit Geflügel"
+    ],
+    "additives": [
+      "Glutenhaltiges",
+      "Milch/-erzeugnisse",
+      "Lupine/-erzeugnisse"
+    ]
+  },
+  {
+    "mensa": "Geomatikum",
+    "week": 5,
+    "name": "Beliebt und gerne gegessen",
+    "dish": "Spaghetti Bolognese",
+    "studPrice": "0,01",
+    "normalPrice": "0,01",
+    "date": "2014-1-28",
+    "properties": [
+      "laktosefrei",
+      "mit Rind"
+    ],
+    "additives": [
+      "Glutenhaltiges",
+      "Soja/-erzeugnisse",
+      "Geschmacksverstärker"
+    ]
+  },
+  {
+    "mensa": "Geomatikum",
+    "week": 5,
+    "name": "Beliebt und gerne gegessen",
+    "dish": "Schlemmerfilet Italiano mit Basilikumsoße und Kartoffelpüree",
+    "studPrice": "2,50",
+    "normalPrice": "3,60",
+    "date": "2014-1-29",
+    "properties": [
+      "Klima Teller",
+      "mit Fisch"
+    ],
+    "additives": [
+      "Glutenhaltiges",
+      "Fisch/-erzeugnisse",
+      "Milch/-erzeugnisse",
+      "Soja/-erzeugnisse",
+      "Antioxidationsmittel"
+    ]
+  },
+  {
+    "mensa": "Geomatikum",
+    "week": 5,
+    "name": "Beliebt und gerne gegessen",
+    "dish": "Currybratwurst mit Grillsoße und Pommes Frites",
+    "studPrice": "2,30",
+    "normalPrice": "3,40",
+    "date": "2014-1-30",
+    "properties": [
+      "mit Schwein"
+    ],
+    "additives": [
+      "Antioxidationsmittel",
+      "Geschmacksverstärker",
+      "Phosphat",
+      "Süßungsmittel",
+      "Soja/-erzeugnisse",
+      "Milch/-erzeugnisse",
+      "Senf/-erzeugnisse",
+      "Konservierungsstoffe"
+    ]
+  },
+  {
+    "mensa": "Geomatikum",
+    "week": 5,
+    "name": "Vegetarisch",
+    "dish": "Vegetarisch gefüllte Paprikaschote auf Currysoße mit Kokosreis",
+    "studPrice": "2,60",
+    "normalPrice": "3,70",
+    "date": "2014-1-27",
+    "properties": [
+      "vegetarisch"
+    ],
+    "additives": [
+      "Geschmacksverstärker",
+      "Glutenhaltiges",
+      "Ei/-erzeugnisse",
+      "Soja/-erzeugnisse",
+      "Milch/-erzeugnisse"
+    ]
+  },
+  {
+    "mensa": "Geomatikum",
+    "week": 5,
+    "name": "Vegetarisch",
+    "dish": "Farfalle mit Ruccola, Tomatenwürfeln und hausgemachtem Pesto Genovese",
+    "studPrice": "2,40",
+    "normalPrice": "3,50",
+    "date": "2014-1-28",
+    "properties": [
+      "vegetarisch"
+    ],
+    "additives": [
+      "Glutenhaltiges",
+      "Milch/-erzeugnisse",
+      "Schalenfrüchte"
+    ]
+  },
+  {
+    "mensa": "Geomatikum",
+    "week": 5,
+    "name": "Vegetarisch",
+    "dish": "Sojastreifen mit verschiedenen Pilzen und Bambussprossen mit Basmatireis",
+    "studPrice": "2,20",
+    "normalPrice": "3,30",
+    "date": "2014-1-29",
+    "properties": [
+      "Vegan",
+      "Klima Teller",
+      "laktosefrei",
+      "vegetarisch"
+    ],
+    "additives": [
+      "Konservierungsstoffe",
+      "Antioxidationsmittel",
+      "Glutenhaltiges",
+      "Soja/-erzeugnisse",
+      "Sellerie/-erzeugnisse"
+    ]
+  },
+  {
+    "mensa": "Geomatikum",
+    "week": 5,
+    "name": "Vegetarisch",
+    "dish": "Vegetarisches Milchschnitzel in Knusperpanade mit tomatisierter Kräutersoße und bunten Fusilli",
+    "studPrice": "2,60",
+    "normalPrice": "3,70",
+    "date": "2014-1-30",
+    "properties": [
+      "vegetarisch"
+    ],
+    "additives": [
+      "Glutenhaltiges",
+      "Ei/-erzeugnisse",
+      "Soja/-erzeugnisse",
+      "Milch/-erzeugnisse"
+    ]
+  },
+  {
+    "mensa": "Geomatikum",
+    "week": 5,
+    "name": "Vegetarisch",
+    "dish": "Hirtenkäse auf mediterranen Gemüse aus dem Wok mit Tzatziki und Fladenbrot",
+    "studPrice": "2,60",
+    "normalPrice": "3,70",
+    "date": "2014-1-31",
+    "properties": [
+      "vegetarisch"
+    ],
+    "additives": [
+      "Antioxidationsmittel",
+      "Geschwärzt",
+      "Milch/-erzeugnisse",
+      "Glutenhaltiges",
+      "Soja/-erzeugnisse"
+    ]
+  },
+  {
+    "mensa": "Geomatikum",
+    "week": 5,
+    "name": "Campus Spezial",
+    "dish": "Schweinefilet gebraten mit Rosmarinsoße, Prinzessbohnen und Kartoffelgratin",
+    "studPrice": "4,50",
+    "normalPrice": "5,30",
+    "date": "2014-1-27",
+    "properties": [
+      "mit Schwein"
+    ],
+    "additives": [
+      "Sellerie/-erzeugnisse",
+      "Milch/-erzeugnisse",
+      "Antioxidationsmittel",
+      "Geschwefelt",
+      "Ei/-erzeugnisse"
+    ]
+  },
+  {
+    "mensa": "Geomatikum",
+    "week": 5,
+    "name": "Campus Spezial",
+    "dish": "Putenoberkeule gebraten Thymian-Rotweinsoße, Ratatouillegemüse und Blechkartoffeln",
+    "studPrice": "3,80",
+    "normalPrice": "4,50",
+    "date": "2014-1-29",
+    "properties": [
+      "Klima Teller",
+      "mit Geflügel",
+      "mit Alkohol"
+    ],
+    "additives": [
+      "Geschmacksverstärker",
+      "Glutenhaltiges",
+      "Soja/-erzeugnisse",
+      "Milch/-erzeugnisse",
+      "Schwefeldioxid/Sulfite"
+    ]
+  }
+]

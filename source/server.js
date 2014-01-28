@@ -6,6 +6,7 @@
 var
   express = require('express'),
   get = require("./get.js").get,
+  urls = require("./urls.js"),
   parseRequest = require("./parseRequestMiddleware.js"),
   allowCrossDomain = require("./allowCrossDomainMiddleware.js"),
   port = 8081,
@@ -16,8 +17,6 @@ function minimize(menu){
 	return menu.map(function(item){
 		item._id = undefined;  // useless in app
 		item.__v = undefined;  // useless in app
-		item.week = undefined; // week can be infered by date
-		item.date = item.date.getFullYear() + "-" + (item.date.getMonth()+1) + "-" + item.date.getDate();
 		item.createdAt = undefined;
 		if(!item.kcal){ // remove if empty or null
 			item.kcal = undefined;
@@ -45,11 +44,25 @@ var reply = function(req, res){
  */
 var legacyReply = function(req, res){
 	get(req, req.mensen, req.weeks, function(error){
+		var menu;
 		if(error){
 			console.error(new Date(), "legacy error", req, error);
 			res.send(500, JSON.stringify([]));
 		} else {
-			res.send( minimize(req.result) );
+			menu = minimize(req.result);
+			// rewrite to legacy format
+			menu = menu.map(function(item){
+				item.date = item.date.getFullYear() + "-" + (item.date.getMonth() + 1) + "-" + item.date.getDate();
+				item.mensa = urls.byId[item.mensaId].name;
+				item.studPrice = item.studPrice.toFixed(2).toString().replace(".", ",");
+				item.normalPrice = item.normalPrice.toFixed(2).toString().replace(".", ",");
+				item.dish = item.name;
+				item.name = item.type;
+				delete item.type;
+				delete item.mensaId;
+				return item;
+			});
+			res.send( menu );
 		}
 	});
 };
