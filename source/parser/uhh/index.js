@@ -54,6 +54,7 @@ exports.parser = function(body, mensaId, week, callback){
 						properties.push(key);
 					}
 				}
+				tempObj = {};
 
 				// Parse Additives
 				spans = $pi.find("span");
