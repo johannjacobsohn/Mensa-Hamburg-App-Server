@@ -26,6 +26,9 @@ check-coverage:
 coverage:
 	node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha
 
+coverall:
+	node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
+
 clean:
 	-rm -r coverage
 	-rm -r node_modules
@@ -41,6 +44,7 @@ travis:
 	make lint
 	make test
 	make check-coverage
+	make coverall
 
 log:
 	git log --format="%ad %s" --date=short

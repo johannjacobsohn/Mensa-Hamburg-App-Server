@@ -5,6 +5,7 @@ This is the backend server for the Mensa Hamburg App Project.
 
 [![Dependency Status](https://gemnasium.com/johannjacobsohn/Mensa-Hamburg-App-Server.png)](https://gemnasium.com/johannjacobsohn/Mensa-Hamburg-App-Server)
 [![Build Status](https://travis-ci.org/johannjacobsohn/Mensa-Hamburg-App-Server.png?branch=master)](https://travis-ci.org/johannjacobsohn/Mensa-Hamburg-App-Server)
+[![Coverage Status](https://coveralls.io/repos/johannjacobsohn/Mensa-Hamburg-App-Server/badge.png)](https://coveralls.io/r/johannjacobsohn/Mensa-Hamburg-App-Server)
 
 Technical overview:
 ---------
