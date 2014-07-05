@@ -5,6 +5,9 @@
 "use strict";
 var
   express = require('express'),
+  morgan = require("morgan"),
+  vhost = require("vhost"),
+  compression   = require("compression"),
   get = require("./get.js").get,
   urls = require("./urls.js"),
   parseRequest = require("./parseRequestMiddleware.js"),
@@ -87,18 +90,18 @@ var formatString = {
 
 
 var app = express()
-	.use(express.logger({stream: logFile, format: JSON.stringify(formatString)}))               // log to access.log
+	.use(morgan({stream: logFile, format: JSON.stringify(formatString)}))               // log to access.log
 	.use(allowCrossDomain)                                // allow other domains via CORS header
-	.use(express.compress())                              // use compression
+	.use(compression())                              // use compression
 	.use(parseRequest)                                    // process parameters from request
 	.use(function(err, req, res, next){                   // catch errors
 		console.error(new Date(), err.stack);
 		res.send(500, JSON.stringify({menu:[]}));
 	})
-	.use(express.vhost('menu.mensaapp.org', legacyReply)) // legacy server for old domain
-	.use(express.vhost('data.mensaapp.org', reply))       // new server for new domain
-	.use(express.vhost('localhost', reply))               // new server for local testing
-	.use(express.vhost('localhost-legacy', legacyReply))  // legacy server for local testing
+	.use(vhost('menu.mensaapp.org', legacyReply)) // legacy server for old domain
+	.use(vhost('data.mensaapp.org', reply))       // new server for new domain
+	.use(vhost('localhost', reply))               // new server for local testing
+	.use(vhost('localhost-legacy', legacyReply))  // legacy server for local testing
 	.listen(port);
 
 console.log("Server running at http://localhost:"+port+"/");

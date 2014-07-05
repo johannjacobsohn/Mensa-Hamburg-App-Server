@@ -9,7 +9,6 @@ var
   serv    = require('..'),
   fs = require('fs');
 
-
 var now = new Date();
 var thisWeek = getWeek(now);
 var nextWeek = getWeek( new Date( +now + 7 * 24 * 3600 * 1000 ));
@@ -48,13 +47,13 @@ var checkJSON = function(menu){
 
 describe('legacy server', function(){
 	var thisWeekGeomatikum;
+
 	it("should return well formed data", function(done){
 		request(url + "Geomatikum", function(err, res, body){
 			var menu = JSON.parse(body);
 			expect(menu).to.be.an("array");
 			expect(menu).to.have.length(27);
 			checkJSON(menu);
-
 
 			expect( menu.every(function(i){ return getWeek( new Date(i.date) ) === thisWeek; }) ).to.be(true);
 			done();
@@ -66,10 +65,11 @@ describe('legacy server', function(){
 			fs.readFile("test/fixtures/540.json", 'utf8', function(err, data) {
 				var fixture = JSON.parse(data);
 				fixture.sort(sort).forEach(function(item, i){
+					item.week = thisWeek;     // set week from fixture to this week
+					item.date = menu[i].date; // ignore date
 					expect(item).to.eql(menu[i]);
 				});
 				expect(menu.length).to.be(fixture.length);
-
 
 				expect( menu.every(function(i){ return getWeek( new Date(i.date) ) === thisWeek; }) ).to.be(true);
 				done();
