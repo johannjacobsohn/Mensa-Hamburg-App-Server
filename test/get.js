@@ -3,7 +3,7 @@
 
 var
   mockery = require("mockery"),
-  expect  = require('expect.js'),
+  expect  = require("expect.js"),
   numberOfCalls = 0,
   get;
 
@@ -16,7 +16,7 @@ describe("get.js", function(){
 		// mock retriever
 		mockery.enable({ useCleanCache: true });
 		mockery.warnOnUnregistered(false);
-		mockery.registerMock('./retriever.js', function(mensa, week, callback){
+		mockery.registerMock("./retriever.js", function(mensa, week, callback){
 			numberOfCalls++;
 
 			setTimeout(function(){

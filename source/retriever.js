@@ -21,9 +21,9 @@ function retrieve(mensaId, w, callback){
 
 		if(url.indexOf(".pdf") !== -1){
 			var path = mensaId + week + ".pdf";
-			var fs = require('fs');
+			var fs = require("fs");
 			if(url.indexOf(".pdf") !== -1){
-				var r = request( url ).on('end', function () {
+				var r = request( url ).on("end", function () {
 					parser[mensa.parser](path, mensaId, week, callback);
 				}).pipe(fs.createWriteStream(path));
 			}

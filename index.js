@@ -1,1 +1,1 @@
-require('./source/server');
+require("./source/server");

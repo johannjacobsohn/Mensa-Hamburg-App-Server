@@ -2,12 +2,12 @@
 
 var
   url      = "http://localhost-legacy:8081/",
-  expect   = require('expect.js'),
-  request  = require('request'),
-  fakeweb  = require('node-fakeweb'),
+  expect   = require("expect.js"),
+  request  = require("request"),
+  fakeweb  = require("node-fakeweb"),
   getWeek  = require("../source/getweek.js"),
-  serv     = require('..'),
-  fs       = require('fs'),
+  serv     = require(".."),
+  fs       = require("fs"),
   now      = new Date(),
   thisWeek = getWeek(now),
   nextWeek = getWeek( new Date( +now + 7 * 24 * 3600 * 1000 ));
@@ -21,8 +21,8 @@ require("../source/urls.js").list.forEach(function(item){
 	var id = item.url.match(/\/de\/(.*)\/201/);
 	if(id){
 		id = id[1];
-		fakeweb.registerUri({uri: item.url.replace("{{week}}", thisWeek).replace(".de", ".de:80"), file: 'test/fixtures/'+id});
-		fakeweb.registerUri({uri: item.url.replace("{{week}}", nextWeek).replace(".de", ".de:80"), file: 'test/fixtures/'+id});
+		fakeweb.registerUri({uri: item.url.replace("{{week}}", thisWeek).replace(".de", ".de:80"), file: "test/fixtures/"+id});
+		fakeweb.registerUri({uri: item.url.replace("{{week}}", nextWeek).replace(".de", ".de:80"), file: "test/fixtures/"+id});
 	}
 });
 
@@ -44,7 +44,7 @@ var checkJSON = function(menu){
 	expect( menu.every(hasPrice)      ).to.be(true);
 };
 
-describe('legacy server', function(){
+describe("legacy server", function(){
 	var thisWeekGeomatikum;
 
 	it("should return well formed data", function(done){
@@ -61,7 +61,7 @@ describe('legacy server', function(){
 	it("has not changed", function(done){
 		request(url + "Geomatikum/" + thisWeek, function(err, res, body){
 			var menu = JSON.parse(body).sort(sort);
-			fs.readFile("test/fixtures/540.json", 'utf8', function(err, data) {
+			fs.readFile("test/fixtures/540.json", "utf8", function(err, data) {
 				var fixture = JSON.parse(data);
 				fixture.sort(sort).forEach(function(item, i){
 					item.week = thisWeek;     // set week from fixture to this week

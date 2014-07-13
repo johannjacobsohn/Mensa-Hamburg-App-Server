@@ -39,7 +39,7 @@ var dishSchema = mongoose.Schema({
 	additives   : [String]
 });
 
-var Dish = mongoose.model('Dish', dishSchema);
+var Dish = mongoose.model("Dish", dishSchema);
 
 var get = function(req, mensen, weeks, callback){
 	var requested = [];

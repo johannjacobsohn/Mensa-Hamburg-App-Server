@@ -25,8 +25,8 @@ require("../source/urls.js").list.forEach(function(item){
 	var id = item.url.match(/\/de\/(.*)\/201/);
 	if(id){
 		id = id[1];
-		fakeweb.registerUri({uri: item.url.replace("{{week}}", thisWeekNumber).replace(".de", ".de:80"), file: 'test/fixtures/'+id});
-		fakeweb.registerUri({uri: item.url.replace("{{week}}", nextWeekNumber).replace(".de", ".de:80"), file: 'test/fixtures/'+id});
+		fakeweb.registerUri({uri: item.url.replace("{{week}}", thisWeekNumber).replace(".de", ".de:80"), file: "test/fixtures/"+id});
+		fakeweb.registerUri({uri: item.url.replace("{{week}}", nextWeekNumber).replace(".de", ".de:80"), file: "test/fixtures/"+id});
 	}
 });
 
@@ -35,7 +35,7 @@ var sort = function(a,b){
 	return a.date + a.name > b.date + b.name ? 1 : -1;
 };
 
-describe('server', function(){
+describe("server", function(){
 	var geomatikum;
 
 	var checkJSON = function(menu){
@@ -171,7 +171,7 @@ describe('server', function(){
 
 	it( "should handle unexpected urls gracefully", function(done){
 		request(url + "test", function(err, res, body){
-			expect( res.headers['content-type'] ).to.be('application/json; charset=utf-8');
+			expect( res.headers["content-type"] ).to.be("application/json; charset=utf-8");
 			expect( res.statusCode ).to.be(200);
 
 			var j = JSON.parse(body);
@@ -218,18 +218,18 @@ describe('server', function(){
 
 	it("should compress output", function(done){
 		var headers = {
-			'Accept-Encoding': 'gzip'
+			"Accept-Encoding": "gzip"
 		};
 
-		request({url: url + "Geomatikum/", 'headers': headers}, function(err, res, body){
-			expect( res.headers['content-encoding'] ).to.be('gzip');
+		request({url: url + "Geomatikum/", "headers": headers}, function(err, res, body){
+			expect( res.headers["content-encoding"] ).to.be("gzip");
 			done();
 		});
 	});
 
 	it("an empty mensa yields an empty result", function(done){
 		request({url: url + "emptymensa/"}, function(err, res, body){
-			expect( res.headers['content-type'] ).to.be('application/json; charset=utf-8');
+			expect( res.headers["content-type"] ).to.be("application/json; charset=utf-8");
 			expect( res.statusCode ).to.be(200);
 			expect( JSON.parse(body).menu ).to.be.empty();
 			done();
@@ -256,14 +256,14 @@ describe('server', function(){
 
 	it( "should allow CORS requests", function(done){
 		request(url + "Geomatikum/", function(err, res, body){
-			expect( res.headers['Access-Control-Allow-Origin'.toLowerCase()] ).to.be('*');
+			expect( res.headers["Access-Control-Allow-Origin".toLowerCase()] ).to.be("*");
 			done();
 		});
 	});
 
 	it( "accept CORS preflight requests", function(done){
 		request({url: url + "Geomatikum/", method: "OPTIONS"}, function(err, res, body){
-			expect( res.headers['Access-Control-Allow-Origin'.toLowerCase()] ).to.be('*');
+			expect( res.headers["Access-Control-Allow-Origin".toLowerCase()] ).to.be("*");
 			expect(body).to.be("OK");
 			done();
 		});

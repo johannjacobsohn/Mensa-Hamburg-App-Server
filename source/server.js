@@ -4,7 +4,7 @@
 */
 "use strict";
 var
-  express = require('express'),
+  express = require("express"),
   morgan = require("morgan"),
   vhost = require("vhost"),
   compression   = require("compression"),
@@ -13,7 +13,7 @@ var
   parseRequest = require("./parseRequestMiddleware.js"),
   allowCrossDomain = require("./allowCrossDomainMiddleware.js"),
   port = 8081,
-  logFile = require("fs").createWriteStream('./logs/access.log', {flags: 'a'});
+  logFile = require("fs").createWriteStream("./logs/access.log", {flags: "a"});
 
 // use to compress output
 function minimize(menu){
@@ -71,8 +71,8 @@ var legacyReply = function(req, res){
 };
 
 // log exceptions
-process.on('uncaughtException', function (err) {
-	console.error(new Date(), 'uncaught exception: ' + err);
+process.on("uncaughtException", function (err) {
+	console.error(new Date(), "uncaught exception: " + err);
 });
 
 
@@ -98,10 +98,10 @@ var app = express()
 		console.error(new Date(), err.stack);
 		res.send(500, JSON.stringify({menu:[]}));
 	})
-	.use(vhost('menu.mensaapp.org', legacyReply)) // legacy server for old domain
-	.use(vhost('data.mensaapp.org', reply))       // new server for new domain
-	.use(vhost('localhost', reply))               // new server for local testing
-	.use(vhost('localhost-legacy', legacyReply))  // legacy server for local testing
+	.use(vhost("menu.mensaapp.org", legacyReply)) // legacy server for old domain
+	.use(vhost("data.mensaapp.org", reply))       // new server for new domain
+	.use(vhost("localhost", reply))               // new server for local testing
+	.use(vhost("localhost-legacy", legacyReply))  // legacy server for local testing
 	.listen(port);
 
 console.log("Server running at http://localhost:"+port+"/");

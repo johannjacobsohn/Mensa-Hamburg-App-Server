@@ -1,5 +1,5 @@
 "use strict";
-var exec = require('child_process').exec;
+var exec = require("child_process").exec;
 
 function trim(item){
 	return item.replace(/[\s]+/g, " ").trim();
@@ -157,7 +157,7 @@ function parse(entry, x, y, week, additivesList){
 
 function parser(file, mensaId, week, callback){
 	var names = [];
-	exec('pdftotext -q -layout ' + file + " - ", function (error, stdout, stderr){
+	exec("pdftotext -q -layout " + file + " - ", function (error, stdout, stderr){
 		var s = stdout.split("\n"), menu = [], rows = [], header;
 
 		// remove header
