@@ -5,7 +5,7 @@
   "dependencies": {
     "cheerio": "0.17.x",
     "compression": "1.0.x",
-    "express": "4.5.x",
+    "express": "4.6.x",
     "mongoose": "3.8.x",
     "morgan": "1.1.x",
     "request": "2.x",
