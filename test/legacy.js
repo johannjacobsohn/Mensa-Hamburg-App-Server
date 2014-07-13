@@ -1,17 +1,16 @@
 "use strict";
 
 var
-  url     = "http://localhost-legacy:8081/",
-  expect  = require('expect.js'),
-  request = require('request'),
-  fakeweb = require('node-fakeweb'),
-  getWeek = require("../source/getweek.js"),
-  serv    = require('..'),
-  fs = require('fs');
-
-var now = new Date();
-var thisWeek = getWeek(now);
-var nextWeek = getWeek( new Date( +now + 7 * 24 * 3600 * 1000 ));
+  url      = "http://localhost-legacy:8081/",
+  expect   = require('expect.js'),
+  request  = require('request'),
+  fakeweb  = require('node-fakeweb'),
+  getWeek  = require("../source/getweek.js"),
+  serv     = require('..'),
+  fs       = require('fs'),
+  now      = new Date(),
+  thisWeek = getWeek(now),
+  nextWeek = getWeek( new Date( +now + 7 * 24 * 3600 * 1000 ));
 
 fakeweb.allowNetConnect = false;
 fakeweb.ignoreUri({uri: url + "Geomatikum"});
@@ -28,8 +27,8 @@ require("../source/urls.js").list.forEach(function(item){
 });
 
 var sort = function(a,b){
-	var left = a.date + a.dish + a.mensa,
-		right = b.date + b.dish + b.mensa;
+	var left = +new Date(a.date) + a.dish + a.mensa,
+		right = +new Date(b.date) + b.dish + b.mensa;
 	return left === right ? 0 : left > right ? 1 : -1;
 };
 
