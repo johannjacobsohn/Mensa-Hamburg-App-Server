@@ -105,13 +105,13 @@ var mensen = [
 		name: "HCU",
 		id: "hcu",
 		url: baselink + "430/" + year + "/{{week}}/",
-		parser: "uke"
+		parser: "studhh"
 	},
 	{
 		name: "Cafe am Mittelweg",
 		id: "cafeammittelweg",
 		url: baselink + "690/" + year + "/{{week}}/",
-		parser: "uke"
+		parser: "studhh"
 	},
 	{
 		name: "empty mensa - just for testing",
