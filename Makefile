@@ -1,6 +1,6 @@
 setup:
 	-apt-get update && apt-get install poppler-utils
-	npm install -g forever
+	npm install -g forever@0.12
 	npm install
 
 start:
