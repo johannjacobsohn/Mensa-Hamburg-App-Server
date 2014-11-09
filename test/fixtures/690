@@ -1,0 +1,457 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="title" content="Speisepläne - Studierendenwerk Hamburg" />
+    <title>Speisepläne - Studierendenwerk Hamburg</title>
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" type="text/css" media="all" href="/css/main.css" />
+<link rel="stylesheet" type="text/css" media="print" href="/css/print.css" />
+  </head>
+  <body>
+    
+    <div id="plan-page">
+  <div id="plan">
+    <div id="header">
+      <a id="logo" href="http://www.studierendenwerk-hamburg.de/essen/speiseplaene.php?mid=4&amp;sprache=deutsch" title="Speisepläne">
+        <img src="/images/logo_speiseplan.png" title="" alt="Logo von " />
+      </a>
+              <img id="image" src="/uploads/header/18a20e441c564bb0b67eb6e48522a819906c88a7.jpg" title="" alt="" />
+            <div id="cafeteria">
+        <h1>Café (am Mittelweg)</h1>
+        <p>Mittelweg 177
+<br />20148 Hamburg 
+<br />Montag - Freitag: 08:00 - 15:00 Uhr
+<br />Essenausgabe bis 30 Min. vor Caféschließung.</p>              </div>
+    </div>
+    <div class="clear"></div>
+
+
+                <table id="week-menu">
+        <caption></caption>
+        <thead>
+          <tr>
+            <th class="category">
+              Wochenplan:                              <br />03.11.2014 - 07.11.2014                          </th>
+            <th class="day">Montag</th>
+            <th class="day">Dienstag</th>
+            <th class="day">Mittwoch</th>
+            <th class="day">Donnerstag</th>
+            <th class="day">Freitag</th>
+          </tr>
+        </thead>
+        <tbody>
+                              
+
+                      <tr class="odd">
+              <th class="category">Aus dem Suppentopf und Süßes</th>
+                              <td class="day">
+                                                            
+                                                <p class="dish ">
+                                                      <strong>Erbsencremesuppe <strong> (<span class=tooltip title=Milch/-erzeugnisse (einschl. Laktose)>20</span>, <span class=tooltip title=Sellerie/-erzeugnisse>22</span>) </strong></strong><br />
+                                                        <span class="price">1,30 € / 2,30 €</span>
+
+                            <br />
+
+                            
+                                                                                                                                <img src="/uploads/icons/37beeeef680a6791f97fe5a5da5f9ef5548a4ee9.png" width="20" height="17" title="vegetarisch" alt="vegetarisch" />
+                                                              
+                                                                              </p>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </td>
+                              <td class="day">
+                                                                                                  
+                                                <p class="dish ">
+                                                      <strong>Vegane Linsensuppe <strong> (<span class=tooltip title=Antioxidationsmittel>3</span>, <span class=tooltip title=Geschwefelt>5</span>, <span class=tooltip title=Sellerie/-erzeugnisse>22</span>) </strong></strong><br />
+                                                        <span class="price">1,30 € / 2,30 €</span>
+
+                            <br />
+
+                            
+                                                                                                                                <img src="/uploads/icons/0e5bab8a7d0af8f5bdbaa75dc217ed76a6186584.png" width="20" height="17" title="Vegan" alt="Vegan" />
+                                                              
+                            
+                                                                                                                                <img src="/uploads/icons/a77e0a40d4ef2cdce578538758710c9c59548207.png" width="20" height="17" title="laktosefrei" alt="laktosefrei" />
+                                                              
+                                                                              </p>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      </td>
+                              <td class="day">
+                                                                                                                                        
+                                                <p class="dish ">
+                                                      <strong>Kürbis Koriander Suppe <strong> (<span class=tooltip title=Milch/-erzeugnisse (einschl. Laktose)>20</span>, <span class=tooltip title=Sellerie/-erzeugnisse>22</span>) </strong></strong><br />
+                                                        <span class="price">1,30 € / 2,30 €</span>
+
+                            <br />
+
+                            
+                                                                                                                                <img src="/uploads/icons/66175e4b4c7402f3badaabeffdf39316a74e1edb.png" width="20" height="17" title="mit Fisch" alt="mit Fisch" />
+                                                              
+                                                                              </p>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </td>
+                              <td class="day">
+                                                                                                                                                                              
+                                                <p class="dish ">
+                                                      <strong>Kartoffelsuppe <strong> (<span class=tooltip title=Konservierungsstoffe>2</span>, <span class=tooltip title=Antioxidationsmittel>3</span>, <span class=tooltip title=Geschwefelt>5</span>, <span class=tooltip title=Sellerie/-erzeugnisse>22</span>) </strong> mit Speckwürfel und Schweinefleisch </strong><br />
+                                                        <span class="price">1,30 € / 2,30 €</span>
+
+                            <br />
+
+                            
+                                                                                                                                <img src="/uploads/icons/605801019ea63cf45702f2a2beb9cb9fc64b6b07.png" width="20" height="17" title="mit Schwein" alt="mit Schwein" />
+                                                              
+                                                                              </p>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          </td>
+                              <td class="day">
+                                                                                                                                                                                                                    
+                                                <p class="dish ">
+                                                      <strong>Karottencremesuppe mit Kerbel <strong> (<span class=tooltip title=Antioxidationsmittel>3</span>, <span class=tooltip title=Geschwefelt>5</span>, <span class=tooltip title=Sellerie/-erzeugnisse>22</span>) </strong></strong><br />
+                                                        <span class="price">1,30 € / 2,30 €</span>
+
+                            <br />
+
+                            
+                                                                                                                                <img src="/uploads/icons/82cc2fece681d1b080ceb0b63d2971f8e33c3d43.png" width="20" height="17" title="Klima Teller" alt="Klima Teller" />
+                                                              
+                            
+                                                                                                                                <img src="/uploads/icons/a77e0a40d4ef2cdce578538758710c9c59548207.png" width="20" height="17" title="laktosefrei" alt="laktosefrei" />
+                                                              
+                                                                              </p>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </td>
+                          </tr>
+                                  <tr class="even">
+              <th class="category">Gut und günstig</th>
+                              <td class="day">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </td>
+                              <td class="day">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </td>
+                              <td class="day">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </td>
+                              <td class="day">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </td>
+                              <td class="day">
+                                                                                                                                                                                                                                                                                                    
+                                                <p class="dish ">
+                                                      <strong>Überbackene Hackfleisch- Gemüsepfanne <strong> (<span class=tooltip title=Glutenhaltiges Getreide>14</span>, <span class=tooltip title=Milch/-erzeugnisse (einschl. Laktose)>20</span>) </strong> mit Rindfleisch und Nudeln</strong><br />
+                                                        <span class="price">1,95 € / 3,05 €</span>
+
+                            <br />
+
+                            
+                                                                                                                                <img src="/uploads/icons/e9a8e409409cf3ff7a40855d08e89097d6168e29.png" width="20" height="17" title="mit Rind" alt="mit Rind" />
+                                                              
+                                                                              </p>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </td>
+                          </tr>
+                                  <tr class="odd">
+              <th class="category">Beliebt und gerne gegessen</th>
+                              <td class="day">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </td>
+                              <td class="day">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </td>
+                              <td class="day">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </td>
+                              <td class="day">
+                                                                                                                                                                                                                                                                                                                                          
+                                                <p class="dish ">
+                                                      <strong>Currybratwurst <strong> (<span class=tooltip title=Antioxidationsmittel>3</span>, <span class=tooltip title=Geschmacksverstärker>4</span>, <span class=tooltip title=Phosphat>8</span>, <span class=tooltip title=Süßungsmittel>9</span>, <span class=tooltip title=Soja/-erzeugnisse>19</span>, <span class=tooltip title=Milch/-erzeugnisse (einschl. Laktose)>20</span>, <span class=tooltip title=Senf/-erzeugnisse>23</span>) </strong> mit Grillsoße <strong> (<span class=tooltip title=Konservierungsstoffe>2</span>, <span class=tooltip title=Süßungsmittel>9</span>, <span class=tooltip title=Sellerie/-erzeugnisse>22</span>, <span class=tooltip title=Senf/-erzeugnisse>23</span>) </strong> und Wedges <strong> (<span class=tooltip title=Glutenhaltiges Getreide>14</span>) </strong></strong><br />
+                                                        <span class="price">2,40 € / 3,50 €</span>
+
+                            <br />
+
+                            
+                                                                                                                                <img src="/uploads/icons/605801019ea63cf45702f2a2beb9cb9fc64b6b07.png" width="20" height="17" title="mit Schwein" alt="mit Schwein" />
+                                                              
+                                                                              </p>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              </td>
+                              <td class="day">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </td>
+                          </tr>
+                                  <tr class="even">
+              <th class="category">Vegetarisch</th>
+                              <td class="day">
+                                                                                                                                                                                                                                                                                                                                                                                
+                                                <p class="dish ">
+                                                      <strong>Vegetarisch gefüllte Paprikaschote Bollywood <strong> (<span class=tooltip title=Geschmacksverstärker>4</span>, <span class=tooltip title=Glutenhaltiges Getreide>14</span>, <span class=tooltip title=Ei/-erzeugnisse>16</span>, <span class=tooltip title=Soja/-erzeugnisse>19</span>, <span class=tooltip title=Milch/-erzeugnisse (einschl. Laktose)>20</span>) </strong> auf Currysoße <strong> (<span class=tooltip title=Glutenhaltiges Getreide>14</span>, <span class=tooltip title=Soja/-erzeugnisse>19</span>, <span class=tooltip title=Milch/-erzeugnisse (einschl. Laktose)>20</span>) </strong> mit Kokosreis</strong><br />
+                                                        <span class="price">2,60 € / 3,70 €</span>
+
+                            <br />
+
+                            
+                                                                                                                                <img src="/uploads/icons/37beeeef680a6791f97fe5a5da5f9ef5548a4ee9.png" width="20" height="17" title="vegetarisch" alt="vegetarisch" />
+                                                              
+                                                                              </p>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </td>
+                              <td class="day">
+                                                                                                                                                                                                                                                                                                                                                                                                                      
+                                                <p class="dish ">
+                                                      <strong>Farfalle  mit Rucola, Tomatenwürfeln und hausgemachtem Pesto Genovese <strong> (<span class=tooltip title=Glutenhaltiges Getreide>14</span>, <span class=tooltip title=Milch/-erzeugnisse (einschl. Laktose)>20</span>, <span class=tooltip title=Schalenfrüchte>21</span>) </strong></strong><br />
+                                                        <span class="price">2,40 € / 3,50 €</span>
+
+                            <br />
+
+                            
+                                                                                                                                <img src="/uploads/icons/37beeeef680a6791f97fe5a5da5f9ef5548a4ee9.png" width="20" height="17" title="vegetarisch" alt="vegetarisch" />
+                                                              
+                                                                              </p>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </td>
+                              <td class="day">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                                                <p class="dish ">
+                                                      <strong>Grünkohl vegetarisch <strong> (<span class=tooltip title=Antioxidationsmittel>3</span>, <span class=tooltip title=Geschwefelt>5</span>, <span class=tooltip title=Sellerie/-erzeugnisse>22</span>) </strong> mit Soja-Bratwurst <strong> (<span class=tooltip title=Glutenhaltiges Getreide>14</span>, <span class=tooltip title=Ei/-erzeugnisse>16</span>, <span class=tooltip title=Soja/-erzeugnisse>19</span>, <span class=tooltip title=Senf/-erzeugnisse>23</span>) </strong> und Röstkartoffeln</strong><br />
+                                                        <span class="price">2,60 € / 3,70 €</span>
+
+                            <br />
+
+                            
+                                                                                                                                <img src="/uploads/icons/37beeeef680a6791f97fe5a5da5f9ef5548a4ee9.png" width="20" height="17" title="vegetarisch" alt="vegetarisch" />
+                                                              
+                                                                              </p>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </td>
+                              <td class="day">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                                                <p class="dish ">
+                                                      <strong>Vegetarisches Milchschnitzel in Knusperpanade <strong> (<span class=tooltip title=Glutenhaltiges Getreide>14</span>, <span class=tooltip title=Ei/-erzeugnisse>16</span>, <span class=tooltip title=Soja/-erzeugnisse>19</span>, <span class=tooltip title=Milch/-erzeugnisse (einschl. Laktose)>20</span>) </strong> mit tomatisierter Kräutersoße <strong> (<span class=tooltip title=Glutenhaltiges Getreide>14</span>, <span class=tooltip title=Soja/-erzeugnisse>19</span>, <span class=tooltip title=Milch/-erzeugnisse (einschl. Laktose)>20</span>) </strong> und bunten Fusilli <strong> (<span class=tooltip title=Soja/-erzeugnisse>19</span>) </strong></strong><br />
+                                                        <span class="price">2,70 € / 3,80 €</span>
+
+                            <br />
+
+                            
+                                                                                                                                <img src="/uploads/icons/37beeeef680a6791f97fe5a5da5f9ef5548a4ee9.png" width="20" height="17" title="vegetarisch" alt="vegetarisch" />
+                                                              
+                                                                              </p>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </td>
+                              <td class="day">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+                                                <p class="dish ">
+                                                      <strong>Hirtenkäse auf mediterranen Gemüse aus der Pfanne <strong> (<span class=tooltip title=Antioxidationsmittel>3</span>, <span class=tooltip title=Geschwärzt>6</span>, <span class=tooltip title=Milch/-erzeugnisse (einschl. Laktose)>20</span>) </strong> mit Tzatziki <strong> (<span class=tooltip title=Milch/-erzeugnisse (einschl. Laktose)>20</span>) </strong> und Fladenbrot <strong> (<span class=tooltip title=Glutenhaltiges Getreide>14</span>, <span class=tooltip title=Soja/-erzeugnisse>19</span>) </strong></strong><br />
+                                                        <span class="price">2,80 € / 3,90 €</span>
+
+                            <br />
+
+                            
+                                                                                                                                <img src="/uploads/icons/37beeeef680a6791f97fe5a5da5f9ef5548a4ee9.png" width="20" height="17" title="vegetarisch" alt="vegetarisch" />
+                                                              
+                                                                              </p>
+                                                                                                                                                                                                                                                                                                                                                                                                                                      </td>
+                          </tr>
+                                  <tr class="odd">
+              <th class="category">Campus Spezial</th>
+                              <td class="day">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                <p class="dish ">
+                                                      <strong>Schweinefilet gebraten  mit Rosmarinsoße <strong> (<span class=tooltip title=Sellerie/-erzeugnisse>22</span>) </strong>, Prinzessbohnen <strong> (<span class=tooltip title=Milch/-erzeugnisse (einschl. Laktose)>20</span>) </strong> und Kartoffelgratin <strong> (<span class=tooltip title=Antioxidationsmittel>3</span>, <span class=tooltip title=Geschwefelt>5</span>, <span class=tooltip title=Ei/-erzeugnisse>16</span>, <span class=tooltip title=Milch/-erzeugnisse (einschl. Laktose)>20</span>) </strong></strong><br />
+                                                        <span class="price">4,50 € / 5,30 €</span>
+
+                            <br />
+
+                            
+                                                                                                                                <img src="/uploads/icons/605801019ea63cf45702f2a2beb9cb9fc64b6b07.png" width="20" height="17" title="mit Schwein" alt="mit Schwein" />
+                                                              
+                                                                              </p>
+                                                                                                      
+                                                <p class="dish ">
+                                                      <strong>Wir bieten für Sie täglich zwei Pastasorten mit zwei verschiedenen Soßen zur Wahl an. </strong><br />
+                                                        <span class="price">3,30 € / 3,90 €</span>
+
+                            <br />
+
+                                                                              </p>
+                                                                                                                                                                                                                                                                                                                </td>
+                              <td class="day">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                <p class="dish ">
+                                                      <strong>Wir bieten für Sie täglich zwei Pastasorten mit zwei verschiedenen Soßen zur Wahl an. </strong><br />
+                                                        <span class="price">3,30 € / 3,90 €</span>
+
+                            <br />
+
+                                                                              </p>
+                                                                                                      
+                                                <p class="dish ">
+                                                      <strong>Grünkohl <strong> (<span class=tooltip title=Konservierungsstoffe>2</span>, <span class=tooltip title=Antioxidationsmittel>3</span>, <span class=tooltip title=Geschwefelt>5</span>, <span class=tooltip title=Sellerie/-erzeugnisse>22</span>) </strong> mit Kasselernacken<strong> (<span class=tooltip title=Konservierungsstoffe>2</span>, <span class=tooltip title=Antioxidationsmittel>3</span>, <span class=tooltip title=Milch/-erzeugnisse (einschl. Laktose)>20</span>, <span class=tooltip title=Sellerie/-erzeugnisse>22</span>) </strong>, Kochwurst <strong> (<span class=tooltip title=Farbstoffe>1</span>, <span class=tooltip title=Konservierungsstoffe>2</span>, <span class=tooltip title=Antioxidationsmittel>3</span>, <span class=tooltip title=Geschmacksverstärker>4</span>, <span class=tooltip title=Phosphat>8</span>, <span class=tooltip title=Senf/-erzeugnisse>23</span>) </strong> und Röstkartoffeln</strong><br />
+                                                        <span class="price">3,95 € / 4,65 €</span>
+
+                            <br />
+
+                            
+                                                                                                                                <img src="/uploads/icons/605801019ea63cf45702f2a2beb9cb9fc64b6b07.png" width="20" height="17" title="mit Schwein" alt="mit Schwein" />
+                                                              
+                                                                              </p>
+                                                                                                                                                                                                                                    </td>
+                              <td class="day">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                <p class="dish ">
+                                                      <strong>Putenoberkeule mit Geflügelsoße <strong> (<span class=tooltip title=Geschmacksverstärker>4</span>, <span class=tooltip title=Milch/-erzeugnisse (einschl. Laktose)>20</span>) </strong>,Rosenkohl <strong> (<span class=tooltip title=Milch/-erzeugnisse (einschl. Laktose)>20</span>) </strong> und Blechkartoffeln</strong><br />
+                                                        <span class="price">4,10 € / 4,85 €</span>
+
+                            <br />
+
+                            
+                                                                                                                                <img src="/uploads/icons/66175e4b4c7402f3badaabeffdf39316a74e1edb.png" width="20" height="17" title="mit Fisch" alt="mit Fisch" />
+                                                              
+                                                                              </p>
+                                                                                                      
+                                                <p class="dish ">
+                                                      <strong>Wir bieten für Sie täglich zwei Pastasorten mit zwei verschiedenen Soßen zur Wahl an. </strong><br />
+                                                        <span class="price">3,30 € / 3,90 €</span>
+
+                            <br />
+
+                                                                              </p>
+                                                                                                                                                        </td>
+                              <td class="day">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+                                                <p class="dish ">
+                                                      <strong>Wir bieten für Sie täglich zwei Pastasorten mit zwei verschiedenen Soßen zur Wahl an. </strong><br />
+                                                        <span class="price">3,30 € / 3,90 €</span>
+
+                            <br />
+
+                                                                              </p>
+                                                                                                                  </td>
+                              <td class="day">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                                                <p class="dish ">
+                                                      <strong>Wir bieten für Sie täglich zwei Pastasorten mit zwei verschiedenen Soßen zur Wahl an. </strong><br />
+                                                        <span class="price">3,30 € / 3,90 €</span>
+
+                            <br />
+
+                                                                              </p>
+                                                                            </td>
+                          </tr>
+                              </tbody>
+      </table>
+    
+
+  </div>
+
+  
+
+
+      <div id="advices">
+            <p>• Änderungen des Speiseplans vorbehalten.<br />
+• Wir sind als gemeinnütziges Unternehmen verpflichtet, die Nutzungsberechtigung der Studierenden regelmäßig zu überprüfen und bitten Sie daher, den Studierendenausweis immer mitzuführen.<br />
+• Über die gesetzlich kennzeichnungspflichtigen Zusatzstoffe hinaus kennzeichnen wir als Serviceangebot auch Hauptauslöser von Allergien und Lebensmittelunverträglichkeiten. Die Angaben auf dem Speiseplan zu den enthaltenden Hauptauslösern von Allergien und Nahrungsmittelunverträglichkeiten sind nicht abschließend und ohne Gewähr. Kreuzkontaminationen bei den einzelnen Zutaten sowie technologisch unvermeidbare Verunreinigungen einzelner Produkte können nicht ausgeschlossen werden.<br />
+• Die verschiedenen Preise sind jeweils gültig für Studierende / Bedienstete.</p>
+    </div>
+  
+
+  <h2>Zusatzstoffe/Allergene</h2>
+    <ul class="additives">
+          
+        <li>1 = Farbstoffe</li>
+
+        
+                        
+        <li>2 = Konservierungsstoffe</li>
+
+        
+                        
+        <li>3 = Antioxidationsmittel</li>
+
+        
+                        
+        <li>4 = Geschmacksverstärker</li>
+
+        
+                        
+        <li>5 = Geschwefelt</li>
+
+                  </ul><ul class="additives">
+        
+                        
+        <li>6 = Geschwärzt</li>
+
+        
+                                  
+        <li>8 = Phosphat</li>
+
+        
+                        
+        <li>9 = Süßungsmittel</li>
+
+        
+                                  
+        <li>14 = Glutenhaltiges Getreide</li>
+
+        
+                                  
+        <li>16 = Ei/-erzeugnisse</li>
+
+                  </ul><ul class="additives">
+        
+                                            
+        <li>19 = Soja/-erzeugnisse</li>
+
+        
+                        
+        <li>20 = Milch/-erzeugnisse (einschl. Laktose)</li>
+
+        
+                        
+        <li>21 = Schalenfrüchte</li>
+
+        
+                        
+        <li>22 = Sellerie/-erzeugnisse</li>
+
+        
+                        
+        <li>23 = Senf/-erzeugnisse</li>
+
+                  </ul><ul class="additives">
+        
+                                                            </ul>
+
+
+  <br class="clear" />
+
+  <ul class="clear" id="additioncategories">
+                                                                                                              <li>
+                  <img src="/uploads/icons/605801019ea63cf45702f2a2beb9cb9fc64b6b07.png" title="mit Schwein" alt="mit Schwein" />
+                <br />
+        mit Schwein      </li>
+                  <li>
+                  <img src="/uploads/icons/e9a8e409409cf3ff7a40855d08e89097d6168e29.png" title="mit Rind" alt="mit Rind" />
+                <br />
+        mit Rind      </li>
+                                  <li>
+                  <img src="/uploads/icons/66175e4b4c7402f3badaabeffdf39316a74e1edb.png" title="mit Fisch" alt="mit Fisch" />
+                <br />
+        mit Fisch      </li>
+                                                          <li>
+                  <img src="/uploads/icons/37beeeef680a6791f97fe5a5da5f9ef5548a4ee9.png" title="vegetarisch" alt="vegetarisch" />
+                <br />
+        vegetarisch      </li>
+                          <li>
+                  <img src="/uploads/icons/a77e0a40d4ef2cdce578538758710c9c59548207.png" title="laktosefrei" alt="laktosefrei" />
+                <br />
+        laktosefrei      </li>
+                                  <li>
+                  <img src="/uploads/icons/82cc2fece681d1b080ceb0b63d2971f8e33c3d43.png" title="Klima Teller" alt="Klima Teller" />
+                <br />
+        Klima Teller      </li>
+                          <li>
+                  <img src="/uploads/icons/0e5bab8a7d0af8f5bdbaa75dc217ed76a6186584.png" title="Vegan" alt="Vegan" />
+                <br />
+        Vegan      </li>
+                                                                                                  </ul>
+
+  
+</div>    <script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/script.js"></script>
+    <!-- Piwik -->
+    <script type="text/javascript">
+      var pkBaseURL = (("https:" == document.location.protocol) ? "https://piwik.studwerk.uptrade.de/" : "http://piwik.studwerk.uptrade.de/");
+      document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+      </script><script type="text/javascript">
+      try {
+      var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 1);
+      piwikTracker.trackPageView();
+      piwikTracker.enableLinkTracking();
+      } catch( err ) {}
+    </script><noscript><p><img src="http://piwik.studwerk.uptrade.de/piwik.php?idsite=1" style="border:0" alt="" /></p></noscript>
+    <!-- End Piwik Tracking Code -->
+  </body>
+</html>

@@ -18,12 +18,6 @@ var mensen = [
 		parser: "studhh"
 	},
 	{
-		name: "Averhoffstrasse",
-		id: "averhoffstrasse",
-		url: baselink + "650/" + year + "/{{week}}/",
-		parser: "studhh"
-	},
-	{
 		name: "Bergedorf",
 		id: "bergedorf",
 		url: baselink + "520/" + year + "/{{week}}/",
@@ -51,12 +45,6 @@ var mensen = [
 		name: "Campus",
 		id: "campus",
 		url: baselink + "340/" + year + "/{{week}}/",
-		parser: "studhh"
-	},
-	{
-		name: "City Nord",
-		id: "citynord",
-		url: baselink + "550/" + year + "/{{week}}/",
 		parser: "studhh"
 	},
 	{
@@ -111,6 +99,18 @@ var mensen = [
 		name: "UKE",
 		id: "uke",
 		url: "http://www.uke.de/zentrale-dienste/kge/downloads/kge-klinik-gastronomie-eppendorf/ma_kw{{week}}.pdf",
+		parser: "uke"
+	},
+	{
+		name: "HCU",
+		id: "hcu",
+		url: baselink + "430/" + year + "/{{week}}/",
+		parser: "uke"
+	},
+	{
+		name: "Cafe am Mittelweg",
+		id: "cafeammittelweg",
+		url: baselink + "690/" + year + "/{{week}}/",
 		parser: "uke"
 	},
 	{
