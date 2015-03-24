@@ -50,7 +50,7 @@ var mensen = [
 	{
 		name: "Finkenau",
 		id: "finkenau",
-		url: baselink + "620/" + year + "/{{week}}/",
+		url: baselink + "420/" + year + "/{{week}}/",
 		parser: "studhh"
 	},
 	{
