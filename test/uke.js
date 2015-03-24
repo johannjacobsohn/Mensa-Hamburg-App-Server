@@ -3,8 +3,7 @@
 var
   expect  = require("expect.js"),
   parser = require("../source/parser/uke/index.js").parser,
-  fs = require("fs"),
-  year = new Date().getFullYear();
+  fs = require("fs");
 
 function sort(a, b){
 	a = a.name + a.type;
@@ -23,8 +22,8 @@ describe("uke parser", function(){
 					data = data.sort(sort);
 
 					fixture.sort(sort).forEach(function(item, i){
-						// normalize date for comparison
-						data[i].date = new Date(data[i].date).toISOString();
+						// ignore date for comparison
+						data[i].date = item.date;
 
 						expect(item).to.eql(data[i]);
 					});
@@ -35,5 +34,4 @@ describe("uke parser", function(){
 			});
 		});
 	});
-
 });
