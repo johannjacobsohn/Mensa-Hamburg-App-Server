@@ -1,16 +1,12 @@
 setup:
-	-apt-get update && apt-get install poppler-utils
-	npm install -g forever@0.12
+	-apt-get update && apt-get install poppler-utils daemontools daemontools-run
 	npm install
 
 start:
-	NODE_ENV=production forever -e logs/error.log -o logs/output.log -l forever.log -a start .
-
-start-dev:
-	forever -w -e ./logs/error.log -o ./logs/output.log -l forever.log -a start .
+	svc -u /etc/service/mensa
 
 stop:
-	forever stop `pwd`
+	svc -k /etc/service/mensa
 
 restart: stop start
 
