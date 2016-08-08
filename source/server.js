@@ -100,7 +100,13 @@ var app = express()
 	})
 	.use(vhost("menu.mensaapp.org", legacyReply)) // legacy server for old domain
 	.use(vhost("data.mensaapp.org", reply))       // new server for new domain
-	.use(vhost("localhost", reply))               // new server for local testing
+	.use(vhost("localhost", function(req, b, c){
+		if(req.headers["x-forwarded-host"] === "menu.mensaapp.org"){
+			legacyReply(req, b, c);
+		} else {
+			reply(req, b, c);
+		}
+	}))               // new server for local testing
 	.use(vhost("localhost-legacy", legacyReply))  // legacy server for local testing
 	.listen(port);
 
