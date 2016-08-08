@@ -36,18 +36,35 @@ var checkJSON = function(menu){
 	var hasProperties = function(item){ return item.properties; };
 	var hasAdditives  = function(item){ return item.additives; };
 	var hasName  = function(item){ return item.name; };
+	var hasDish  = function(item){ return item.dish; };
 	var hasPrice = function(item){ return item.studPrice && item.normalPrice; };
 	expect( menu ).to.not.be.empty();
 	expect( menu.every(hasProperties) ).to.be(true);
 	expect( menu.every(hasAdditives)  ).to.be(true);
 	expect( menu.every(hasName)       ).to.be(true);
 	expect( menu.every(hasPrice)      ).to.be(true);
+	expect( menu.every(hasDish)      ).to.be(true);
 };
 
 describe("legacy server", function(){
 	var thisWeekGeomatikum;
 
-	it("should return well formed data", function(done){
+	it("should return well formed data on initial load", function(done){
+		require("../source/get.js").clean(function(){
+			request(url + "Geomatikum", function(err, res, body){
+				var menu = JSON.parse(body);
+				expect(menu).to.be.an("array");
+				expect(menu).to.have.length(27);
+				checkJSON(menu);
+
+				expect( menu.every(function(i){ return getWeek( new Date(i.date) ) === thisWeek; }) ).to.be(true);
+				done();
+			});
+		});
+	});
+
+
+	it("should still return well formed data from cache", function(done){
 		request(url + "Geomatikum", function(err, res, body){
 			var menu = JSON.parse(body);
 			expect(menu).to.be.an("array");

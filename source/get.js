@@ -91,7 +91,7 @@ var get = function(req, mensen, weeks, callback){
 											if(err){
 												console.error(err);
 											} else {
-												req.result.push(dish);
+												req.result.push(dish.toObject());
 											}
 											if(!--counter){
 												processQueue(null, mensa+week);
